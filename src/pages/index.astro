@@ -1,9 +1,15 @@
 ---
 import Layout from "../layouts/layout.astro";
 import GameCard from "../components/games/GameCard.astro";
+import { games } from "../data/games";
+
+const mainSlugs = ["lineweight", "auditorium", "splice", "pulse", "intake", "fractal"];
+const miniSlugs = ["jawns", "tailwind", "shimsham", "monster-want-burger"];
+const mainGames = mainSlugs.map((slug) => games.find((g) => g.slug === slug)!);
+const miniGames = miniSlugs.map((slug) => games.find((g) => g.slug === slug)!);
 ---
 
-<Layout title="Beautiful Games" description="Ten games, ten years — music, motion and puzzle-driven games from a small studio in Philadelphia.">
+<Layout title="Beautiful Games" description="Ten games, ten years — music, motion and puzzle-driven games from a small studio in Philadelphia." hideNav>
 	<section class="site-hero">
 		<video class="bg-video" poster="/img/common/cp-splash.png" autoplay muted loop playsinline>
 			<source src="/video/sixteenseconds.webm" type="video/webm" />
@@ -12,7 +18,7 @@ import GameCard from "../components/games/GameCard.astro";
 			<div class="inner">
 				<img class="mark" src="/img/common/cp-logo-white.png" alt="Cipher Prime" />
 				<h1>Set Your Mind On Fire</h1>
-				<p class="subhead"><strong>Cipher Prime</strong> is a small multi-award winning game studio in Philadelphia.</p>
+				<p class="subhead">Cipher Prime makes games out of light and music in Philly.</p>
 			</div>
 		</div>
 	</section>
@@ -24,34 +30,9 @@ import GameCard from "../components/games/GameCard.astro";
 		</div>
 
 		<div class="games">
-			<GameCard name="Lineweight" href="/games/lineweight" cover="/img/games/covers/lineweight.webp" desc="A five-chapter living book, told entirely by touch. Published with Team17.">
-				<div class="badge-row">
-					<img src="/img/vendor/appstore-badge.svg" alt="App Store" />
-					<img src="/img/vendor/googleplay-badge.svg" alt="Google Play" />
-				</div>
-			</GameCard>
-
-			<GameCard name="Auditorium" href="/games/auditorium" cover="/img/games/covers/auditorium.webp" desc="The signature game — bend light into sound. Turns 20 in 2028.">
-				<a class="purchase" href="https://store.steampowered.com/app/205870/" target="_blank" rel="noopener">Buy on Steam</a>
-			</GameCard>
-
-			<GameCard name="Splice" href="/games/splice" cover="/img/games/covers/splice.webp" desc="Biomorphic strand puzzle. Cipher Prime's biggest organic seller.">
-				<a class="purchase" href="https://store.steampowered.com/app/209790/" target="_blank" rel="noopener">Buy on Steam — $9.99</a>
-			</GameCard>
-
-			<GameCard name="Pulse" href="/games/pulse" cover="/img/games/covers/pulse.webp" desc="Touch rhythm. Cipher Prime's first iPad game — still live after 15 years.">
-				<div class="badge-row">
-					<img src="/img/vendor/appstore-badge.svg" alt="App Store" />
-				</div>
-			</GameCard>
-
-			<GameCard name="Intake" href="/games/intake" cover="/img/games/covers/intake.webp" desc="A drugstep arcade shooter. Lean, loud, and the lowest-lift revival in the catalog.">
-				<a class="purchase" href="https://store.steampowered.com/app/237760/" target="_blank" rel="noopener">Buy on Steam</a>
-			</GameCard>
-
-			<GameCard name="Fractal" href="/games/fractal" cover="/img/games/covers/fractal.webp" desc="A music puzzler pushed across five platforms — the most-ported title in the catalog.">
-				<a class="purchase" href="https://store.steampowered.com/app/61310/" target="_blank" rel="noopener">Buy on Steam — $6.99</a>
-			</GameCard>
+			{mainGames.map((game) => (
+				<GameCard name={game.title} href={game.href} cover={game.cover} desc={game.shortDescription} platforms={game.platforms} />
+			))}
 		</div>
 
 		<div class="minis-head">
@@ -60,21 +41,9 @@ import GameCard from "../components/games/GameCard.astro";
 		</div>
 
 		<div class="games minis">
-			<GameCard name="Jawns" href="https://playjawns.com" external cover="/img/games/covers/jawns.webp" desc="Abstract head-to-head strategy — chess meets checkers, with a cult following.">
-				<a class="learn" href="https://playjawns.com" target="_blank" rel="noopener">Learn more &rarr;</a>
-			</GameCard>
-
-			<GameCard name="Tailwind: Prologue" href="/games/tailwind" cover="/img/games/covers/tailwind.webp" desc="A Humble Original — a lightning storm's last moments, told as aerial ballet.">
-				<a class="learn" href="/games/tailwind">Learn more &rarr;</a>
-			</GameCard>
-
-			<GameCard name="Shimsham" href="/games/shimsham" cover="/img/games/covers/shimsham.webp" desc="A Leap Motion launch title with a live-jazz score. Since rebuilt for keyboard & mouse.">
-				<a class="learn" href="/games/shimsham">Learn more &rarr;</a>
-			</GameCard>
-
-			<GameCard name="Monster Want Burger" href="https://monsterwantburger.com" external cover="/img/games/covers/monster-want-burger.webp" desc="A fast, funny, self-published micro-game. No publisher, no advance, shipped anyway.">
-				<a class="learn" href="https://monsterwantburger.com" target="_blank" rel="noopener">Learn more &rarr;</a>
-			</GameCard>
+			{miniGames.map((game) => (
+				<GameCard name={game.title} href={game.href} cover={game.cover} desc={game.shortDescription} external={game.external} platforms={game.platforms} />
+			))}
 		</div>
 
 		<section class="mailinglist">
@@ -93,7 +62,6 @@ import GameCard from "../components/games/GameCard.astro";
 		margin-left: calc(50% - 50vw);
 		margin-right: calc(50% - 50vw);
 		margin-top: -96px;
-		min-height: 50vh;
 		display: flex;
 		align-items: center;
 	}
@@ -106,11 +74,23 @@ import GameCard from "../components/games/GameCard.astro";
 		object-position: 50% 50%;
 		z-index: 0;
 	}
+	@media (max-width: 768px) {
+		.bg-video {
+			display: none;
+		}
+		.site-hero {
+			background-image: url("/img/common/cp-splash.png");
+			background-size: cover;
+			background-position: 50% 50%;
+		}
+	}
 	.hero-content {
 		position: relative;
 		z-index: 2;
 		display: flex;
 		justify-content: flex-start;
+		padding-top: 150px;
+		padding-bottom: 150px;
 	}
 	.site-hero .inner {
 		text-align: left;
@@ -121,13 +101,14 @@ import GameCard from "../components/games/GameCard.astro";
 		margin: 0 0 26px 0;
 	}
 	.site-hero h1 {
-		font-size: clamp(32px, 6vw, 52px);
+		font-size: var(--fs-2xl);
 		margin: 0;
 		font-weight: 300;
 		line-height: 1;
+		color: #fff;
 	}
 	.site-hero .subhead {
-		font-size: 16px;
+		font-size: var(--fs-md);
 		color: #dcdfd0;
 		margin: 16px 0 0;
 	}
@@ -146,8 +127,11 @@ import GameCard from "../components/games/GameCard.astro";
 		border-radius: 999px;
 	}
 
+	.page-head {
+		padding-top: 64px;
+	}
 	.page-head h2 {
-		font-size: clamp(28px, 5vw, 60px);
+		font-size: var(--fs-xl);
 		margin: 0;
 		font-weight: 300;
 	}
@@ -170,67 +154,32 @@ import GameCard from "../components/games/GameCard.astro";
 		}
 	}
 	.games.minis {
-		grid-template-columns: repeat(2, 1fr);
-		gap: 34px 26px;
+		grid-template-columns: 1fr;
+		gap: 16px;
 	}
 	@media (min-width: 768px) {
 		.games.minis {
 			grid-template-columns: repeat(4, 1fr);
+			gap: 34px 26px;
 		}
 	}
 
 	.minis-head h2 {
-		font-size: 60px;
-		color: #fff;
+		font-size: var(--fs-3xl);
 		margin: 0;
 		font-weight: 300;
 	}
 	.minis-head p {
 		color: var(--cp-text-faint);
-		font-size: 13px;
+		font-size: var(--fs-base);
 	}
 
 	.mailinglist h2 {
 		font-weight: 300;
-		font-size: 28px;
+		font-size: var(--fs-xl);
 		margin: 0 0 12px;
 	}
 	.mailinglist p {
 		color: var(--cp-text-faint);
-	}
-
-	:global(.badge-row) {
-		display: flex;
-		gap: 8px;
-		flex-wrap: wrap;
-		align-items: center;
-		margin-top: 2px;
-	}
-	:global(.badge-row img) {
-		height: 38px;
-		width: auto;
-	}
-	:global(.purchase) {
-		display: inline-block;
-		background: var(--cp-steam);
-		color: #06121c;
-		font-weight: 700;
-		font-size: 14px;
-		text-decoration: none;
-		padding: 10px 16px;
-		border-radius: 5px;
-		margin-bottom: 8px;
-	}
-	:global(.learn) {
-		font-size: 13px;
-		color: var(--cp-green);
-		text-decoration: none;
-		display: inline-flex;
-		align-items: center;
-		gap: 5px;
-		margin-top: auto;
-	}
-	:global(.learn:hover) {
-		text-decoration: underline;
 	}
 </style>

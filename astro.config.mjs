@@ -4,6 +4,9 @@ import { defineConfig } from 'astro/config';
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://cipherprime.com',
+	server: {
+		host: true,
+	},
 	redirects: {
 		'/games': '/',
 		'/games/pulse/buy': '/games/pulse',

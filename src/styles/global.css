@@ -9,6 +9,15 @@
 	--cp-text-faint: #5c5f52;
 	--cp-dark-text: #1c1e16;
 	--cp-font: "Avenir Next", "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+	/* Type scale — base 12px, 1.4 ratio, chained via calc() */
+	--fs-ratio: 1.4;
+	--fs-base: 12px;
+	--fs-md: calc(var(--fs-base) * var(--fs-ratio));
+	--fs-lg: calc(var(--fs-md) * var(--fs-ratio));
+	--fs-xl: calc(var(--fs-lg) * var(--fs-ratio));
+	--fs-2xl: calc(var(--fs-xl) * var(--fs-ratio));
+	--fs-3xl: calc(var(--fs-2xl) * var(--fs-ratio));
 }
 
 * {
@@ -30,6 +39,15 @@ body {
 
 a {
 	color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	line-height: 1;
 }
 
 img {

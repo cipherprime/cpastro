@@ -4,9 +4,10 @@ import BaseHead from "../components/BaseHead.astro";
 interface Props {
 	title: string;
 	description?: string;
+	hideNav?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, hideNav = false } = Astro.props;
 ---
 
 <html lang="en">
@@ -14,13 +15,15 @@ const { title, description } = Astro.props;
 		<BaseHead title={title} description={description} />
 	</head>
 	<body>
-		<header class="site-header">
-			<nav>
-				<a href="/#games">Games</a>
-				<a href="/about">About</a>
-				<a href="/mailinglist">Mailing List</a>
-			</nav>
-		</header>
+		{!hideNav && (
+			<header class="site-header">
+				<nav>
+					<a href="/#games">Games</a>
+					<a href="/about">About</a>
+					<a href="/mailinglist">Mailing List</a>
+				</nav>
+			</header>
+		)}
 
 		<main class="contain">
 			<slot />
@@ -62,7 +65,7 @@ const { title, description } = Astro.props;
 	}
 	.site-header nav a {
 		text-decoration: none;
-		font-size: 13px;
+		font-size: var(--fs-base);
 		text-transform: uppercase;
 		letter-spacing: 0.06em;
 		color: var(--cp-text-dim);
@@ -91,7 +94,7 @@ const { title, description } = Astro.props;
 	}
 	.site-footer .links a {
 		text-decoration: none;
-		font-size: 13px;
+		font-size: var(--fs-base);
 		color: var(--cp-text-faint);
 		text-transform: uppercase;
 		letter-spacing: 0.06em;
@@ -100,7 +103,7 @@ const { title, description } = Astro.props;
 		color: var(--cp-dark-text);
 	}
 	.site-footer .copy {
-		font-size: 11px;
+		font-size: var(--fs-base);
 		color: var(--cp-text-faint);
 	}
 </style>

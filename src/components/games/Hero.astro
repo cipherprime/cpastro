@@ -1,4 +1,7 @@
 ---
+import GamePlatformBadge from "./GamePlatformBadge.astro";
+import type { PlatformLink } from "../../data/games";
+
 interface Props {
 	title: string;
 	tagline?: string;
@@ -6,9 +9,10 @@ interface Props {
 	backgroundSrc: string;
 	trailerHref?: string;
 	compact?: boolean;
+	platforms?: PlatformLink[];
 }
 
-const { title, tagline, logoSrc, backgroundSrc, trailerHref, compact = false } = Astro.props;
+const { title, tagline, logoSrc, backgroundSrc, trailerHref, compact = false, platforms = [] } = Astro.props;
 ---
 
 <div class:list={["hero", { compact }]} style={`background-image:url(${backgroundSrc})`}>
@@ -20,15 +24,15 @@ const { title, tagline, logoSrc, backgroundSrc, trailerHref, compact = false } =
 		)}
 		{tagline && <p class="tagline">{tagline}</p>}
 
-		<div class="cta-row">
-			<slot />
-		</div>
+		{platforms.length > 0 && (
+			<div class="cta-row">
+				{platforms.map((p) => <GamePlatformBadge type={p.type} href={p.href} />)}
+			</div>
+		)}
 
 		{trailerHref && (
 			<a class="trailer-link" href={trailerHref} target="_blank" rel="noopener">▶ Watch the trailer</a>
 		)}
-
-		<slot name="platforms" />
 	</div>
 </div>
 
@@ -77,11 +81,12 @@ const { title, tagline, logoSrc, backgroundSrc, trailerHref, compact = false } =
 		filter: drop-shadow(0 12px 40px rgba(0, 0, 0, 0.55));
 	}
 	.hero-inner h1 {
-		font-size: clamp(32px, 6vw, 52px);
+		font-size: var(--fs-2xl);
+		font-weight: 400;
 		margin: 0;
 	}
 	.tagline {
-		font-size: clamp(14px, 2vw, 17px);
+		font-size: var(--fs-md);
 		color: #d7dac9;
 		max-width: 520px;
 		margin: 8px auto 34px;
@@ -95,7 +100,7 @@ const { title, tagline, logoSrc, backgroundSrc, trailerHref, compact = false } =
 		margin-bottom: 10px;
 	}
 	.trailer-link {
-		font-size: 14px;
+		font-size: var(--fs-base);
 		color: #cfd2c2;
 		text-decoration: none;
 		border-bottom: 1px solid rgba(207, 210, 194, 0.4);

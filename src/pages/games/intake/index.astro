@@ -1,16 +1,58 @@
 ---
 import GameLayout from "../../../layouts/GameLayout.astro";
 import Hero from "../../../components/games/Hero.astro";
-import SteamButton from "../../../components/games/SteamButton.astro";
+import Gallery from "../../../components/games/Gallery.astro";
+import Press from "../../../components/games/Press.astro";
+import { games } from "../../../data/games";
+
+const game = games.find((g) => g.slug === "intake")!;
+
+const accolades = [
+	{ label: "5/5", source: "Mash Those Buttons" },
+	{ label: "Bass-dropping arcade experience", source: "Penny Arcade Report" },
+	{ label: "Super addicting", source: "Joystiq" },
+];
 ---
 
-<GameLayout title="Intake" description="A drugstep arcade shooter — lean, loud, and the lowest-lift revival in the Cipher Prime catalog.">
+<GameLayout title={game.title} description={game.longDescription}>
 	<Hero
-		title="Intake"
-		tagline="A drugstep arcade shooter. Lean, loud, and the lowest-lift revival in the catalog."
-		backgroundSrc="/img/games/intake/intake_splash.jpg"
-		compact
-	>
-		<SteamButton href="https://store.steampowered.com/app/237760/" />
-	</Hero>
+		title={game.title}
+		tagline={game.shortDescription}
+		backgroundSrc={game.heroBackground}
+		trailerHref={game.trailerHref}
+		compact={game.compactHero}
+		platforms={game.platforms}
+	/>
+
+	<Gallery images={["/img/games/intake/intake1.jpg", "/img/games/intake/intake2.jpg", "/img/games/intake/intake3.jpg"]} />
+
+	<section class="about">
+		<h2>Grab some quarters & strap in.</h2>
+		<p>Intake is the retro-futuristic drugstep arcade shooter from Cipher Prime. In this polychromatic love child of Dr. Mario and Ikaruga, you battle a never-ending barrage of pills, pushing your skill and reflexes to the limit to avoid a lethal dosage.</p>
+		<p>Blast and combo your way through an epic cascade of audiovisual mayhem so intoxicating it comes with its own warning label. Listen to the <a href="https://music.cipherprime.com/album/intake-ost" target="_blank" rel="noopener">official soundtrack</a>.</p>
+	</section>
+
+	<Press quote="Intake is a spectacularly minimal game that contains a staggering amount of complexity with just a handful of straightforward concepts." cite="Daniel Starkey, Gamespot" accolades={accolades} />
 </GameLayout>
+
+<style>
+	.about {
+		padding: 70px 24px;
+		max-width: 680px;
+		margin: 0 auto;
+		text-align: center;
+	}
+	.about h2 {
+		font-size: var(--fs-lg);
+		margin: 0 0 16px;
+		font-weight: 800;
+		color: #fff;
+	}
+	.about p {
+		font-size: var(--fs-base);
+		color: #c7cab9;
+	}
+	.about a {
+		color: var(--cp-green);
+	}
+</style>

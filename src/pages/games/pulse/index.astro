@@ -1,18 +1,61 @@
 ---
 import GameLayout from "../../../layouts/GameLayout.astro";
 import Hero from "../../../components/games/Hero.astro";
-import PlatformRow from "../../../components/games/PlatformRow.astro";
+import Gallery from "../../../components/games/Gallery.astro";
+import Press from "../../../components/games/Press.astro";
+import { games } from "../../../data/games";
 
-const platforms = [{ icon: "/img/vendor/vendor-appstore.png", label: "App Store" }];
+const game = games.find((g) => g.slug === "pulse")!;
+
+const accolades = [
+	{ label: "iPad Game of the Week", source: "Apple" },
+	{ label: "Best iPad Games of 2011", source: "Gamezebo" },
+	{ label: "Cover Story, Issue 16", source: "The Indie Game Magazine" },
+	{ label: "Editors Choice", source: "MacLife" },
+	{ label: "App of the Day", source: "Kotaku" },
+	{ label: "Game of the Year", source: "Philadelphia Geek Awards" },
+];
 ---
 
-<GameLayout title="Pulse" description="Touch rhythm. Cipher Prime's first iPad game — still live after 15 years.">
+<GameLayout title={game.title} description={game.longDescription}>
 	<Hero
-		title="Pulse"
-		tagline="Touch rhythm. Cipher Prime's first iPad game — still live after 15 years."
-		backgroundSrc="/img/games/pulse/pulse_splash.jpg"
-		compact
-	>
-		<Fragment slot="platforms"><PlatformRow platforms={platforms} /></Fragment>
-	</Hero>
+		title={game.title}
+		tagline={game.shortDescription}
+		backgroundSrc={game.heroBackground}
+		trailerHref={game.trailerHref}
+		compact={game.compactHero}
+		platforms={game.platforms}
+	/>
+
+	<Gallery images={["/img/games/pulse/pulse1.jpg", "/img/games/pulse/pulse2.jpg", "/img/games/pulse/pulse3.jpg"]} />
+
+	<section class="about">
+		<h2>Reach out and touch the music.</h2>
+		<p>Enter an absorbing world where players become part conductor, part note-captor, part multi-touch master. Tap speeding notes as they cross the radiant pulse to conduct gorgeous original melodies.</p>
+		<p>Pulse debuted on the iPad in 2011 and absolutely destroyed the App Store, claiming the #1 Music Rhythm Game spot for years. Since then, it has enjoyed many updates, including a full Android launch. Listen to the <a href="https://music.cipherprime.com/album/pulse-ost" target="_blank" rel="noopener">official soundtrack</a>.</p>
+	</section>
+
+	<Press quote="A package so thoroughly well put together that you're reminded of why music games were popular in the first place." cite="Tracy Erickson, Pocket Gamer" accolades={accolades} />
 </GameLayout>
+
+<style>
+	.about {
+		padding: 70px 24px;
+		max-width: 680px;
+		margin: 0 auto;
+		text-align: center;
+	}
+	.about h2 {
+		font-size: var(--fs-lg);
+		margin: 0 0 16px;
+		font-weight: 800;
+		color: #fff;
+	}
+	.about p {
+		font-size: var(--fs-base);
+		color: #c7cab9;
+	}
+	.about a {
+		color: var(--cp-green);
+	}
+</style>

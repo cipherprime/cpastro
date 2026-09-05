@@ -1,16 +1,57 @@
 ---
 import GameLayout from "../../../layouts/GameLayout.astro";
 import Hero from "../../../components/games/Hero.astro";
-import SteamButton from "../../../components/games/SteamButton.astro";
+import Gallery from "../../../components/games/Gallery.astro";
+import Press from "../../../components/games/Press.astro";
+import { games } from "../../../data/games";
+
+const game = games.find((g) => g.slug === "auditorium")!;
+
+const accolades = [
+	{ label: "Most Creative Game of the Year", source: "The Mochis" },
+	{ label: "Award of Excellence", source: "Communication Arts" },
+	{ label: "Official Honoree", source: "The Webby Awards" },
+	{ label: "Grand Prize Winner", source: "IndiePub" },
+	{ label: "Best of 2008", source: "Jayisgames" },
+	{ label: "Musical Excellence Nominee", source: "IndieCade" },
+];
 ---
 
-<GameLayout title="Auditorium" description="Cipher Prime's signature game — bend light into sound.">
+<GameLayout title={game.title} description={game.longDescription}>
 	<Hero
-		title="Auditorium"
-		tagline="The signature game — bend light into sound. Turns 20 in 2028."
-		backgroundSrc="/img/games/auditorium/auditorium_flyer.jpg"
-		compact
-	>
-		<SteamButton href="https://store.steampowered.com/app/205870/" />
-	</Hero>
+		title={game.title}
+		tagline={game.shortDescription}
+		backgroundSrc={game.heroBackground}
+		compact={game.compactHero}
+		platforms={game.platforms}
+	/>
+
+	<Gallery images={["/img/games/auditorium/auditorium1.jpg", "/img/games/auditorium/auditorium2.jpg", "/img/games/auditorium/auditorium3.jpg"]} />
+
+	<section class="about">
+		<h2>Discovery & play.</h2>
+		<p>Play the first game we ever created together. Auditorium hit the scene in 2009. Since then, its sleek design, vibrant colors, and iconic soundtrack have captured the imagination of thousands of players worldwide.</p>
+		<p>The full version is the culmination of over 8 months of work by two indie game developers, spread across 70+ levels in 15 acts. Remember: there are no right or wrong answers, only your own.</p>
+	</section>
+
+	<Press quote="I love music. I love videogames. Consequently, I love Auditorium." cite="Samit Sarkar, Destructoid" accolades={accolades} />
 </GameLayout>
+
+<style>
+	.about {
+		padding: 70px 24px;
+		max-width: 680px;
+		margin: 0 auto;
+		text-align: center;
+	}
+	.about h2 {
+		font-size: var(--fs-lg);
+		margin: 0 0 16px;
+		font-weight: 800;
+		color: #fff;
+	}
+	.about p {
+		font-size: var(--fs-base);
+		color: #c7cab9;
+	}
+</style>

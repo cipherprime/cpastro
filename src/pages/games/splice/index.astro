@@ -1,13 +1,12 @@
 ---
 import GameLayout from "../../../layouts/GameLayout.astro";
 import Hero from "../../../components/games/Hero.astro";
-import SteamButton from "../../../components/games/SteamButton.astro";
-import PlatformRow from "../../../components/games/PlatformRow.astro";
 import Gallery from "../../../components/games/Gallery.astro";
 import Press from "../../../components/games/Press.astro";
 import MusicGrid from "../../../components/games/MusicGrid.astro";
+import { games } from "../../../data/games";
 
-const platforms = [{ icon: "/img/vendor/vendor-steam.png", label: "Steam" }];
+const game = games.find((g) => g.slug === "splice")!;
 
 const accolades = [
 	{ label: "Best Puzzle Game", source: "Intel Level Up" },
@@ -45,17 +44,16 @@ const musicItems = [
 ];
 ---
 
-<GameLayout title="Splice" description="An experimental, artistic puzzler about splicing microbial life into new forms. The cells react to you.">
+<GameLayout title={game.title} description={game.longDescription}>
 	<Hero
-		title="Splice"
-		logoSrc="/img/games/splice/splice_logo.jpg"
-		tagline="An experimental, artistic puzzler about splicing microbial life into new forms. The cells react to you."
-		backgroundSrc="/img/games/splice/splice_splash_bg.jpg"
-		trailerHref="https://www.youtube.com/embed/UpAi8kPrFaA"
-	>
-		<SteamButton href="https://store.steampowered.com/app/209790/" price="$9.99" />
-		<Fragment slot="platforms"><PlatformRow platforms={platforms} /></Fragment>
-	</Hero>
+		title={game.title}
+		logoSrc={game.heroLogo}
+		tagline={game.shortDescription}
+		backgroundSrc={game.heroBackground}
+		trailerHref={game.trailerHref}
+		compact={game.compactHero}
+		platforms={game.platforms}
+	/>
 
 	<Gallery images={["/img/games/splice/splice1.jpg", "/img/games/splice/splice2.jpg", "/img/games/splice/splice3.jpg"]} />
 
@@ -77,13 +75,13 @@ const musicItems = [
 		text-align: center;
 	}
 	.about h2 {
-		font-size: clamp(22px, 3.4vw, 30px);
+		font-size: var(--fs-lg);
 		margin: 0 0 16px;
 		font-weight: 800;
 		color: #fff;
 	}
 	.about p {
-		font-size: 16px;
+		font-size: var(--fs-base);
 		color: #c7cab9;
 	}
 </style>

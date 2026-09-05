@@ -1,13 +1,53 @@
 ---
 import GameLayout from "../../../layouts/GameLayout.astro";
 import Hero from "../../../components/games/Hero.astro";
+import Gallery from "../../../components/games/Gallery.astro";
+import Press from "../../../components/games/Press.astro";
+import { games } from "../../../data/games";
+
+const game = games.find((g) => g.slug === "tailwind")!;
 ---
 
-<GameLayout title="Tailwind: Prologue" description="A Humble Original — a lightning storm's last moments, told as aerial ballet.">
+<GameLayout title={game.title} description={game.longDescription}>
 	<Hero
-		title="Tailwind: Prologue"
-		tagline="A Humble Original — a lightning storm's last moments, told as aerial ballet."
-		backgroundSrc="/img/games/tailwind/tailwind_splash.jpg"
-		compact
+		title={game.title}
+		tagline={game.shortDescription}
+		backgroundSrc={game.heroBackground}
+		trailerHref={game.trailerHref}
+		compact={game.compactHero}
+		platforms={game.platforms}
 	/>
+
+	<Gallery images={["/img/games/tailwind/tailwind1.jpg", "/img/games/tailwind/tailwind2.jpg", "/img/games/tailwind/tailwind3.jpg"]} />
+
+	<section class="about">
+		<h2>Before you die, live.</h2>
+		<p>You are the last survivor of an alien invasion that has all but destroyed your homeworld. Barely escaping the atmosphere in your experimental ship, the Keravnós, you realize you don't have enough fuel to survive.</p>
+		<p>If this is your time, you might as well spend it doing what you do best: aerial ballet. Rain from the heavens as a bolt of lightning in one final blaze of glory.</p>
+		<p><em>Tailwind: Prologue</em> was released exclusively in the Humble Monthly Bundle as a Humble Original in April 2016. Listen to the <a href="https://music.cipherprime.com/album/keravn-s" target="_blank" rel="noopener">official soundtrack</a>.</p>
+	</section>
+
+	<Press quote="IT'S FROM CIPHER PRIME!?" cite="Prince Jones" />
 </GameLayout>
+
+<style>
+	.about {
+		padding: 70px 24px;
+		max-width: 680px;
+		margin: 0 auto;
+		text-align: center;
+	}
+	.about h2 {
+		font-size: var(--fs-lg);
+		margin: 0 0 16px;
+		font-weight: 800;
+		color: #fff;
+	}
+	.about p {
+		font-size: var(--fs-base);
+		color: #c7cab9;
+	}
+	.about a {
+		color: var(--cp-green);
+	}
+</style>

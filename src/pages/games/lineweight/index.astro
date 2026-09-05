@@ -1,21 +1,57 @@
 ---
 import GameLayout from "../../../layouts/GameLayout.astro";
 import Hero from "../../../components/games/Hero.astro";
-import PlatformRow from "../../../components/games/PlatformRow.astro";
+import Gallery from "../../../components/games/Gallery.astro";
+import Press from "../../../components/games/Press.astro";
+import { games } from "../../../data/games";
 
-const platforms = [
-	{ icon: "/img/vendor/vendor-appstore.png", label: "App Store" },
-	{ icon: "/img/vendor/vendor-play.png", label: "Google Play" },
+const game = games.find((g) => g.slug === "lineweight")!;
+
+const accolades = [
+	{ label: "Gold Medal, Interactive Design", source: "Indigo Awards 2019" },
+	{ label: "Gold Medal, Book Design", source: "Indigo Awards 2019" },
+	{ label: "Silver Medal, Mobile Games", source: "Indigo Awards 2019" },
+	{ label: "Nominee", source: "IndieCade 2019" },
+	{ label: "Nominee", source: "IndieCade Europe 2019" },
 ];
 ---
 
-<GameLayout title="Lineweight" description="A five-chapter living book, told entirely by touch. Published with Team17.">
+<GameLayout title={game.title} description={game.longDescription}>
 	<Hero
-		title="Lineweight"
-		tagline="A five-chapter living book, told entirely by touch. Published with Team17."
-		backgroundSrc="/img/games/lineweight/lineweight_splash.jpg"
-		compact
-	>
-		<Fragment slot="platforms"><PlatformRow platforms={platforms} /></Fragment>
-	</Hero>
+		title={game.title}
+		tagline={game.shortDescription}
+		backgroundSrc={game.heroBackground}
+		trailerHref={game.trailerHref}
+		compact={game.compactHero}
+		platforms={game.platforms}
+	/>
+
+	<Gallery images={["/img/games/lineweight/lineweight1.jpg", "/img/games/lineweight/lineweight2.jpg", "/img/games/lineweight/lineweight3.jpg"]} />
+
+	<section class="about">
+		<h2>Feel something.</h2>
+		<p>A face, a sunset, a moment in time—our lives are the emotions we feel, and the stories we tell. These are our stories.</p>
+		<p>Each of Lineweight's five chapters showcases a story with a specific emotional focus, illuminated with the studio's signature stylings of color, light, and music. Every moment, word, and image is controlled by your swipe, marrying storytelling and graphic design in a unique union.</p>
+	</section>
+
+	<Press quote="Two Gold Medals for Interactive Design and Book Design." cite="Indigo Awards 2019" accolades={accolades} />
 </GameLayout>
+
+<style>
+	.about {
+		padding: 70px 24px;
+		max-width: 680px;
+		margin: 0 auto;
+		text-align: center;
+	}
+	.about h2 {
+		font-size: var(--fs-lg);
+		margin: 0 0 16px;
+		font-weight: 800;
+		color: #fff;
+	}
+	.about p {
+		font-size: var(--fs-base);
+		color: #c7cab9;
+	}
+</style>

@@ -1,0 +1,56 @@
+---
+import type { PlatformType } from "../../data/games";
+
+interface Props {
+	type: PlatformType;
+	href: string;
+	external?: boolean;
+}
+
+const { type, href, external = type !== "learn" } = Astro.props;
+const linkProps = external ? { target: "_blank", rel: "noopener" } : {};
+---
+
+{type === "steam" && (
+	<a class="badge purchase" href={href} {...linkProps}>Buy on Steam</a>
+)}
+{type === "appstore" && (
+	<a class="badge store" href={href} {...linkProps}><img src="/img/vendor/appstore-badge.svg" alt="App Store" /></a>
+)}
+{type === "googleplay" && (
+	<a class="badge store" href={href} {...linkProps}><img src="/img/vendor/googleplay-badge.svg" alt="Google Play" /></a>
+)}
+{type === "learn" && (
+	<a class="badge learn" href={href} {...linkProps}>Learn more &rarr;</a>
+)}
+
+<style>
+	.badge.purchase {
+		display: inline-block;
+		background: var(--cp-steam);
+		color: #06121c;
+		font-weight: 700;
+		font-size: var(--fs-base);
+		text-decoration: none;
+		padding: 10px 16px;
+		border-radius: 5px;
+	}
+	.badge.store {
+		display: inline-flex;
+	}
+	.badge.store img {
+		height: 38px;
+		width: auto;
+	}
+	.badge.learn {
+		font-size: var(--fs-base);
+		color: var(--cp-green);
+		text-decoration: none;
+		display: inline-flex;
+		align-items: center;
+		gap: 5px;
+	}
+	.badge.learn:hover {
+		text-decoration: underline;
+	}
+</style>

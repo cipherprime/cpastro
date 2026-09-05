@@ -1,13 +1,17 @@
 ---
+import GamePlatformBadge from "./GamePlatformBadge.astro";
+import type { PlatformLink } from "../../data/games";
+
 interface Props {
 	name: string;
 	href: string;
 	cover: string;
 	desc: string;
 	external?: boolean;
+	platforms?: PlatformLink[];
 }
 
-const { name, href, cover, desc, external = false } = Astro.props;
+const { name, href, cover, desc, external = false, platforms = [] } = Astro.props;
 const linkProps = external ? { target: "_blank", rel: "noopener" } : {};
 ---
 
@@ -16,15 +20,18 @@ const linkProps = external ? { target: "_blank", rel: "noopener" } : {};
 	<div class="body">
 		<h3><a href={href} {...linkProps}>{name}</a></h3>
 		<p class="desc">{desc}</p>
-		<slot />
+		<div class="platform-row">
+			{platforms.length > 0
+				? platforms.map((p) => <GamePlatformBadge type={p.type} href={p.href} />)
+				: <GamePlatformBadge type="learn" href={href} external={external} />}
+		</div>
 	</div>
 </div>
 
 <style>
 	.game-box {
 		background: #171811;
-		border: 1px solid #2a2c22;
-		border-radius: 8px;
+		border-radius: 4px;
 		overflow: hidden;
 		display: flex;
 		flex-direction: column;
@@ -52,7 +59,8 @@ const linkProps = external ? { target: "_blank", rel: "noopener" } : {};
 		flex-direction: column;
 	}
 	.game-box h3 {
-		font-size: 20px;
+		font-size: var(--fs-xl);
+		font-weight: 400;
 		margin: 0 0 6px;
 		color: #fff;
 	}
@@ -60,10 +68,40 @@ const linkProps = external ? { target: "_blank", rel: "noopener" } : {};
 		text-decoration: none;
 	}
 	.game-box .desc {
-		font-size: 13px;
+		font-size: var(--fs-md);
 		color: var(--cp-text-dim);
 		line-height: 1.5;
 		margin: 0 0 16px;
 		flex: 1;
+	}
+	.game-box .platform-row {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 8px;
+		margin-top: auto;
+	}
+
+	:global(.games.minis) .game-box h3 {
+		font-size: var(--fs-lg);
+	}
+
+	@media (max-width: 767px) {
+		:global(.games.minis) .game-box {
+			flex-direction: row;
+			align-items: stretch;
+		}
+		:global(.games.minis) .game-box .cover {
+			width: 100px;
+			aspect-ratio: auto;
+			flex-shrink: 0;
+		}
+		:global(.games.minis) .game-box .cover img {
+			height: 100%;
+			object-fit: cover;
+		}
+		:global(.games.minis) .game-box .body {
+			padding: 14px 16px;
+		}
 	}
 </style>

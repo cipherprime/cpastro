@@ -1,13 +1,52 @@
 ---
 import GameLayout from "../../../layouts/GameLayout.astro";
 import Hero from "../../../components/games/Hero.astro";
+import Gallery from "../../../components/games/Gallery.astro";
+import Press from "../../../components/games/Press.astro";
+import { games } from "../../../data/games";
+
+const game = games.find((g) => g.slug === "shimsham")!;
 ---
 
-<GameLayout title="Shimsham" description="A Leap Motion launch title with a live-jazz score. Since rebuilt for keyboard & mouse.">
+<GameLayout title={game.title} description={game.longDescription}>
 	<Hero
-		title="Shimsham"
-		tagline="A Leap Motion launch title with a live-jazz score. Since rebuilt for keyboard & mouse."
-		backgroundSrc="/img/games/shimsham/shimsham_splash.jpg"
-		compact
+		title={game.title}
+		tagline={game.shortDescription}
+		backgroundSrc={game.heroBackground}
+		trailerHref={game.trailerHref}
+		compact={game.compactHero}
+		platforms={game.platforms}
 	/>
+
+	<Gallery images={["/img/games/shimsham/shimsham1.jpg", "/img/games/shimsham/shimsham2.jpg", "/img/games/shimsham/shimsham3.jpg"]} />
+
+	<section class="about">
+		<h2>Go toe-to-toe and crush your opponent.</h2>
+		<p>In this heads-up competitive game, each player fights for control of their world while battling competing laws of gravity. Spin your level and control the falling blocks to crush your opponent—without letting them crush you first.</p>
+		<p>Originally created as a debut title for the Leap Motion, Shimsham has since been revamped with full keyboard, mouse, and controller support. Listen to the <a href="https://music.cipherprime.com/album/shimsham-ost" target="_blank" rel="noopener">official soundtrack</a>.</p>
+	</section>
+
+	<Press quote="This game is a piece of art!" cite="fifigyuri" />
 </GameLayout>
+
+<style>
+	.about {
+		padding: 70px 24px;
+		max-width: 680px;
+		margin: 0 auto;
+		text-align: center;
+	}
+	.about h2 {
+		font-size: var(--fs-lg);
+		margin: 0 0 16px;
+		font-weight: 800;
+		color: #fff;
+	}
+	.about p {
+		font-size: var(--fs-base);
+		color: #c7cab9;
+	}
+	.about a {
+		color: var(--cp-green);
+	}
+</style>

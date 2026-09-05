@@ -1,16 +1,58 @@
 ---
 import GameLayout from "../../../layouts/GameLayout.astro";
 import Hero from "../../../components/games/Hero.astro";
-import SteamButton from "../../../components/games/SteamButton.astro";
+import Gallery from "../../../components/games/Gallery.astro";
+import Press from "../../../components/games/Press.astro";
+import { games } from "../../../data/games";
+
+const game = games.find((g) => g.slug === "fractal")!;
+
+const accolades = [
+	{ label: "Musical Excellence Nominee", source: "IndieCade" },
+	{ label: "Featured", source: "Humble Bundle" },
+	{ label: "Editor's Choice", source: "App Store" },
+	{ label: "10/10", source: "App Storm" },
+	{ label: "Featured", source: "TIME" },
+	{ label: "25 Best Mac App Store Games", source: "Mac|Life" },
+];
 ---
 
-<GameLayout title="Fractal" description="A music puzzler pushed across five platforms — the most-ported title in the Cipher Prime catalog.">
+<GameLayout title={game.title} description={game.longDescription}>
 	<Hero
-		title="Fractal"
-		tagline="A music puzzler pushed across five platforms — the most-ported title in the catalog."
-		backgroundSrc="/img/games/fractal/fractal_splash.jpg"
-		compact
-	>
-		<SteamButton href="https://store.steampowered.com/app/61310/" price="$6.99" />
-	</Hero>
+		title={game.title}
+		tagline={game.shortDescription}
+		backgroundSrc={game.heroBackground}
+		trailerHref={game.trailerHref}
+		compact={game.compactHero}
+		platforms={game.platforms}
+	/>
+
+	<Gallery images={["/img/games/fractal/fractal1.jpg", "/img/games/fractal/fractal2.jpg", "/img/games/fractal/fractal3.jpg"]} />
+
+	<section class="about">
+		<h2>Make blooms, not war.</h2>
+		<p>From the award-winning team that brought you Auditorium comes Fractal, an enthralling music puzzler experience across three modes: a story-driven Campaign, a mechanics-focused Puzzle mode, and a fast, unlimited Arcade mode.</p>
+		<p>Push, Combo, and Chain your way through a pulsing technicolor dreamscape all while expanding your consciousness at 130 BPM.</p>
+	</section>
+
+	<Press quote="Slick, explosive, and wickedly addictive. Fractal brings together the best parts of Hexic and Lumines, and then blows them to itty-bitty pieces." cite="Adam Fimio, Indie Game Reviewer" accolades={accolades} />
 </GameLayout>
+
+<style>
+	.about {
+		padding: 70px 24px;
+		max-width: 680px;
+		margin: 0 auto;
+		text-align: center;
+	}
+	.about h2 {
+		font-size: var(--fs-lg);
+		margin: 0 0 16px;
+		font-weight: 800;
+		color: #fff;
+	}
+	.about p {
+		font-size: var(--fs-base);
+		color: #c7cab9;
+	}
+</style>
