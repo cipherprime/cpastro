@@ -1,0 +1,58 @@
+:root {
+	--cp-ink: #0c0f08;
+	--cp-paper: #f4f4ee;
+	--cp-green: #9bd83e;
+	--cp-green-dim: #6f9c2c;
+	--cp-steam: #66c0f4;
+	--cp-text: #e9ebe0;
+	--cp-text-dim: #9a9d8e;
+	--cp-text-faint: #5c5f52;
+	--cp-dark-text: #1c1e16;
+	--cp-font: "Avenir Next", "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background: var(--cp-ink);
+	color: var(--cp-text);
+	font-family: var(--cp-font);
+	line-height: 1.6;
+}
+
+a {
+	color: inherit;
+}
+
+img {
+	max-width: 100%;
+	display: block;
+}
+
+/* Centered max-width column with side gutters. Reach for this instead of
+   redeclaring max-width/margin/padding wherever content needs to line up
+   with the grid. */
+.contain {
+	width: 100%;
+	max-width: 1180px;
+	margin-inline: auto;
+	padding-inline: 24px;
+}
+
+/* Vertical rhythm between stacked sections. Override the gap per-instance
+   with style="--stack-space: 40px" rather than adding one-off padding. */
+.stack {
+	display: flex;
+	flex-direction: column;
+}
+.stack > * + * {
+	margin-top: var(--stack-space, 64px);
+}

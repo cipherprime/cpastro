@@ -1,0 +1,108 @@
+---
+interface Props {
+	title: string;
+	tagline?: string;
+	logoSrc?: string;
+	backgroundSrc: string;
+	trailerHref?: string;
+	compact?: boolean;
+}
+
+const { title, tagline, logoSrc, backgroundSrc, trailerHref, compact = false } = Astro.props;
+---
+
+<div class:list={["hero", { compact }]} style={`background-image:url(${backgroundSrc})`}>
+	<div class="hero-inner">
+		{logoSrc ? (
+			<div class="hero-logo"><img src={logoSrc} alt={title} /></div>
+		) : (
+			<h1>{title}</h1>
+		)}
+		{tagline && <p class="tagline">{tagline}</p>}
+
+		<div class="cta-row">
+			<slot />
+		</div>
+
+		{trailerHref && (
+			<a class="trailer-link" href={trailerHref} target="_blank" rel="noopener">▶ Watch the trailer</a>
+		)}
+
+		<slot name="platforms" />
+	</div>
+</div>
+
+<style>
+	.hero {
+		position: relative;
+		min-height: 100vh;
+		overflow: hidden;
+		background-color: #0e1607;
+		background-size: cover;
+		background-position: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+	}
+	.hero.compact {
+		min-height: 62vh;
+	}
+	.hero::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+		background: radial-gradient(
+			ellipse at 50% 40%,
+			rgba(0, 0, 0, 0) 0%,
+			rgba(6, 10, 3, 0.55) 62%,
+			rgba(4, 7, 2, 0.9) 100%
+		);
+	}
+	.hero-inner {
+		position: relative;
+		z-index: 1;
+		padding: 120px 24px 64px;
+		max-width: 920px;
+	}
+	.hero-logo {
+		width: min(640px, 86vw);
+		margin: 0 auto 6px;
+	}
+	.hero-logo img {
+		width: 100%;
+		-webkit-mask-image: radial-gradient(closest-side, black 60%, transparent 100%);
+		mask-image: radial-gradient(closest-side, black 60%, transparent 100%);
+		filter: drop-shadow(0 12px 40px rgba(0, 0, 0, 0.55));
+	}
+	.hero-inner h1 {
+		font-size: clamp(32px, 6vw, 52px);
+		margin: 0;
+	}
+	.tagline {
+		font-size: clamp(14px, 2vw, 17px);
+		color: #d7dac9;
+		max-width: 520px;
+		margin: 8px auto 34px;
+	}
+	.cta-row {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 18px;
+		flex-wrap: wrap;
+		margin-bottom: 10px;
+	}
+	.trailer-link {
+		font-size: 14px;
+		color: #cfd2c2;
+		text-decoration: none;
+		border-bottom: 1px solid rgba(207, 210, 194, 0.4);
+		padding-bottom: 2px;
+	}
+	.trailer-link:hover {
+		color: #fff;
+		border-color: #fff;
+	}
+</style>

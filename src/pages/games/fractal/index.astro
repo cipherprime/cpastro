@@ -1,0 +1,16 @@
+---
+import GameLayout from "../../../layouts/GameLayout.astro";
+import Hero from "../../../components/games/Hero.astro";
+import SteamButton from "../../../components/games/SteamButton.astro";
+---
+
+<GameLayout title="Fractal" description="A music puzzler pushed across five platforms — the most-ported title in the Cipher Prime catalog.">
+	<Hero
+		title="Fractal"
+		tagline="A music puzzler pushed across five platforms — the most-ported title in the catalog."
+		backgroundSrc="/img/games/fractal/fractal_splash.jpg"
+		compact
+	>
+		<SteamButton href="https://store.steampowered.com/app/61310/" price="$6.99" />
+	</Hero>
+</GameLayout>

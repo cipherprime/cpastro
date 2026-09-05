@@ -1,0 +1,18 @@
+---
+import GameLayout from "../../../layouts/GameLayout.astro";
+import Hero from "../../../components/games/Hero.astro";
+import PlatformRow from "../../../components/games/PlatformRow.astro";
+
+const platforms = [{ icon: "/img/vendor/vendor-appstore.png", label: "App Store" }];
+---
+
+<GameLayout title="Pulse" description="Touch rhythm. Cipher Prime's first iPad game — still live after 15 years.">
+	<Hero
+		title="Pulse"
+		tagline="Touch rhythm. Cipher Prime's first iPad game — still live after 15 years."
+		backgroundSrc="/img/games/pulse/pulse_splash.jpg"
+		compact
+	>
+		<Fragment slot="platforms"><PlatformRow platforms={platforms} /></Fragment>
+	</Hero>
+</GameLayout>

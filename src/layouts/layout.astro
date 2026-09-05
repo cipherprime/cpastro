@@ -1,0 +1,106 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+	</head>
+	<body>
+		<header class="site-header">
+			<nav>
+				<a href="/#games">Games</a>
+				<a href="/about">About</a>
+				<a href="/mailinglist">Mailing List</a>
+			</nav>
+		</header>
+
+		<main class="contain">
+			<slot />
+		</main>
+
+		<footer class="site-footer">
+			<div class="links">
+				<a href="/about">About</a>
+				<a href="https://music.cipherprime.com">Music</a>
+				<a href="/mailinglist">Mailing List</a>
+				<a href="mailto:team@cipherprime.com">Contact</a>
+			</div>
+			<div class="copy">Cipher Prime Studios &mdash; Philadelphia, PA</div>
+		</footer>
+	</body>
+</html>
+
+<style>
+	body {
+		background: var(--cp-paper);
+		color: var(--cp-dark-text);
+	}
+
+	.site-header {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 10;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		padding: 22px 28px;
+		background: linear-gradient(180deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
+	}
+	.site-header nav {
+		display: flex;
+		gap: 22px;
+	}
+	.site-header nav a {
+		text-decoration: none;
+		font-size: 13px;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--cp-text-dim);
+	}
+	.site-header nav a:hover {
+		color: #fff;
+	}
+
+	main {
+		padding-top: 96px;
+		padding-bottom: 60px;
+	}
+
+	.site-footer {
+		border-top: 1px solid #ddd;
+		padding: 40px 24px 46px;
+		text-align: center;
+		margin-top: 20px;
+	}
+	.site-footer .links {
+		display: flex;
+		justify-content: center;
+		gap: 26px;
+		flex-wrap: wrap;
+		margin-bottom: 18px;
+	}
+	.site-footer .links a {
+		text-decoration: none;
+		font-size: 13px;
+		color: var(--cp-text-faint);
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+	}
+	.site-footer .links a:hover {
+		color: var(--cp-dark-text);
+	}
+	.site-footer .copy {
+		font-size: 11px;
+		color: var(--cp-text-faint);
+	}
+</style>

@@ -1,0 +1,21 @@
+---
+import GameLayout from "../../../layouts/GameLayout.astro";
+import Hero from "../../../components/games/Hero.astro";
+import PlatformRow from "../../../components/games/PlatformRow.astro";
+
+const platforms = [
+	{ icon: "/img/vendor/vendor-appstore.png", label: "App Store" },
+	{ icon: "/img/vendor/vendor-play.png", label: "Google Play" },
+];
+---
+
+<GameLayout title="Lineweight" description="A five-chapter living book, told entirely by touch. Published with Team17.">
+	<Hero
+		title="Lineweight"
+		tagline="A five-chapter living book, told entirely by touch. Published with Team17."
+		backgroundSrc="/img/games/lineweight/lineweight_splash.jpg"
+		compact
+	>
+		<Fragment slot="platforms"><PlatformRow platforms={platforms} /></Fragment>
+	</Hero>
+</GameLayout>

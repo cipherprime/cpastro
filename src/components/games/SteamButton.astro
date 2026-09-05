@@ -1,0 +1,45 @@
+---
+interface Props {
+	href: string;
+	label?: string;
+	price?: string;
+}
+
+const { href, label = "Buy on Steam", price } = Astro.props;
+---
+
+<a class="btn-steam" href={href} target="_blank" rel="noopener">
+	<img src="/img/vendor/vendor-steam.png" alt="" />
+	{label} {price && <span class="price">{price}</span>}
+</a>
+
+<style>
+	.btn-steam {
+		display: inline-flex;
+		align-items: center;
+		gap: 12px;
+		text-decoration: none;
+		background: linear-gradient(180deg, var(--cp-steam), #1b6fa8);
+		color: #06121c;
+		font-weight: 800;
+		font-size: 17px;
+		padding: 16px 30px;
+		border-radius: 999px;
+		box-shadow: 0 10px 30px rgba(27, 111, 168, 0.45);
+		transition:
+			transform 0.15s ease,
+			box-shadow 0.15s ease;
+	}
+	.btn-steam:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 14px 36px rgba(27, 111, 168, 0.6);
+	}
+	.btn-steam img {
+		height: 22px;
+		width: auto;
+	}
+	.btn-steam .price {
+		font-weight: 600;
+		opacity: 0.75;
+	}
+</style>

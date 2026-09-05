@@ -1,0 +1,16 @@
+---
+import GameLayout from "../../../layouts/GameLayout.astro";
+import Hero from "../../../components/games/Hero.astro";
+import SteamButton from "../../../components/games/SteamButton.astro";
+---
+
+<GameLayout title="Auditorium" description="Cipher Prime's signature game — bend light into sound.">
+	<Hero
+		title="Auditorium"
+		tagline="The signature game — bend light into sound. Turns 20 in 2028."
+		backgroundSrc="/img/games/auditorium/auditorium_flyer.jpg"
+		compact
+	>
+		<SteamButton href="https://store.steampowered.com/app/205870/" />
+	</Hero>
+</GameLayout>

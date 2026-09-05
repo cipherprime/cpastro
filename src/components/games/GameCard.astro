@@ -1,0 +1,69 @@
+---
+interface Props {
+	name: string;
+	href: string;
+	cover: string;
+	desc: string;
+	external?: boolean;
+}
+
+const { name, href, cover, desc, external = false } = Astro.props;
+const linkProps = external ? { target: "_blank", rel: "noopener" } : {};
+---
+
+<div class="game-box">
+	<a class="cover" href={href} {...linkProps}><img src={cover} alt={name} /></a>
+	<div class="body">
+		<h3><a href={href} {...linkProps}>{name}</a></h3>
+		<p class="desc">{desc}</p>
+		<slot />
+	</div>
+</div>
+
+<style>
+	.game-box {
+		background: #171811;
+		border: 1px solid #2a2c22;
+		border-radius: 8px;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+	}
+	.game-box .cover {
+		aspect-ratio: 561 / 800;
+		overflow: hidden;
+		display: block;
+	}
+	.game-box .cover img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+		transition: transform 0.2s ease;
+	}
+	.game-box .cover:hover img {
+		transform: scale(1.03);
+	}
+	.game-box .body {
+		padding: 18px 20px 22px;
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+	}
+	.game-box h3 {
+		font-size: 20px;
+		margin: 0 0 6px;
+		color: #fff;
+	}
+	.game-box h3 a {
+		text-decoration: none;
+	}
+	.game-box .desc {
+		font-size: 13px;
+		color: var(--cp-text-dim);
+		line-height: 1.5;
+		margin: 0 0 16px;
+		flex: 1;
+	}
+</style>

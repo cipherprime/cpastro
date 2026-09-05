@@ -1,0 +1,89 @@
+---
+import GameLayout from "../../../layouts/GameLayout.astro";
+import Hero from "../../../components/games/Hero.astro";
+import SteamButton from "../../../components/games/SteamButton.astro";
+import PlatformRow from "../../../components/games/PlatformRow.astro";
+import Gallery from "../../../components/games/Gallery.astro";
+import Press from "../../../components/games/Press.astro";
+import MusicGrid from "../../../components/games/MusicGrid.astro";
+
+const platforms = [{ icon: "/img/vendor/vendor-steam.png", label: "Steam" }];
+
+const accolades = [
+	{ label: "Best Puzzle Game", source: "Intel Level Up" },
+	{ label: "Best International Game", source: "Freeplay Awards" },
+	{ label: "PAX 10 Selection", source: "PAX Prime" },
+	{ label: "Finalist", source: "IndieCade" },
+	{ label: "Editor's Choice", source: "Apple" },
+	{ label: "Game of the Week", source: "Pocket Gamer" },
+	{ label: "Game of the Day", source: "Kotaku" },
+	{ label: "Platinum Award", source: "Pocket Gamer" },
+];
+
+const musicItems = [
+	{
+		cover: "/img/games/splice/flight_of_angels_cover.png",
+		kind: "Soundtrack",
+		title: "Flight of Angels",
+		desc: "The main Splice OST.",
+		href: "https://cipherprime.bandcamp.com/album/flight-of-angels-splice-ost",
+	},
+	{
+		cover: "/img/games/splice/algorithms_angelology_cover.png",
+		kind: "Soundtrack",
+		title: "Algorithms and Angelology",
+		desc: "The Splice epilogue OST.",
+		href: "https://cipherprime.bandcamp.com/album/algorithms-and-angelology",
+	},
+	{
+		cover: "/img/games/splice/sheet_music_cover.jpg",
+		kind: "Sheet Music",
+		title: "Splice Sheet Music",
+		desc: "Play the score yourself.",
+		href: "https://gumroad.com/l/BaOhm",
+	},
+];
+---
+
+<GameLayout title="Splice" description="An experimental, artistic puzzler about splicing microbial life into new forms. The cells react to you.">
+	<Hero
+		title="Splice"
+		logoSrc="/img/games/splice/splice_logo.jpg"
+		tagline="An experimental, artistic puzzler about splicing microbial life into new forms. The cells react to you."
+		backgroundSrc="/img/games/splice/splice_splash_bg.jpg"
+		trailerHref="https://www.youtube.com/embed/UpAi8kPrFaA"
+	>
+		<SteamButton href="https://store.steampowered.com/app/209790/" price="$9.99" />
+		<Fragment slot="platforms"><PlatformRow platforms={platforms} /></Fragment>
+	</Hero>
+
+	<Gallery images={["/img/games/splice/splice1.jpg", "/img/games/splice/splice2.jpg", "/img/games/splice/splice3.jpg"]} />
+
+	<section class="about">
+		<h2>Evolve your mind.</h2>
+		<p>Splice is an experimental and artistic puzzler. Immerse yourself in its microbial world and start splicing! Every level ("strand") consists of a number of cells that you will need to rearrange into a target structure in several moves ("splices"). Exploration and experimentation are key in determining how the curious little cells react to each other.</p>
+	</section>
+
+	<Press quote="Elegant puzzle games should be on Oprah's non-existent list of video game favorite things." cite="Kotaku, Game of the Day" accolades={accolades} />
+
+	<MusicGrid subheading="Two soundtracks, one score." items={musicItems} />
+</GameLayout>
+
+<style>
+	.about {
+		padding: 70px 24px;
+		max-width: 680px;
+		margin: 0 auto;
+		text-align: center;
+	}
+	.about h2 {
+		font-size: clamp(22px, 3.4vw, 30px);
+		margin: 0 0 16px;
+		font-weight: 800;
+		color: #fff;
+	}
+	.about p {
+		font-size: 16px;
+		color: #c7cab9;
+	}
+</style>
