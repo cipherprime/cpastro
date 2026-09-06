@@ -1,0 +1,287 @@
+---
+import GameLayout from "../../../layouts/GameLayout.astro";
+import { games } from "../../../data/games";
+
+const game = games.find((g) => g.slug === "fractal")!;
+
+const powerups = [
+	{
+		icon: "powerup_explode",
+		title: "Explode",
+		desc: "Include this power-up in a bloom to clear all fractals within a two-fractal radius of the power-up when activated. The power-up slowly cycles through all available colors in the level, and can be combined with any available color to form a bloom.",
+	},
+	{
+		icon: "powerup_electrify",
+		title: "Electrify",
+		desc: "When included in a bloom, this power-up clears all same-color fractals in contact with the bloom, as well as any same-color fractals in contact with these affected fractals. The power-up cycles through all available colors and can be combined with any available color to form a bloom.",
+	},
+	{
+		icon: "powerup_pushback",
+		title: "Push-back",
+		desc: "Adds a single push to the Push Queue when included in a bloom. Combine with fractals of the same color to form a bloom.",
+	},
+	{
+		icon: "powerup_pushback3x",
+		title: "Push-back 3x",
+		desc: "Adds three pushes to the Push Queue when included in a bloom. Combine with fractals of the same color to form a bloom.",
+	},
+	{
+		icon: "powerup_timeincrease",
+		title: "2-sec Time-increase",
+		desc: "Each adds 2 seconds to the clock when cleared from the board. Combine with fractals of the same color to form a bloom.",
+	},
+	{
+		icon: "powerup_timeincrease6sec",
+		title: "6-sec Time-increase",
+		desc: "Each adds 6 seconds to the clock when cleared from the board. Combine with fractals of the same color to form a bloom.",
+	},
+	{
+		icon: "powerup_clearbonus",
+		title: "Cleared Bonus 3x",
+		desc: "Worth three fractals when cleared from the board. Each adds 3 to the Counter on the Progress Meter. Combine with fractals of the same color to form a bloom.",
+	},
+];
+---
+
+<GameLayout
+	title={`Guide — ${game.title}`}
+	description={`A guide to the modes, power-ups, and bloom mechanics of ${game.title}.`}
+	lightTopbar
+	hideBack
+>
+	<section class="guide">
+		<div class="guide-inner">
+			<a class="eyebrow" href="/games/fractal">← <img src="/img/games/fractal/fractal_icon.webp" alt="" /> Fractal</a>
+			<h1>Fractal Guide</h1>
+
+			<div class="intro">
+				<p>Why is the sky blue? Why do the tides come in only to go out again? How does one go about playing <em>Fractal</em>? These are just a few of the perennial questions asked by scientists and philosophers throughout the ages. For now, let's just talk about <em>Fractal</em>.</p>
+			</div>
+
+			<div class="block">
+				<div class="grid grid-2">
+					<div class="item">
+						<img src="/img/games/fractal/guide/indirect.webp" alt="" />
+						<div>
+							<h3>What Are Fractals?</h3>
+							<p>In terms of this game, <em>fractals</em> are the colorful six-sided hexagonal tile pieces at the center of all the excitement. <em>Push</em> and notice as they multiply. Maneuver them together and watch as they <em>bloom</em> and explode!</p>
+						</div>
+					</div>
+					<div class="item">
+						<img src="/img/games/fractal/guide/create_blooms.webp" alt="" />
+						<div>
+							<h3>The Gist of It</h3>
+							<p>Your goal is to clear fractals from the board by arranging them into 7-piece hexagonal-shaped clusters called <em>blooms</em>. Moves in <em>Fractal</em> are referred to as <em>pushes</em>. You can push fractals by selecting any of the open spaces along their edges, including the darkened border spaces. Any fractal that moves out of bounds will be removed from play. Be sure to monitor your gauges in the corners of the screen&mdash;these will keep you informed with each push and assist you in successfully completing each level.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="block">
+				<h2>Modes</h2>
+
+				<figure class="hud">
+					<img src="/img/games/fractal/guide/campaign_hud1.webp" alt="Campaign mode HUD, annotated" />
+				</figure>
+
+				<div class="modes">
+					<div>
+						<h3>Campaign Mode</h3>
+						<p>The core challenge in this mode is presented by the limited number of available pushes for each level. To advance, you must clear enough fractals from the board to fill the Progress Meter before you exceed the available number of pushes in the Push Queue. The complexity and difficulty of these challenges increase as you advance from one level to the next.</p>
+					</div>
+					<div>
+						<h3>Puzzle Mode</h3>
+						<p>Puzzle mode serves as an arena both for understanding the basics and for practicing some of the more advanced techniques. Pushes are limited. Though, unlike other modes, the queue is fully disclosed with all available pushes and colors in sequence at the bottom of the screen.</p>
+					</div>
+					<div>
+						<h3>Arcade Mode</h3>
+						<p>In this mode you are pitted against the clock in a race for survival. Each level starts with 20 seconds on the clock. Pushes are infinite, and you can earn time back by clearing fractals labeled as <em>Time-increase</em> power-ups&mdash;plus 5 seconds with each level progression. The difficulty curve increases exponentially between the three Arcade modes: <em>Speed</em>, <em>Agility</em>, and <em>Confidence</em>.</p>
+					</div>
+				</div>
+
+				<div class="grid grid-3 arcade-modes">
+					<p><strong>Speed mode</strong> limits the board to a single playable color per level: only one color on the board, only one color in the Push Queue.</p>
+					<p><strong>Agility mode</strong> opens the board up to two playable colors, but limits pushes to a single color.</p>
+					<p><strong>Confidence mode</strong> presents the challenge of managing two playable colors on the board while the Push Queue alternates at random between the two available colors.</p>
+				</div>
+			</div>
+
+			<div class="block">
+				<h2>Power-Ups</h2>
+				<p>As you progress through Campaign mode, you'll notice the appearance of a few special fractals with some pretty spectacular abilities. These fractals are referred to as <em>power-ups</em>, each labeled with an icon indicating what type it is. Points-wise, each is worth double that of normal fractals. Power-ups are made available in certain levels of Campaign mode, and then only after a specified number of fractals have been cleared from the board.</p>
+
+				<div class="grid grid-3">
+					{powerups.map((p) => (
+						<div class="item">
+							<img src={`/img/games/fractal/guide/${p.icon}.webp`} alt={p.title} />
+							<div>
+								<h3>{p.title}</h3>
+								<p>{p.desc}</p>
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+
+			<div class="block">
+				<h2>Blooms, Clusters, &amp; Chain-reactions</h2>
+				<p>The simplest bloom consists of seven fractals, and occurs when a single fractal is enclosed by a ring of fractals, having one at each of its six sides. The outer six fractals then move away from the center by one space&mdash;pushing back any fractals directly inline with their paths&mdash;before bursting into a shower of particles. Each fractal cleared from the board is then added to the Progress Meter; the Counter is increased by the number of fractals cleared.</p>
+
+				<div class="modes">
+					<div>
+						<h3>Multi-Bloom Cluster</h3>
+						<p>A multi-bloom cluster occurs when bloom shapes form overlapped in a cluster. Peripheral fractals push outward before the cluster bursts into a shower of particles. The total number of fractals used to form the cluster is then added to the Progress Meter. Although the points value for peripheral fractals remains 5, points for the central fractals each equal 100x the number of blooms in the cluster.</p>
+					</div>
+					<div>
+						<h3>Chain-Reaction</h3>
+						<p>A chain-reaction occurs when a peripheral fractal extends away from a bloom to complete the formation of another bloom. This is where efforts really start to pay off: after the initial bloom, the total points value for each additional bloom or multi-bloom cluster is multiplied by a value of 2x.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</GameLayout>
+
+<style>
+	.guide {
+		background: var(--cp-paper);
+		color: var(--cp-dark-text);
+		padding: 130px 24px 90px;
+	}
+	.guide-inner {
+		max-width: 980px;
+		margin: 0 auto;
+	}
+	.eyebrow {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		font-size: var(--fs-base);
+		text-transform: uppercase;
+		letter-spacing: 0.22em;
+		color: var(--cp-green-dim);
+		font-weight: 700;
+		text-decoration: none;
+		margin-bottom: 18px;
+	}
+	.eyebrow img {
+		width: 16px;
+		height: 16px;
+		border-radius: 3px;
+	}
+	.eyebrow:hover {
+		color: var(--cp-dark-text);
+	}
+	.guide h1 {
+		font-size: var(--fs-xl);
+		margin: 0 0 56px;
+		font-weight: 300;
+		color: var(--cp-dark-text);
+	}
+	.intro,
+	.block {
+		max-width: 680px;
+		margin: 0 0 60px;
+	}
+	.block {
+		max-width: 980px;
+	}
+	.guide h2 {
+		font-size: var(--fs-md);
+		margin: 0 0 12px;
+		font-weight: 400;
+		color: var(--cp-dark-text);
+	}
+	.guide > .guide-inner > .block > p {
+		max-width: 680px;
+		margin: 0 0 40px;
+	}
+	.guide p {
+		font-size: var(--fs-base);
+		color: var(--cp-paper-text-dim);
+	}
+	.guide em {
+		color: var(--cp-paper-rule);
+		font-style: normal;
+	}
+
+	.hud {
+		margin: 0 0 40px;
+	}
+	.hud img {
+		width: 100%;
+		max-width: 480px;
+		height: auto;
+		margin: 0 auto;
+		border-radius: 6px;
+	}
+
+	.modes {
+		display: grid;
+		gap: 32px;
+		grid-template-columns: repeat(3, 1fr);
+		margin-bottom: 32px;
+	}
+	.modes h3 {
+		font-size: var(--fs-base);
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		margin: 0 0 8px;
+		color: var(--cp-dark-text);
+	}
+
+	.arcade-modes p {
+		margin: 0;
+	}
+
+	/* Icon + copy pairing. The icon floats beside its paragraph, same
+	   idea as the old site's alignright treatment, but the surrounding
+	   columns are laid out with grid instead of a 12-col float grid. */
+	.grid {
+		display: grid;
+		gap: 32px;
+		text-align: left;
+		margin-top: 8px;
+	}
+	.grid-3 {
+		grid-template-columns: repeat(3, 1fr);
+	}
+	.grid-2 {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.item {
+		display: flow-root;
+	}
+	.item img {
+		float: left;
+		width: auto;
+		height: 44px;
+		margin: 2px 12px 8px 0;
+	}
+	.item h3 {
+		font-size: var(--fs-base);
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		margin: 4px 0 6px;
+		color: var(--cp-dark-text);
+	}
+	.item p {
+		margin: 0;
+	}
+
+	@media (max-width: 860px) {
+		.modes,
+		.grid-3 {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	@media (max-width: 640px) {
+		.modes,
+		.grid-3,
+		.grid-2 {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

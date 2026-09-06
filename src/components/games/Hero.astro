@@ -31,7 +31,7 @@ const { title, tagline, logoSrc, backgroundSrc, trailerHref, compact = false, pl
 		)}
 
 		{trailerHref && (
-			<a class="trailer-link" href={trailerHref} target="_blank" rel="noopener">▶ Watch the trailer</a>
+			<a class="trailer-link link-underline" href={trailerHref} target="_blank" rel="noopener">▶ Watch the trailer</a>
 		)}
 	</div>
 </div>
@@ -39,7 +39,7 @@ const { title, tagline, logoSrc, backgroundSrc, trailerHref, compact = false, pl
 <style>
 	.hero {
 		position: relative;
-		min-height: 100vh;
+		min-height: 80vh;
 		overflow: hidden;
 		background-color: #0e1607;
 		background-size: cover;
@@ -48,9 +48,6 @@ const { title, tagline, logoSrc, backgroundSrc, trailerHref, compact = false, pl
 		align-items: center;
 		justify-content: center;
 		text-align: center;
-	}
-	.hero.compact {
-		min-height: 62vh;
 	}
 	.hero::before {
 		content: "";
@@ -76,8 +73,6 @@ const { title, tagline, logoSrc, backgroundSrc, trailerHref, compact = false, pl
 	}
 	.hero-logo img {
 		width: 100%;
-		-webkit-mask-image: radial-gradient(closest-side, black 60%, transparent 100%);
-		mask-image: radial-gradient(closest-side, black 60%, transparent 100%);
 		filter: drop-shadow(0 12px 40px rgba(0, 0, 0, 0.55));
 	}
 	.hero-inner h1 {
@@ -101,10 +96,8 @@ const { title, tagline, logoSrc, backgroundSrc, trailerHref, compact = false, pl
 	}
 	.trailer-link {
 		font-size: var(--fs-base);
-		color: #cfd2c2;
-		text-decoration: none;
-		border-bottom: 1px solid rgba(207, 210, 194, 0.4);
-		padding-bottom: 2px;
+		color: var(--cp-text-quiet);
+		border-bottom-color: rgba(207, 210, 194, 0.4);
 	}
 	.trailer-link:hover {
 		color: #fff;

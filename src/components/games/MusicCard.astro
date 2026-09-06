@@ -1,0 +1,69 @@
+---
+import Card from "../Card.astro";
+
+export interface MusicItem {
+	cover: string;
+	kind: string;
+	title: string;
+	desc: string;
+	href: string;
+}
+
+interface Props extends MusicItem {}
+
+const { cover, kind, title, desc, href } = Astro.props;
+---
+
+<Card variant="music" href={href} cover={cover} coverAlt={`${title} cover art`} eyebrow={kind} title={title} desc={desc} external wholeCardLink>
+	<div class="go">Listen &rarr;</div>
+</Card>
+
+<style>
+	:global(.card-music) {
+		background: var(--cp-panel);
+		border: 1px solid #262b1a;
+		border-radius: 10px;
+		transition:
+			transform 0.15s ease,
+			border-color 0.15s ease,
+			background 0.15s ease;
+	}
+	:global(.card-music:hover) {
+		transform: translateY(-3px);
+		border-color: var(--cp-green-dim);
+		background: var(--cp-panel-hover);
+	}
+	:global(.card-music .cover) {
+		aspect-ratio: 1 / 1;
+	}
+	:global(.card-music .body) {
+		padding: 20px 22px 24px;
+	}
+	:global(.card-music .eyebrow-label) {
+		font-size: var(--fs-base);
+		text-transform: uppercase;
+		letter-spacing: 0.16em;
+		color: var(--cp-green);
+		font-weight: 700;
+		margin-bottom: 10px;
+	}
+	:global(.card-music .title) {
+		font-size: var(--fs-md);
+		font-weight: 400;
+		color: #fff;
+		margin-bottom: 8px;
+		line-height: 1.3;
+	}
+	:global(.card-music .desc) {
+		font-size: var(--fs-md);
+		color: var(--cp-text-dim);
+		margin-bottom: 16px;
+	}
+	:global(.card-music .go) {
+		font-size: var(--fs-base);
+		color: var(--cp-text-quiet);
+	}
+	:global(.card-music:hover .go) {
+		color: #fff;
+	}
+</style>

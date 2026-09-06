@@ -1,0 +1,38 @@
+---
+interface Props {
+	quote: string;
+	cite: string;
+}
+
+const { quote, cite } = Astro.props;
+---
+
+<section class="pullquote">
+	<div class="pullquote-inner contain-narrow align-center">
+		<p class="quote">&ldquo;{quote}&rdquo;</p>
+		<cite>&mdash; {cite}</cite>
+	</div>
+</section>
+
+<style>
+	.pullquote {
+		background: var(--cp-ink);
+		padding: 64px 0 56px;
+	}
+	.quote {
+		font-size: var(--fs-2xl);
+		font-weight: 700;
+		line-height: 1.2;
+		letter-spacing: -0.01em;
+		color: #fff;
+		margin: 0 0 18px;
+	}
+	cite {
+		font-style: normal;
+		font-size: var(--fs-base);
+		text-transform: uppercase;
+		letter-spacing: 0.14em;
+		color: var(--cp-green);
+		font-weight: 700;
+	}
+</style>

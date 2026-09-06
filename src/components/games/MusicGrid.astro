@@ -1,124 +1,30 @@
 ---
-export interface MusicItem {
-	cover: string;
-	kind: string;
-	title: string;
-	desc: string;
-	href: string;
-}
+import CardGrid from "../CardGrid.astro";
+import MusicCard, { type MusicItem } from "./MusicCard.astro";
 
 interface Props {
 	heading?: string;
-	subheading?: string;
 	items: MusicItem[];
 }
 
-const { heading = "Listen & play along", subheading, items } = Astro.props;
+const { heading = "Get the soundtracks", items } = Astro.props;
 ---
 
 <section class="music">
-	<div class="music-inner">
-		<h2>{heading}</h2>
-		{subheading && <p class="sub">{subheading}</p>}
-		<div class="music-grid">
-			{items.map((item) => (
-				<a class="music-card" href={item.href} target="_blank" rel="noopener">
-					<img class="cover" src={item.cover} alt={`${item.title} cover art`} />
-					<div class="body">
-						<div class="kind">{item.kind}</div>
-						<div class="title">{item.title}</div>
-						<div class="desc">{item.desc}</div>
-						<div class="go">Listen &rarr;</div>
-					</div>
-				</a>
-			))}
-		</div>
+	<div class="music-inner contain align-center">
+		<h2 class="section-title">{heading}</h2>
+		<CardGrid columns={3} gap="20px">
+			{items.map((item) => <MusicCard {...item} />)}
+		</CardGrid>
 	</div>
 </section>
 
 <style>
 	.music {
-		background: #0e1108;
-		padding: 80px 24px;
-	}
-	.music-inner {
-		max-width: 960px;
-		margin: 0 auto;
-		text-align: center;
+		background: var(--cp-ink);
+		padding: 80px 0;
 	}
 	.music-inner h2 {
-		font-size: var(--fs-lg);
-		margin: 0 0 16px;
-		font-weight: 800;
-		color: #fff;
-	}
-	.music-inner .sub {
-		font-size: var(--fs-base);
-		color: var(--cp-text-dim);
-		margin: 0 0 40px;
-	}
-	.music-grid {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 20px;
-		text-align: left;
-	}
-	@media (max-width: 700px) {
-		.music-grid {
-			grid-template-columns: 1fr;
-		}
-	}
-	.music-card {
-		display: block;
-		text-decoration: none;
-		color: inherit;
-		background: #161a0f;
-		border: 1px solid #262b1a;
-		border-radius: 10px;
-		overflow: hidden;
-		transition:
-			transform 0.15s ease,
-			border-color 0.15s ease,
-			background 0.15s ease;
-	}
-	.music-card:hover {
-		transform: translateY(-3px);
-		border-color: var(--cp-green-dim);
-		background: #191e11;
-	}
-	.music-card .cover {
-		width: 100%;
-		aspect-ratio: 1 / 1;
-		object-fit: cover;
-	}
-	.music-card .body {
-		padding: 20px 22px 24px;
-	}
-	.music-card .kind {
-		font-size: var(--fs-base);
-		text-transform: uppercase;
-		letter-spacing: 0.16em;
-		color: var(--cp-green);
-		font-weight: 700;
-		margin-bottom: 10px;
-	}
-	.music-card .title {
-		font-size: var(--fs-md);
-		font-weight: 800;
-		color: #fff;
-		margin-bottom: 8px;
-		line-height: 1.3;
-	}
-	.music-card .desc {
-		font-size: var(--fs-base);
-		color: var(--cp-text-dim);
-		margin-bottom: 16px;
-	}
-	.music-card .go {
-		font-size: var(--fs-base);
-		color: #cfd2c2;
-	}
-	.music-card:hover .go {
-		color: #fff;
+		margin-bottom: 40px;
 	}
 </style>

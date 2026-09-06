@@ -1,14 +1,35 @@
 ---
 import GameLayout from "../../../layouts/GameLayout.astro";
 import Hero from "../../../components/games/Hero.astro";
+import PullQuote from "../../../components/games/PullQuote.astro";
+import GameAbout from "../../../components/games/GameAbout.astro";
 import Gallery from "../../../components/games/Gallery.astro";
 import Press from "../../../components/games/Press.astro";
+import MusicGrid from "../../../components/games/MusicGrid.astro";
+import Credits from "../../../components/games/Credits.astro";
 import { games } from "../../../data/games";
 
 const game = games.find((g) => g.slug === "tailwind")!;
+
+const quotes = [
+	{ quote: "IT'S FROM CIPHER PRIME!?", cite: "Prince Jones" },
+	{ quote: "Just installed and played—that is some awesome exclusive game.", cite: "David Bauer" },
+	{ quote: "dank", cite: "charlieatron" },
+	{ quote: "SH*************************T WHEN, WHERE, HOW, PRICE?", cite: "Michael Khang" },
+];
+
+const musicItems = [
+	{
+		cover: "/img/games/tailwind/tailwind_keravnos_cover.webp",
+		kind: "Single",
+		title: "Keravnós",
+		desc: "The Tailwind theme, plus an orchestral version.",
+		href: "https://cipherprime.bandcamp.com/album/keravn-s",
+	},
+];
 ---
 
-<GameLayout title={game.title} description={game.longDescription}>
+<GameLayout title={game.title} description={game.longDescription} platforms={game.platforms}>
 	<Hero
 		title={game.title}
 		tagline={game.shortDescription}
@@ -18,36 +39,53 @@ const game = games.find((g) => g.slug === "tailwind")!;
 		platforms={game.platforms}
 	/>
 
+	<PullQuote quote="It's from Cipher Prime!?" cite="Prince Jones" />
+
 	<Gallery images={["/img/games/tailwind/tailwind1.jpg", "/img/games/tailwind/tailwind2.jpg", "/img/games/tailwind/tailwind3.jpg"]} />
 
-	<section class="about">
-		<h2>Before you die, live.</h2>
+	<GameAbout heading="Before you die, live.">
 		<p>You are the last survivor of an alien invasion that has all but destroyed your homeworld. Barely escaping the atmosphere in your experimental ship, the Keravnós, you realize you don't have enough fuel to survive.</p>
 		<p>If this is your time, you might as well spend it doing what you do best: aerial ballet. Rain from the heavens as a bolt of lightning in one final blaze of glory.</p>
-		<p><em>Tailwind: Prologue</em> was released exclusively in the Humble Monthly Bundle as a Humble Original in April 2016. Listen to the <a href="https://music.cipherprime.com/album/keravn-s" target="_blank" rel="noopener">official soundtrack</a>.</p>
-	</section>
+		<p><em>Tailwind: Prologue</em> was released exclusively in the Humble Monthly Bundle as a Humble Original in April 2016.</p>
+	</GameAbout>
 
-	<Press quote="IT'S FROM CIPHER PRIME!?" cite="Prince Jones" />
+	<Press quotes={quotes} />
+
+	<MusicGrid items={musicItems} />
+
+	<Credits
+		groups={[
+			{
+				heading: "The Team",
+				names: [
+					{ name: "Dain Saint", href: "https://twitter.com/dainsaint" },
+					{ name: "William Stallwood", href: "https://twitter.com/willstall" },
+				],
+			},
+			{
+				heading: "Special Thanks",
+				names: [
+					{ name: "Mike Ambrogi", href: "https://twitter.com/mikeambrogi" },
+					{ name: "Tim Ambrogi", href: "https://twitter.com/westquote" },
+				],
+			},
+			{
+				heading: "The Humble Team",
+				names: [
+					{ name: "John Graham", href: "https://twitter.com/wolfirejohn" },
+					{ name: "Robert Bowling", href: "https://twitter.com/fourzerotwo" },
+					{ name: "John Polson", href: "https://twitter.com/JohnPolson" },
+					{ name: "Jackie Lee", href: "https://twitter.com/ohhellojackie" },
+				],
+			},
+			{
+				heading: "Faithful Interning",
+				names: [{ name: "Andrew Cotter", href: "https://twitter.com/thatcotter" }],
+			},
+			{
+				heading: "Moral Support",
+				names: [{ name: "Philly Dev Night", href: "https://phillydevnight.com" }],
+			},
+		]}
+	/>
 </GameLayout>
-
-<style>
-	.about {
-		padding: 70px 24px;
-		max-width: 680px;
-		margin: 0 auto;
-		text-align: center;
-	}
-	.about h2 {
-		font-size: var(--fs-lg);
-		margin: 0 0 16px;
-		font-weight: 800;
-		color: #fff;
-	}
-	.about p {
-		font-size: var(--fs-base);
-		color: #c7cab9;
-	}
-	.about a {
-		color: var(--cp-green);
-	}
-</style>

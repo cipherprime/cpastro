@@ -1,0 +1,140 @@
+---
+import GameLayout from "../../../layouts/GameLayout.astro";
+import Hero from "../../../components/games/Hero.astro";
+import PullQuote from "../../../components/games/PullQuote.astro";
+import FeatureRows from "../../../components/games/FeatureRows.astro";
+import Press from "../../../components/games/Press.astro";
+import MusicGrid from "../../../components/games/MusicGrid.astro";
+import Credits from "../../../components/games/Credits.astro";
+import { games } from "../../../data/games";
+
+const game = games.find((g) => g.slug === "splice")!;
+
+const quotes = [
+	{ quote: "Elegant puzzle games should be on Oprah's non-existent list of video game favorite things.", cite: "Kotaku, Game of the Day" },
+	{ quote: "Just moments after you've uttered the words 'what the heck am I supposed to be doing', you're relishing in one of the freshest and most mind-blowing puzzle games you've played in a long while.", cite: "Mike Rose, Gamezebo" },
+	{ quote: "Sexy on a Cellular Level.", cite: "John Polson, Touch Arcade" },
+	{ quote: "You discover Splice more than you play it, and it works spectacularly.", cite: "B.C. Johnson, Gaming Illustrated" },
+	{ quote: "[Splice is] a fantastic puzzle with a great atmosphere.", cite: "Steve Lewis, Jay Is Games" },
+	{ quote: "Splice does what most puzzle games fail to do: it enthralls.", cite: "John Lindvay, BigSushi.fm" },
+	{ quote: "Splice: Tree of Life is mesmerizing and serene as you power through each stage.", cite: "Brittany Vincent, Slide to Play" },
+];
+
+const accolades = [
+	{ label: "Best Puzzle Game", source: "Intel Level Up" },
+	{ label: "Best International Game", source: "Freeplay Awards" },
+	{ label: "PAX 10 Selection", source: "PAX Prime" },
+	{ label: "Finalist", source: "IndieCade" },
+	{ label: "Editor's Choice", source: "Apple" },
+	{ label: "Game of the Week", source: "Pocket Gamer" },
+	{ label: "Game of the Day", source: "Kotaku" },
+	{ label: "Platinum Award", source: "Pocket Gamer" },
+];
+
+const musicItems = [
+	{
+		cover: "/img/games/splice/flight_of_angels_cover.png",
+		kind: "Soundtrack",
+		title: "Flight of Angels",
+		desc: "The main Splice OST.",
+		href: "https://cipherprime.bandcamp.com/album/flight-of-angels-splice-ost",
+	},
+	{
+		cover: "/img/games/splice/algorithms_angelology_cover.png",
+		kind: "Soundtrack",
+		title: "Algorithms and Angelology",
+		desc: "The Splice epilogue OST.",
+		href: "https://cipherprime.bandcamp.com/album/algorithms-and-angelology",
+	},
+	{
+		cover: "/img/games/splice/sheet_music_cover.jpg",
+		kind: "Sheet Music",
+		title: "Splice Sheet Music",
+		desc: "Play the score yourself.",
+		href: "https://gumroad.com/l/BaOhm",
+	},
+];
+---
+
+<GameLayout title={game.title} description={game.longDescription}>
+	<Hero
+		title={game.title}
+		logoSrc={game.heroLogo}
+		tagline={game.shortDescription}
+		backgroundSrc={game.heroBackground}
+		trailerHref={game.trailerHref}
+		compact={game.compactHero}
+		platforms={game.platforms}
+	/>
+
+	<PullQuote quote="Sexy on a cellular level." cite="John Polson, Touch Arcade" />
+
+	<FeatureRows
+		items={[
+			{
+				image: "/img/games/splice/splice1.jpg",
+				alt: "A strand of cells mid-splice",
+				eyebrow: "Strands",
+				title: "Every strand is a living puzzle.",
+				desc: "Each level presents a strand of cells that must be rearranged into a target structure over a limited number of splices. There's no single solution—only the one you discover.",
+			},
+			{
+				image: "/img/games/splice/splice2.jpg",
+				alt: "A splice rippling through connected cells",
+				eyebrow: "Splices",
+				title: "One move ripples through the whole strand.",
+				desc: "Cells react to their neighbors, so a single splice can cascade into a chain of consequences. Reading how the structure will respond before you commit is the real puzzle.",
+			},
+			{
+				image: "/img/games/splice/splice3.jpg",
+				alt: "A completed strand structure",
+				eyebrow: "Exploration",
+				title: "Experiment first, understand second.",
+				desc: "Splice rewards curiosity over memorized rules. Poke at the microbial world, watch how it behaves, and let that intuition carry you through increasingly intricate strands.",
+			},
+		]}
+	/>
+
+	<section class="about">
+		<h2>Evolve your mind.</h2>
+		<p>Splice is an experimental and artistic puzzler. Immerse yourself in its microbial world and start splicing! Every level ("strand") consists of a number of cells that you will need to rearrange into a target structure in several moves ("splices"). Exploration and experimentation are key in determining how the curious little cells react to each other.</p>
+	</section>
+
+	<Press quotes={quotes} accolades={accolades} />
+
+	<MusicGrid items={musicItems} />
+
+	<Credits
+		groups={[
+			{
+				heading: "The Splice Team",
+				names: [
+					{ name: "Dain Saint", href: "https://twitter.com/dainsaint" },
+					{ name: "William Stallwood", href: "https://twitter.com/willstall" },
+					{ name: "Andrei Marks", href: "https://twitter.com/andreimarks" },
+					{ name: "Nikkolai Davenport", href: "https://twitter.com/wcoastsands" },
+					{ name: "Aaron Chapin", href: "https://twitter.com/achapin" },
+				],
+			},
+		]}
+	/>
+</GameLayout>
+
+<style>
+	.about {
+		padding: 70px 24px;
+		max-width: 680px;
+		margin: 0 auto;
+		text-align: center;
+	}
+	.about h2 {
+		font-size: var(--fs-lg);
+		margin: 0 0 16px;
+		font-weight: 400;
+		color: #fff;
+	}
+	.about p {
+		font-size: var(--fs-md);
+		color: var(--cp-text-soft);
+	}
+</style>

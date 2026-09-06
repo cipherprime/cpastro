@@ -1,11 +1,21 @@
 ---
 import GameLayout from "../../../layouts/GameLayout.astro";
 import Hero from "../../../components/games/Hero.astro";
+import PullQuote from "../../../components/games/PullQuote.astro";
+import GameAbout from "../../../components/games/GameAbout.astro";
 import Gallery from "../../../components/games/Gallery.astro";
 import Press from "../../../components/games/Press.astro";
+import MusicGrid from "../../../components/games/MusicGrid.astro";
+import Credits from "../../../components/games/Credits.astro";
 import { games } from "../../../data/games";
 
 const game = games.find((g) => g.slug === "fractal")!;
+
+const quotes = [
+	{ quote: "Slick, explosive, and wickedly addictive. Fractal brings together the best parts of Hexic and Lumines, and then blows them to itty-bitty pieces.", cite: "Adam Fimio, Indie Game Reviewer" },
+	{ quote: "Cipher Prime succeeds once again in creating a puzzle with an atmosphere that pops with energy.", cite: "Stephen Lewis, JayIsGames" },
+	{ quote: "Praise the Prime, it's lovely stuff.", cite: "Cassandra Khaw, IndieGames.com" },
+];
 
 const accolades = [
 	{ label: "Musical Excellence Nominee", source: "IndieCade" },
@@ -15,11 +25,22 @@ const accolades = [
 	{ label: "Featured", source: "TIME" },
 	{ label: "25 Best Mac App Store Games", source: "Mac|Life" },
 ];
+
+const musicItems = [
+	{
+		cover: "/img/games/fractal/fractal_iterate_cover.webp",
+		kind: "Soundtrack",
+		title: "Iterate! (Theme From Fractal)",
+		desc: "The Fractal theme, plus a reprise.",
+		href: "https://cipherprime.bandcamp.com/album/iterate-theme-from-fractal",
+	},
+];
 ---
 
-<GameLayout title={game.title} description={game.longDescription}>
+<GameLayout title={game.title} description={game.longDescription} image="/img/games/fractal/fractal_social.jpg" platforms={game.platforms}>
 	<Hero
 		title={game.title}
+		logoSrc={game.heroLogo}
 		tagline={game.shortDescription}
 		backgroundSrc={game.heroBackground}
 		trailerHref={game.trailerHref}
@@ -27,32 +48,30 @@ const accolades = [
 		platforms={game.platforms}
 	/>
 
+	<PullQuote quote="Slick, explosive, and wickedly addictive." cite="Adam Fimio, Indie Game Reviewer" />
+
 	<Gallery images={["/img/games/fractal/fractal1.jpg", "/img/games/fractal/fractal2.jpg", "/img/games/fractal/fractal3.jpg"]} />
 
-	<section class="about">
-		<h2>Make blooms, not war.</h2>
+	<GameAbout heading="Make blooms, not war.">
 		<p>From the award-winning team that brought you Auditorium comes Fractal, an enthralling music puzzler experience across three modes: a story-driven Campaign, a mechanics-focused Puzzle mode, and a fast, unlimited Arcade mode.</p>
 		<p>Push, Combo, and Chain your way through a pulsing technicolor dreamscape all while expanding your consciousness at 130 BPM.</p>
-	</section>
+		<p><a href="/games/fractal/guide">Read the guide →</a> &nbsp; <a href="/games/fractal/faq">Frequently asked questions →</a></p>
+	</GameAbout>
 
-	<Press quote="Slick, explosive, and wickedly addictive. Fractal brings together the best parts of Hexic and Lumines, and then blows them to itty-bitty pieces." cite="Adam Fimio, Indie Game Reviewer" accolades={accolades} />
+	<Press quotes={quotes} accolades={accolades} />
+
+	<MusicGrid items={musicItems} />
+
+	<Credits
+		groups={[
+			{
+				heading: "Credits",
+				names: [
+					{ name: "Dain Saint", href: "https://twitter.com/dainsaint" },
+					{ name: "William Stallwood", href: "https://twitter.com/willstall" },
+					{ name: "Ben Ells" },
+				],
+			},
+		]}
+	/>
 </GameLayout>
-
-<style>
-	.about {
-		padding: 70px 24px;
-		max-width: 680px;
-		margin: 0 auto;
-		text-align: center;
-	}
-	.about h2 {
-		font-size: var(--fs-lg);
-		margin: 0 0 16px;
-		font-weight: 800;
-		color: #fff;
-	}
-	.about p {
-		font-size: var(--fs-base);
-		color: #c7cab9;
-	}
-</style>

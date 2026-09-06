@@ -1,14 +1,35 @@
 ---
 import GameLayout from "../../../layouts/GameLayout.astro";
 import Hero from "../../../components/games/Hero.astro";
+import PullQuote from "../../../components/games/PullQuote.astro";
+import GameAbout from "../../../components/games/GameAbout.astro";
 import Gallery from "../../../components/games/Gallery.astro";
 import Press from "../../../components/games/Press.astro";
+import MusicGrid from "../../../components/games/MusicGrid.astro";
+import Credits from "../../../components/games/Credits.astro";
 import { games } from "../../../data/games";
 
 const game = games.find((g) => g.slug === "shimsham")!;
+
+const quotes = [
+	{ quote: "This game is a piece of art!", cite: "fifigyuri" },
+	{ quote: "This game is so perfect!", cite: "ChewySlaw" },
+	{ quote: "This game is very fun, especially if you're more competitive and looking for a fun game of strategy and dexterity.", cite: "AgentParkour" },
+	{ quote: "My 7 year old figured this out regardless that it did not have instructions. Was fun to use after 5 minutes and he beat me twice.", cite: "JessicaMakenzie" },
+];
+
+const musicItems = [
+	{
+		cover: "/img/games/shimsham/shimsham_ost_cover.webp",
+		kind: "Soundtrack",
+		title: "Shimsham OST",
+		desc: "Jazz-inspired, written in two days.",
+		href: "https://cipherprime.bandcamp.com/album/shimsham-ost",
+	},
+];
 ---
 
-<GameLayout title={game.title} description={game.longDescription}>
+<GameLayout title={game.title} description={game.longDescription} platforms={game.platforms}>
 	<Hero
 		title={game.title}
 		tagline={game.shortDescription}
@@ -18,35 +39,32 @@ const game = games.find((g) => g.slug === "shimsham")!;
 		platforms={game.platforms}
 	/>
 
+	<PullQuote quote="This game is a piece of art!" cite="fifigyuri" />
+
 	<Gallery images={["/img/games/shimsham/shimsham1.jpg", "/img/games/shimsham/shimsham2.jpg", "/img/games/shimsham/shimsham3.jpg"]} />
 
-	<section class="about">
-		<h2>Go toe-to-toe and crush your opponent.</h2>
+	<GameAbout heading="Go toe-to-toe and crush your opponent.">
 		<p>In this heads-up competitive game, each player fights for control of their world while battling competing laws of gravity. Spin your level and control the falling blocks to crush your opponent—without letting them crush you first.</p>
-		<p>Originally created as a debut title for the Leap Motion, Shimsham has since been revamped with full keyboard, mouse, and controller support. Listen to the <a href="https://music.cipherprime.com/album/shimsham-ost" target="_blank" rel="noopener">official soundtrack</a>.</p>
-	</section>
+		<p>Originally created as a debut title for the Leap Motion, Shimsham has since been revamped with full keyboard, mouse, and controller support.</p>
+	</GameAbout>
 
-	<Press quote="This game is a piece of art!" cite="fifigyuri" />
+	<Press quotes={quotes} />
+
+	<MusicGrid items={musicItems} />
+
+	<Credits
+		groups={[
+			{
+				heading: "Credits",
+				names: [
+					{ name: "William Stallwood", href: "https://twitter.com/willstall" },
+					{ name: "Dain Saint", href: "https://twitter.com/dainsaint" },
+					{ name: "Andrei Marks", href: "https://twitter.com/andreimarks" },
+					{ name: "Aaron Chapin", href: "https://twitter.com/achapin" },
+					{ name: "Zenas Bellace", href: "https://twitter.com/zenasprime" },
+					{ name: "Jackie Awesome", href: "https://twitter.com/ajackieawesome" },
+				],
+			},
+		]}
+	/>
 </GameLayout>
-
-<style>
-	.about {
-		padding: 70px 24px;
-		max-width: 680px;
-		margin: 0 auto;
-		text-align: center;
-	}
-	.about h2 {
-		font-size: var(--fs-lg);
-		margin: 0 0 16px;
-		font-weight: 800;
-		color: #fff;
-	}
-	.about p {
-		font-size: var(--fs-base);
-		color: #c7cab9;
-	}
-	.about a {
-		color: var(--cp-green);
-	}
-</style>

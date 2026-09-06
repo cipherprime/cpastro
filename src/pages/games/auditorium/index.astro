@@ -1,11 +1,20 @@
 ---
 import GameLayout from "../../../layouts/GameLayout.astro";
 import Hero from "../../../components/games/Hero.astro";
+import PullQuote from "../../../components/games/PullQuote.astro";
+import GameAbout from "../../../components/games/GameAbout.astro";
 import Gallery from "../../../components/games/Gallery.astro";
 import Press from "../../../components/games/Press.astro";
+import MusicGrid from "../../../components/games/MusicGrid.astro";
 import { games } from "../../../data/games";
 
 const game = games.find((g) => g.slug === "auditorium")!;
+
+const quotes = [
+	{ quote: "I love music. I love videogames. Consequently, I love Auditorium.", cite: "Samit Sarkar, Destructoid" },
+	{ quote: "A beautiful and meditative abstract game. I appreciate the fact that nothing is explained, yet it's intuitive enough to figure out through exploration.", cite: "Jay Zasa, Communication Arts" },
+	{ quote: "Auditorium is a really intriguing and addictive multisensory experience—part puzzle game, part light sculpture, part musical instrument.", cite: "Peter Cohen, Macworld" },
+];
 
 const accolades = [
 	{ label: "Most Creative Game of the Year", source: "The Mochis" },
@@ -15,43 +24,40 @@ const accolades = [
 	{ label: "Best of 2008", source: "Jayisgames" },
 	{ label: "Musical Excellence Nominee", source: "IndieCade" },
 ];
+
+const musicItems = [
+	{
+		cover: "/img/games/auditorium/auditorium_autumn_cover.webp",
+		kind: "Single",
+		title: "Autumn",
+		desc: "The Auditorium theme.",
+		href: "https://cipherprime.bandcamp.com/track/autumn",
+	},
+];
 ---
 
-<GameLayout title={game.title} description={game.longDescription}>
+<GameLayout title={game.title} description={game.longDescription} image="/img/games/auditorium/auditorium_social.jpg" platforms={game.platforms}>
 	<Hero
 		title={game.title}
+		logoSrc={game.heroLogo}
 		tagline={game.shortDescription}
 		backgroundSrc={game.heroBackground}
 		compact={game.compactHero}
 		platforms={game.platforms}
 	/>
 
+	<PullQuote quote="I love music. I love videogames. Consequently, I love Auditorium." cite="Samit Sarkar, Destructoid" />
+
 	<Gallery images={["/img/games/auditorium/auditorium1.jpg", "/img/games/auditorium/auditorium2.jpg", "/img/games/auditorium/auditorium3.jpg"]} />
 
-	<section class="about">
-		<h2>Discovery & play.</h2>
+	<GameAbout heading="Discovery & play.">
 		<p>Play the first game we ever created together. Auditorium hit the scene in 2009. Since then, its sleek design, vibrant colors, and iconic soundtrack have captured the imagination of thousands of players worldwide.</p>
 		<p>The full version is the culmination of over 8 months of work by two indie game developers, spread across 70+ levels in 15 acts. Remember: there are no right or wrong answers, only your own.</p>
-	</section>
+		<p><a href="/games/auditorium/guide">Read the guide →</a></p>
+		<p><a href="/games/duet">The unreleased sequel: Auditorium Duet →</a></p>
+	</GameAbout>
 
-	<Press quote="I love music. I love videogames. Consequently, I love Auditorium." cite="Samit Sarkar, Destructoid" accolades={accolades} />
+	<Press quotes={quotes} accolades={accolades} />
+
+	<MusicGrid items={musicItems} />
 </GameLayout>
-
-<style>
-	.about {
-		padding: 70px 24px;
-		max-width: 680px;
-		margin: 0 auto;
-		text-align: center;
-	}
-	.about h2 {
-		font-size: var(--fs-lg);
-		margin: 0 0 16px;
-		font-weight: 800;
-		color: #fff;
-	}
-	.about p {
-		font-size: var(--fs-base);
-		color: #c7cab9;
-	}
-</style>

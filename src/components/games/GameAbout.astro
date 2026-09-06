@@ -1,0 +1,56 @@
+---
+interface LinkItem {
+	href: string;
+	label: string;
+}
+
+interface Props {
+	heading: string;
+	links?: LinkItem[];
+}
+
+const { heading, links = [] } = Astro.props;
+---
+
+<section class="about contain-narrow align-center">
+	<h2 class="section-title">{heading}</h2>
+	<slot />
+	{links.length > 0 && (
+		<div class="links">
+			{links.map((l) => <a class="link-underline" href={l.href}>{l.label}</a>)}
+		</div>
+	)}
+</section>
+
+<style>
+	.about {
+		padding: 70px 0;
+	}
+	.about h2 {
+		margin-bottom: 16px;
+	}
+	.about :global(p) {
+		font-size: var(--fs-md);
+		color: var(--cp-text-soft);
+	}
+	.about :global(a) {
+		color: var(--cp-green);
+	}
+	.links {
+		display: flex;
+		justify-content: center;
+		gap: 32px;
+		margin-top: 32px;
+	}
+	.links a {
+		font-size: var(--fs-base);
+		text-transform: uppercase;
+		letter-spacing: 0.14em;
+		font-weight: 700;
+		color: var(--cp-text-dim);
+	}
+	.links a:hover {
+		color: var(--cp-green);
+		border-bottom-color: var(--cp-green);
+	}
+</style>

@@ -1,11 +1,22 @@
 ---
 import GameLayout from "../../../layouts/GameLayout.astro";
 import Hero from "../../../components/games/Hero.astro";
+import PullQuote from "../../../components/games/PullQuote.astro";
+import GameAbout from "../../../components/games/GameAbout.astro";
 import Gallery from "../../../components/games/Gallery.astro";
 import Press from "../../../components/games/Press.astro";
+import MusicGrid from "../../../components/games/MusicGrid.astro";
 import { games } from "../../../data/games";
 
 const game = games.find((g) => g.slug === "pulse")!;
+
+const quotes = [
+	{ quote: "A package so thoroughly well put together that you're reminded of why music games were popular in the first place.", cite: "Tracy Erickson, Pocket Gamer" },
+	{ quote: "A remarkable rhythm game.", cite: "Chris Holt, Macworld" },
+	{ quote: "Pulse is pretty much unlike anything else that's on the market.", cite: "Mike Thompson, Gamezebo" },
+	{ quote: "[Pulse] makes me want to buy an iPad right now.", cite: "Nicole Kline, Warpzoned" },
+	{ quote: "Destined to stimulate the senses of sight, sound, and touch.", cite: "John Polson, Game Set Watch" },
+];
 
 const accolades = [
 	{ label: "iPad Game of the Week", source: "Apple" },
@@ -15,47 +26,59 @@ const accolades = [
 	{ label: "App of the Day", source: "Kotaku" },
 	{ label: "Game of the Year", source: "Philadelphia Geek Awards" },
 ];
+
+const musicItems = [
+	{
+		cover: "/img/games/pulse/pulse_ost_cover.webp",
+		kind: "Soundtrack",
+		title: "Pulse: OST",
+		desc: "The main Pulse OST.",
+		href: "https://cipherprime.bandcamp.com/album/pulse-ost",
+	},
+	{
+		cover: "/img/games/pulse/pulse_philly_cover.webp",
+		kind: "Compilation",
+		title: "Pulse: Philly is Golden",
+		desc: "Four Philly artists remix Pulse.",
+		href: "https://cipherprime.bandcamp.com/album/pulse-philly-is-golden",
+	},
+	{
+		cover: "/img/games/pulse/pulse_xmas_cover.webp",
+		kind: "Compilation",
+		title: "Pulse: It's a Prime Christmas",
+		desc: "A free holiday EP for Pulse.",
+		href: "https://cipherprime.bandcamp.com/album/pulse-its-a-prime-christmas",
+	},
+];
 ---
 
-<GameLayout title={game.title} description={game.longDescription}>
+<GameLayout title={game.title} description={game.longDescription} image="/img/games/pulse/pulse_social.jpg" platforms={game.platforms}>
 	<Hero
 		title={game.title}
 		tagline={game.shortDescription}
 		backgroundSrc={game.heroBackground}
+		logoSrc={game.heroLogo}
 		trailerHref={game.trailerHref}
 		compact={game.compactHero}
 		platforms={game.platforms}
 	/>
 
+	<PullQuote quote="Reminds you of why music games were popular in the first place." cite="Tracy Erickson, Pocket Gamer" />
+
 	<Gallery images={["/img/games/pulse/pulse1.jpg", "/img/games/pulse/pulse2.jpg", "/img/games/pulse/pulse3.jpg"]} />
 
-	<section class="about">
-		<h2>Reach out and touch the music.</h2>
+	<GameAbout
+		heading="Reach out and touch the music."
+		links={[
+			{ href: "/games/pulse/behindthemusic", label: "Behind the music" },
+			{ href: "/games/pulse/faq", label: "FAQ" },
+		]}
+	>
 		<p>Enter an absorbing world where players become part conductor, part note-captor, part multi-touch master. Tap speeding notes as they cross the radiant pulse to conduct gorgeous original melodies.</p>
-		<p>Pulse debuted on the iPad in 2011 and absolutely destroyed the App Store, claiming the #1 Music Rhythm Game spot for years. Since then, it has enjoyed many updates, including a full Android launch. Listen to the <a href="https://music.cipherprime.com/album/pulse-ost" target="_blank" rel="noopener">official soundtrack</a>.</p>
-	</section>
+		<p>Pulse debuted on the iPad in 2011 and absolutely destroyed the App Store, claiming the #1 Music Rhythm Game spot for years. Since then, it has enjoyed many updates, including a full Android launch.</p>
+	</GameAbout>
 
-	<Press quote="A package so thoroughly well put together that you're reminded of why music games were popular in the first place." cite="Tracy Erickson, Pocket Gamer" accolades={accolades} />
+	<Press quotes={quotes} accolades={accolades} />
+
+	<MusicGrid items={musicItems} />
 </GameLayout>
-
-<style>
-	.about {
-		padding: 70px 24px;
-		max-width: 680px;
-		margin: 0 auto;
-		text-align: center;
-	}
-	.about h2 {
-		font-size: var(--fs-lg);
-		margin: 0 0 16px;
-		font-weight: 800;
-		color: #fff;
-	}
-	.about p {
-		font-size: var(--fs-base);
-		color: #c7cab9;
-	}
-	.about a {
-		color: var(--cp-green);
-	}
-</style>

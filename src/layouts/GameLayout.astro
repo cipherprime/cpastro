@@ -1,42 +1,75 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import type { PlatformLink } from "../data/games";
 
 interface Props {
 	title: string;
 	description?: string;
+	image?: string;
+	platforms?: PlatformLink[];
 	backHref?: string;
 	backLabel?: string;
+	lightTopbar?: boolean;
+	hideBack?: boolean;
 }
 
 const {
 	title,
 	description,
+	image,
+	platforms = [],
 	backHref = "/#games",
 	backLabel = "All games →",
+	lightTopbar = false,
+	hideBack = false,
 } = Astro.props;
+
+const platformOS: Record<PlatformLink["type"], string | null> = {
+	steam: "Windows",
+	appstore: "iOS",
+	googleplay: "Android",
+	learn: null,
+};
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const imageURL = new URL(image ?? "/img/common/cp_social_preview.png", Astro.site);
+
+const videoGameSchema = {
+	"@context": "https://schema.org",
+	"@type": "VideoGame",
+	name: title,
+	description: description ?? "Cipher Prime is a small multi-award winning creative studio in Philadelphia.",
+	image: imageURL.toString(),
+	url: canonicalURL.toString(),
+	publisher: { "@type": "Organization", name: "Cipher Prime", url: "https://cipherprime.com" },
+	...(platforms.some((p) => platformOS[p.type])
+		? { gamePlatform: [...new Set(platforms.map((p) => platformOS[p.type]).filter(Boolean))] }
+		: {}),
+	...(platforms.filter((p) => p.type !== "learn").length
+		? { sameAs: platforms.filter((p) => p.type !== "learn").map((p) => p.href) }
+		: {}),
+};
 ---
 
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead title={title} description={description} image={image} />
+		<script type="application/ld+json" set:html={JSON.stringify(videoGameSchema)} />
 	</head>
 	<body>
-		<div class="topbar">
-			<a class="brand" href="/">
-				<img src="/img/common/cp-logo-white.png" alt="" />
-				<span>Cipher Prime</span>
-			</a>
-			<a class="back" href={backHref}>{backLabel}</a>
+		<div class:list={["topbar", { light: lightTopbar }]}>
+			<div class="topbar-inner contain">
+				<a class="brand" href="/">
+					<img src={lightTopbar ? "/img/common/cp_logotype_black.webp" : "/img/common/cp_logotype_white.webp"} alt="Cipher Prime" />
+				</a>
+				{!hideBack && <a class="back" href={backHref}>{backLabel}</a>}
+			</div>
 		</div>
 
 		<slot />
 
-		<footer class="game-footer">
-			<div class="foot-links">
-				<a href="/mailinglist">Mailing list</a>
-				<a href="/#games">All Cipher Prime games</a>
-			</div>
-		</footer>
+		<Footer />
 	</body>
 </html>
 
@@ -47,10 +80,12 @@ const {
 		left: 0;
 		right: 0;
 		z-index: 5;
+		padding-block: 22px;
+	}
+	.topbar-inner {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding: 22px 28px;
 	}
 	.topbar .brand {
 		display: flex;
@@ -60,14 +95,13 @@ const {
 		opacity: 0.85;
 	}
 	.topbar .brand img {
-		height: 16px;
+		height: 18px;
 		width: auto;
 	}
-	.topbar .brand span {
-		font-size: var(--fs-base);
-		letter-spacing: 0.18em;
-		text-transform: uppercase;
-		color: #cfd2c2;
+	@media (min-width: 900px) {
+		.topbar .brand img {
+			height: 26px;
+		}
 	}
 	.topbar .back {
 		font-size: var(--fs-base);
@@ -78,24 +112,11 @@ const {
 	.topbar .back:hover {
 		color: #fff;
 	}
+	.topbar.light .back {
+		color: var(--cp-text-faint);
+	}
+	.topbar.light .back:hover {
+		color: var(--cp-dark-text);
+	}
 
-	.game-footer {
-		border-top: 1px solid #1c1f14;
-		padding: 36px 24px 40px;
-		text-align: center;
-	}
-	.foot-links {
-		display: flex;
-		justify-content: center;
-		gap: 22px;
-		flex-wrap: wrap;
-	}
-	.foot-links a {
-		font-size: var(--fs-base);
-		color: var(--cp-text-dim);
-		text-decoration: none;
-	}
-	.foot-links a:hover {
-		color: #fff;
-	}
 </style>

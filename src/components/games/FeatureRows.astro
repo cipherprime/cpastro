@@ -1,0 +1,88 @@
+---
+interface Feature {
+	image: string;
+	alt?: string;
+	eyebrow?: string;
+	title: string;
+	desc: string;
+}
+
+interface Props {
+	items: Feature[];
+}
+
+const { items } = Astro.props;
+---
+
+<section class="feature-rows">
+	<div class="contain stack">
+		{items.map((item, i) => (
+			<div class:list={["row", { reverse: i % 2 === 1 }]}>
+				<a class="shot" href={item.image} target="_blank" rel="noopener">
+					<img src={item.image} alt={item.alt ?? ""} loading="lazy" />
+				</a>
+				<div class="copy">
+					{item.eyebrow && <span class="eyebrow">{item.eyebrow}</span>}
+					<h3 class="section-title">{item.title}</h3>
+					<p>{item.desc}</p>
+				</div>
+			</div>
+		))}
+	</div>
+</section>
+
+<style>
+	.feature-rows {
+		background: var(--cp-panel-deep);
+		padding: 80px 0;
+	}
+	.stack {
+		--stack-space: 64px;
+	}
+	.row {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 48px;
+		align-items: center;
+	}
+	.row.reverse .shot {
+		order: 2;
+	}
+	.row.reverse .copy {
+		order: 1;
+	}
+	.shot {
+		display: block;
+		border-radius: 6px;
+		overflow: hidden;
+	}
+	.shot img {
+		width: 100%;
+		display: block;
+	}
+	.eyebrow {
+		display: block;
+		margin-bottom: 12px;
+	}
+	.copy h3 {
+		margin-bottom: 12px;
+	}
+	.copy p {
+		font-size: var(--fs-md);
+		color: var(--cp-text-soft);
+		margin: 0;
+	}
+
+	@media (max-width: 760px) {
+		.row,
+		.row.reverse {
+			grid-template-columns: 1fr;
+		}
+		.row.reverse .shot,
+		.row.reverse .copy,
+		.row .shot,
+		.row .copy {
+			order: initial;
+		}
+	}
+</style>

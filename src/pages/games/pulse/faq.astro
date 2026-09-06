@@ -1,0 +1,127 @@
+---
+import GameLayout from "../../../layouts/GameLayout.astro";
+import { games } from "../../../data/games";
+
+const game = games.find((g) => g.slug === "pulse")!;
+---
+
+<GameLayout
+	title={`FAQ — ${game.title}`}
+	description={`Frequently asked questions about ${game.title}.`}
+	lightTopbar
+	hideBack
+>
+	<section class="faq">
+		<div class="faq-inner">
+			<a class="eyebrow" href="/games/pulse">← Pulse</a>
+			<h1>Frequently Asked Questions</h1>
+
+			<div class="grid grid-2">
+				<div class="col">
+					<div class="qa">
+						<h3>What platforms is Pulse available on?</h3>
+						<p>Pulse is available on the iPad via the App Store, and on Android tablets via <a href="https://play.google.com/store/apps/details?id=com.cipherprime.pulse" target="_blank" rel="noopener">Google Play</a>.</p>
+					</div>
+
+					<div class="qa">
+						<h3>I don't have an iPad! Is Pulse on the iPhone?</h3>
+						<p>Unfortunately, the iPhone's screen real estate is not large enough to accommodate the awesomeness that is Pulse. We've largely ruled out a port to the iPhone, since we'd have to entirely rework the game. If you're really interested, let us know!</p>
+					</div>
+
+					<div class="qa">
+						<h3>Is a demo available for the game?</h3>
+						<p>There is no demo version of Pulse, however with each update a limited number of promo codes are available for the App Store. Get in touch to see if we have any left&mdash;they go fast!</p>
+					</div>
+
+					<div class="qa">
+						<h3>Can I play my own songs in Pulse?</h3>
+						<p>No, unfortunately. We agree that this would be very cool, but each level is handcrafted to fit the music, in order to optimize the gameplay experience. We're not currently considering writing the necessary code to extract levels from any song, but if you're interested in this sort of functionality, let us know&mdash;we take feedback like this into consideration.</p>
+					</div>
+				</div>
+
+				<div class="col">
+					<div class="qa">
+						<h3>Can I make music for Pulse?</h3>
+						<p>With Pulse's frequent update schedule, we're definitely looking to collaborate with musicians on new tracks. If you'd like more details about the opportunity, don't hesitate to get in touch.</p>
+					</div>
+
+					<div class="qa">
+						<h3>Can I get a copy of the soundtrack?</h3>
+						<p><em>Pulse: OST</em> has thirteen original Cipher Prime tracks available as a digital album, including the music from levels like Tutorial, Straylight, Low Tide, Sakura, Porcelain Doll, Let's Roll, Cinder, Cirrus, Orbital Drop, Catnip, High Roller, and Sahara, as well as the original song Pacemaker. We also have four free tracks in the <em>Philly is Golden</em> album, featuring original music by local Philadelphia artists like Cooper and the Fantastic Machine, George &amp; Jonathan, Ghost Fight, and Zilla Persona. Listen to both on <a href="https://cipherprime.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>.</p>
+					</div>
+
+					<div class="qa">
+						<h3>The volume is turned up. Why can't I hear any sound or music?</h3>
+						<p>This is usually an issue with the Side Switch setting for Mute. If the switch is set to Lock Rotation, the device may still be muted. Open the Settings app, select General, and scroll to the Side Switch setting. Select Mute, then slide the Side Switch to the unlocked position (the red dot should be hidden). This disables the Mute feature and allows sound and music to play in-game.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</GameLayout>
+
+<style>
+	.faq {
+		background: var(--cp-paper);
+		color: var(--cp-dark-text);
+		padding: 130px 24px 90px;
+	}
+	.faq-inner {
+		max-width: 980px;
+		margin: 0 auto;
+	}
+	.eyebrow {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		font-size: var(--fs-base);
+		text-transform: uppercase;
+		letter-spacing: 0.22em;
+		color: var(--cp-green-dim);
+		font-weight: 700;
+		text-decoration: none;
+		margin-bottom: 18px;
+	}
+	.eyebrow:hover {
+		color: var(--cp-dark-text);
+	}
+	.faq h1 {
+		font-size: var(--fs-xl);
+		margin: 0 0 40px;
+		font-weight: 300;
+		color: var(--cp-dark-text);
+	}
+	.grid {
+		display: grid;
+		gap: 0 48px;
+	}
+	.grid-2 {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.qa {
+		margin-bottom: 32px;
+	}
+	.qa h3 {
+		font-size: var(--fs-md);
+		margin: 0 0 8px;
+		font-weight: 400;
+		color: var(--cp-dark-text);
+	}
+	.qa p {
+		font-size: var(--fs-base);
+		color: var(--cp-paper-text-dim);
+	}
+	.qa em {
+		font-style: normal;
+		color: var(--cp-paper-rule);
+	}
+	.qa a {
+		color: var(--cp-green-dim);
+	}
+
+	@media (max-width: 780px) {
+		.grid-2 {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

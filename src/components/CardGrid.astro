@@ -1,0 +1,28 @@
+---
+interface Props {
+	columns?: number;
+	gap?: string;
+	mobileGap?: string;
+}
+
+const { columns = 3, gap = "26px", mobileGap = gap } = Astro.props;
+---
+
+<div class="grid" style={`--card-grid-columns: ${columns}; --card-grid-gap: ${gap}; --card-grid-mobile-gap: ${mobileGap}`}>
+	<slot />
+</div>
+
+<style>
+	.grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--card-grid-mobile-gap);
+		text-align: left;
+	}
+	@media (min-width: 720px) {
+		.grid {
+			grid-template-columns: repeat(var(--card-grid-columns), 1fr);
+			gap: var(--card-grid-gap);
+		}
+	}
+</style>

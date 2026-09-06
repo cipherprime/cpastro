@@ -1,0 +1,95 @@
+---
+interface Props {
+	href: string;
+	cover: string;
+	coverAlt: string;
+	title: string;
+	desc: string;
+	eyebrow?: string;
+	external?: boolean;
+	size?: "default" | "mini";
+	wholeCardLink?: boolean;
+	variant: string;
+}
+
+const {
+	href,
+	cover,
+	coverAlt,
+	title,
+	desc,
+	eyebrow,
+	external = false,
+	size = "default",
+	wholeCardLink = false,
+	variant,
+} = Astro.props;
+const linkProps = external ? { target: "_blank", rel: "noopener" } : {};
+---
+
+{wholeCardLink ? (
+	<a class:list={["card", `card-${variant}`, { mini: size === "mini" }]} href={href} {...linkProps}>
+		<img class="cover" src={cover} alt={coverAlt} />
+		<div class="body">
+			{eyebrow && <div class="eyebrow-label">{eyebrow}</div>}
+			<div class="title">{title}</div>
+			<p class="desc">{desc}</p>
+			<div class="footer"><slot /></div>
+		</div>
+	</a>
+) : (
+	<div class:list={["card", `card-${variant}`, { mini: size === "mini" }]}>
+		<a class="cover" href={href} {...linkProps}><img src={cover} alt={coverAlt} /></a>
+		<div class="body">
+			{eyebrow && <div class="eyebrow-label">{eyebrow}</div>}
+			<h3><a href={href} {...linkProps}>{title}</a></h3>
+			<p class="desc">{desc}</p>
+			<div class="footer"><slot /></div>
+		</div>
+	</div>
+)}
+
+<style>
+	/* Structural only — colors, type and hover treatment belong to each
+	   variant's own component (styled via :global(.card-<variant>) there). */
+	.card {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		text-decoration: none;
+		color: inherit;
+		overflow: hidden;
+	}
+	.cover {
+		display: block;
+		overflow: hidden;
+	}
+	.cover img {
+		width: 100%;
+		display: block;
+		object-fit: cover;
+	}
+	img.cover {
+		width: 100%;
+		object-fit: cover;
+	}
+	.body {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+	}
+	.desc {
+		flex: 1;
+		margin: 0;
+	}
+	h3 {
+		margin: 0;
+		font-weight: 400;
+	}
+	h3 a {
+		text-decoration: none;
+	}
+	.footer {
+		margin-top: auto;
+	}
+</style>

@@ -1,0 +1,114 @@
+---
+import { games } from "../data/games";
+
+const mainGames = games.filter((g) => g.section === "main");
+const labGames = games.filter((g) => g.section === "lab");
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+	<div class="contain">
+		<img class="logotype" src="/img/common/cp_logotype_white.webp" alt="Cipher Prime" width="1110" height="315" />
+
+		<div class="cols">
+			<div class="col">
+				<div class="col-head">The Studio</div>
+				<a href="/about">About</a>
+				<a href="https://music.cipherprime.com">Music</a>
+				<a href="/mailinglist">Mailing List</a>
+				<a href="mailto:team@cipherprime.com">Contact</a>
+			</div>
+
+			<div class="col">
+				<div class="col-head">The Games</div>
+				{mainGames.map((game) => (
+					<a href={game.href} target={game.external ? "_blank" : undefined} rel={game.external ? "noopener" : undefined}>{game.title}</a>
+				))}
+			</div>
+
+			<div class="col">
+				<div class="col-head">The Lab</div>
+				{labGames.map((game) => (
+					<a href={game.href} target={game.external ? "_blank" : undefined} rel={game.external ? "noopener" : undefined}>{game.title}</a>
+				))}
+			</div>
+		</div>
+
+		<div class="affiliations">
+			<a class="n3rdst" href="https://n3rd.st/" target="_blank" rel="noopener">
+				<img src="/img/common/n3rdst_logo.png" alt="N3RD Street" width="76" height="25" />
+			</a>
+		</div>
+
+		<div class="copy">
+			<div>&copy; {year} Cipher Prime Studios, Inc.</div>
+			<div class="kicker">Made with love in Philly.</div>
+		</div>
+	</div>
+</footer>
+
+<style>
+	.site-footer {
+		background: var(--cp-ink);
+		border-top: 1px solid var(--cp-border-dark);
+		padding: 40px 0 46px;
+		text-align: left;
+	}
+	.site-footer .logotype {
+		height: 34px;
+		width: auto;
+		margin-bottom: 32px;
+	}
+	.cols {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 28px;
+		margin-bottom: 32px;
+	}
+	@media (min-width: 720px) {
+		.cols {
+			grid-template-columns: repeat(3, 1fr);
+			gap: 26px;
+		}
+	}
+	.col {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+	.col-head {
+		font-size: var(--fs-base);
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--cp-text-faint);
+		margin-bottom: 4px;
+	}
+	.col a {
+		text-decoration: none;
+		font-size: var(--fs-base);
+		color: var(--cp-text-dim);
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+	}
+	.col a:hover {
+		color: #fff;
+	}
+	.site-footer .affiliations {
+		margin-bottom: 24px;
+	}
+	.site-footer .n3rdst {
+		display: inline-block;
+		opacity: 0.6;
+		transition: opacity 0.15s;
+	}
+	.site-footer .n3rdst:hover {
+		opacity: 1;
+	}
+	.site-footer .copy {
+		font-size: var(--fs-sm);
+		color: var(--cp-text-faint);
+	}
+	.site-footer .copy .kicker {
+		margin-top: 4px;
+	}
+</style>

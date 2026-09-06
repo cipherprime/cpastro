@@ -1,0 +1,114 @@
+---
+import GameLayout from "../../../layouts/GameLayout.astro";
+import { games } from "../../../data/games";
+
+const game = games.find((g) => g.slug === "fractal")!;
+---
+
+<GameLayout
+	title={`FAQ — ${game.title}`}
+	description={`Frequently asked questions about ${game.title}.`}
+	lightTopbar
+	hideBack
+>
+	<section class="faq">
+		<div class="faq-inner">
+			<a class="eyebrow" href="/games/fractal">← <img src="/img/games/fractal/fractal_icon.webp" alt="" /> Fractal</a>
+			<h1>Frequently Asked Questions</h1>
+
+			<div class="qa">
+				<h3>What's the difference between the iPad and PC/Mac versions?</h3>
+				<p>The iPad version was built from the ground up for touch, with a control scheme tuned for fingers instead of a mouse. The PC/Mac version otherwise shares the same modes, music, and content.</p>
+			</div>
+
+			<div class="qa">
+				<h3>Fractal crashes on launch on my Windows PC. How do I fix it?</h3>
+				<p>This is almost always caused by a missing Visual C++ runtime. Install the <a href="https://www.microsoft.com/en-us/download/details.aspx?id=5555" target="_blank" rel="noopener">Microsoft Visual C++ 2008 Redistributable</a> and try launching the game again.</p>
+			</div>
+
+			<div class="qa">
+				<h3>Where are my save files stored on Windows?</h3>
+				<p>Fractal saves your progress to the Windows registry rather than a file on disk. To locate it:</p>
+				<ol>
+					<li>Open the Start menu and search for <code>regedit</code>, then press Enter.</li>
+					<li>Navigate to <code>HKEY_CURRENT_USER\Software\Cipher Prime\Fractal</code>.</li>
+					<li>Your save data and settings are stored as keys under this path.</li>
+				</ol>
+			</div>
+
+			<img class="doodle" src="/img/games/fractal/guide/blooms_not_war.webp" alt="Make Blooms, Not War!" />
+		</div>
+	</section>
+</GameLayout>
+
+<style>
+	.faq {
+		background: var(--cp-paper);
+		color: var(--cp-dark-text);
+		padding: 130px 24px 90px;
+	}
+	.faq-inner {
+		max-width: 680px;
+		margin: 0 auto;
+	}
+	.eyebrow {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		font-size: var(--fs-base);
+		text-transform: uppercase;
+		letter-spacing: 0.22em;
+		color: var(--cp-green-dim);
+		font-weight: 700;
+		text-decoration: none;
+		margin-bottom: 18px;
+	}
+	.eyebrow img {
+		width: 16px;
+		height: 16px;
+		border-radius: 3px;
+	}
+	.eyebrow:hover {
+		color: var(--cp-dark-text);
+	}
+	.faq h1 {
+		font-size: var(--fs-xl);
+		margin: 0 0 40px;
+		font-weight: 300;
+		color: var(--cp-dark-text);
+	}
+	.qa {
+		margin-bottom: 36px;
+	}
+	.qa h3 {
+		font-size: var(--fs-md);
+		margin: 0 0 8px;
+		font-weight: 400;
+		color: var(--cp-dark-text);
+	}
+	.qa p,
+	.qa li {
+		font-size: var(--fs-md);
+		color: var(--cp-paper-text-dim);
+	}
+	.qa ol {
+		margin: 0;
+		padding-left: 20px;
+	}
+	.qa a {
+		color: var(--cp-green-dim);
+	}
+	.qa code {
+		color: var(--cp-dark-text);
+		background: #e4e4da;
+		padding: 1px 6px;
+		border-radius: 3px;
+		font-size: 0.9em;
+	}
+	.doodle {
+		display: block;
+		max-width: 160px;
+		margin: 48px auto 0;
+		opacity: 0.9;
+	}
+</style>

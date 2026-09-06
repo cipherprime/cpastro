@@ -1,0 +1,163 @@
+---
+import GameLayout from "../../../layouts/GameLayout.astro";
+import { games } from "../../../data/games";
+
+const game = games.find((g) => g.slug === "pulse")!;
+
+const albums = [
+	{
+		cover: "/img/games/pulse/pulse_ost_cover.webp",
+		kind: "Soundtrack",
+		title: "Pulse: OST",
+		href: "https://cipherprime.bandcamp.com/album/pulse-ost",
+	},
+	{
+		cover: "/img/games/pulse/pulse_philly_cover.webp",
+		kind: "Compilation",
+		title: "Pulse: Philly is Golden",
+		href: "https://cipherprime.bandcamp.com/album/pulse-philly-is-golden",
+	},
+	{
+		cover: "/img/games/pulse/pulse_xmas_cover.webp",
+		kind: "Compilation",
+		title: "Pulse: It's a Prime Christmas",
+		href: "https://cipherprime.bandcamp.com/album/pulse-its-a-prime-christmas",
+	},
+];
+---
+
+<GameLayout
+	title={`Behind the Music — ${game.title}`}
+	description={`The story behind the music of ${game.title}.`}
+	lightTopbar
+	hideBack
+>
+	<section class="btm">
+		<div class="btm-inner">
+			<a class="eyebrow" href="/games/pulse">← Pulse</a>
+
+			<div class="layout">
+				<aside class="albums">
+					{albums.map((a) => (
+						<a class="album" href={a.href} target="_blank" rel="noopener">
+							<img src={a.cover} alt={a.title} />
+							<div>
+								<span class="kind">{a.kind}</span>
+								<span class="title">{a.title}</span>
+							</div>
+						</a>
+					))}
+				</aside>
+
+				<div class="main">
+					<h1>Behind the Music</h1>
+					<p>Pulse's original eight core tracks were composed in-house by Dain Saint and Kerry Gilbert. Over the months following release we added six more tracks of our own, plus seven from amazing local Philadelphia musicians like George &amp; Jonathan. We even have a track from Jim Guthrie, the legendary composer behind Superbrothers: Sword &amp; Sworcery.</p>
+
+					<h3>Local musicians and indie talent, forget licensing deals.</h3>
+					<p>Let's be honest, music is the core of Pulse. It was really important to us that we had great music. Keeping our music local (Philadelphia) and indie gives Pulse a truly unique aural landscape. If you're a fan, be sure to check out any of the generous artists who contributed music to the game&mdash;the full soundtrack is linked in the sidebar.</p>
+
+					<h3>Using time signatures to enrich the experience</h3>
+					<p>By adapting the geography of a level to its song's time signature, we were able to create a unique rhythm experience. For example, let's say a particular song has a 4/4 time signature&mdash;we'll set up the level to have either 4 or 8 rings. What about a time signature like 3/4, a waltz? We'll use 6 rings. Each pulse then represents one to two full measures of that song. This allows a freedom of form rarely seen in rhythm games, and really completes the experience. Who says you can't teach an old dog new tricks?</p>
+				</div>
+			</div>
+		</div>
+	</section>
+</GameLayout>
+
+<style>
+	.btm {
+		background: var(--cp-paper);
+		color: var(--cp-dark-text);
+		padding: 130px 24px 90px;
+	}
+	.btm-inner {
+		max-width: 980px;
+		margin: 0 auto;
+	}
+	.eyebrow {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		font-size: var(--fs-base);
+		text-transform: uppercase;
+		letter-spacing: 0.22em;
+		color: var(--cp-green-dim);
+		font-weight: 700;
+		text-decoration: none;
+		margin-bottom: 32px;
+	}
+	.eyebrow:hover {
+		color: var(--cp-dark-text);
+	}
+
+	.layout {
+		display: grid;
+		grid-template-columns: 260px 1fr;
+		gap: 48px;
+		align-items: start;
+	}
+
+	.albums {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+	.album {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		text-decoration: none;
+		color: inherit;
+	}
+	.album img {
+		width: 64px;
+		height: 64px;
+		border-radius: 4px;
+		flex-shrink: 0;
+	}
+	.album div {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+	}
+	.album .kind {
+		font-size: var(--fs-sm);
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: #6f7261;
+	}
+	.album .title {
+		font-size: var(--fs-base);
+		color: var(--cp-dark-text);
+	}
+	.album:hover .title {
+		color: var(--cp-green-dim);
+	}
+
+	.main h1 {
+		font-size: var(--fs-xl);
+		margin: 0 0 24px;
+		font-weight: 300;
+		color: var(--cp-dark-text);
+	}
+	.main h3 {
+		font-size: var(--fs-md);
+		margin: 32px 0 8px;
+		font-weight: 400;
+		color: var(--cp-dark-text);
+	}
+	.main p {
+		font-size: var(--fs-base);
+		color: var(--cp-paper-text-dim);
+	}
+
+	@media (max-width: 780px) {
+		.layout {
+			grid-template-columns: 1fr;
+		}
+		.albums {
+			flex-direction: row;
+			flex-wrap: wrap;
+		}
+	}
+</style>

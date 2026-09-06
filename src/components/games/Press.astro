@@ -4,20 +4,40 @@ export interface Accolade {
 	source: string;
 }
 
-interface Props {
+export interface Quote {
 	quote: string;
 	cite: string;
+}
+
+interface Props {
+	quotes: Quote[];
 	accolades?: Accolade[];
 }
 
-const { quote, cite, accolades = [] } = Astro.props;
+const { quotes, accolades = [] } = Astro.props;
 ---
 
 <section class="press">
-	<div class="press-inner">
+	<div class="press-inner contain-narrow align-center">
 		<div class="eyebrow">What people said</div>
-		<blockquote>&ldquo;{quote}&rdquo;</blockquote>
-		<cite>&mdash; {cite}</cite>
+
+		<div class="carousel">
+			{quotes.map((q, i) => (
+				<div class="slide" data-slide style={i === 0 ? "" : "display:none"}>
+					<blockquote>&ldquo;{q.quote}&rdquo;</blockquote>
+					<cite>&mdash; {q.cite}</cite>
+				</div>
+			))}
+		</div>
+
+		{quotes.length > 1 && (
+			<div class="dots" data-dots>
+				{quotes.map((_, i) => (
+					<button type="button" class="dot" data-dot data-index={i} aria-label={`Quote ${i + 1}`}></button>
+				))}
+			</div>
+		)}
+
 		{accolades.length > 0 && (
 			<div class="accolades">
 				{accolades.map((a) => (
@@ -28,23 +48,51 @@ const { quote, cite, accolades = [] } = Astro.props;
 	</div>
 </section>
 
+<script define:vars={{ count: quotes.length }}>
+	const section = document.currentScript.previousElementSibling;
+	if (count > 1) {
+		const slides = section.querySelectorAll("[data-slide]");
+		const dots = section.querySelectorAll("[data-dot]");
+		const carousel = section.querySelector(".carousel");
+		let current = 0;
+		let timer;
+
+		function show(index) {
+			current = (index + slides.length) % slides.length;
+			slides.forEach((s, i) => (s.style.display = i === current ? "" : "none"));
+			dots.forEach((d, i) => d.classList.toggle("active", i === current));
+		}
+
+		function start() {
+			timer = setInterval(() => show(current + 1), 6000);
+		}
+
+		function stop() {
+			clearInterval(timer);
+		}
+
+		dots.forEach((d) => {
+			d.addEventListener("click", () => {
+				show(Number(d.dataset.index));
+				stop();
+				start();
+			});
+		});
+
+		show(0);
+		start();
+		carousel.addEventListener("mouseenter", stop);
+		carousel.addEventListener("mouseleave", start);
+	}
+</script>
+
 <style>
 	.press {
 		background: var(--cp-paper);
-		color: #1c1e16;
-		padding: 80px 24px;
-	}
-	.press-inner {
-		max-width: 760px;
-		margin: 0 auto;
-		text-align: center;
+		color: var(--cp-dark-text);
+		padding: 80px 0;
 	}
 	.eyebrow {
-		font-size: var(--fs-base);
-		text-transform: uppercase;
-		letter-spacing: 0.22em;
-		color: var(--cp-green-dim);
-		font-weight: 700;
 		margin-bottom: 22px;
 	}
 	blockquote {
@@ -60,6 +108,24 @@ const { quote, cite, accolades = [] } = Astro.props;
 		color: #66695c;
 		letter-spacing: 0.03em;
 	}
+	.dots {
+		display: flex;
+		justify-content: center;
+		gap: 8px;
+		margin-top: 26px;
+	}
+	.dot {
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		border: none;
+		padding: 0;
+		background: var(--cp-text-quiet);
+		cursor: pointer;
+	}
+	.dot.active {
+		background: var(--cp-green-dim);
+	}
 	.accolades {
 		margin-top: 46px;
 		display: flex;
@@ -67,9 +133,9 @@ const { quote, cite, accolades = [] } = Astro.props;
 		justify-content: center;
 		gap: 10px 22px;
 		font-size: var(--fs-base);
-		color: #4a4c40;
+		color: var(--cp-paper-text-dim);
 	}
 	.accolades span b {
-		color: #1c1e16;
+		color: var(--cp-dark-text);
 	}
 </style>

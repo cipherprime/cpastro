@@ -1,0 +1,276 @@
+---
+import GameLayout from "../../../layouts/GameLayout.astro";
+import { games } from "../../../data/games";
+
+const game = games.find((g) => g.slug === "auditorium")!;
+---
+
+<GameLayout
+	title={`Guide — ${game.title}`}
+	description={`A guide to the Controls, Goals, and Obstacles of ${game.title}.`}
+	lightTopbar
+	hideBack
+>
+	<section class="guide">
+		<div class="guide-inner">
+			<a class="eyebrow" href="/games/auditorium">← <img src="/img/games/auditorium/auditorium_icon.webp" alt="" /> Auditorium</a>
+			<h1>Auditorium Guide</h1>
+
+			<div class="intro">
+				<h2>The General Idea</h2>
+				<p>Auditorium is really all about the experience, both visually and aurally. Take a deep breath, relax, and start playing. If you really feel you need extra information on the way something works, you'll find it here.</p>
+			</div>
+
+			<div class="intro">
+				<h2>The Flow</h2>
+				<p>The Flow is a masterful stream of many tiny audio-visual particles. They can be controlled and manipulated separately; these little ones think for themselves. Guide them to an Audio Container that matches their color in order to light up your path and start some harmony.</p>
+			</div>
+
+			<div class="block">
+				<h2>The Controls</h2>
+				<p>Controls are your way of manipulating the Flow. They can change both the speed and direction of any particle they encounter. There are two ways to operate the controls. First, you can click and drag the control icon to move it. Second, you can also drag the radius of a control to change its area of influence. <em>Remember: Controls can be overlapped to create multiple reactions at any given point.</em></p>
+
+				<div class="grid grid-4">
+					<div class="item">
+						<img src="/img/games/auditorium/guide/directionals.webp" alt="Directional Controls" />
+						<div>
+							<h3>Directionals</h3>
+							<p>The Directional Controls help you get your bearings. This is the simplest form of control. Arrows indicate the direction each control will manipulate your Flow.</p>
+						</div>
+					</div>
+					<div class="item">
+						<img src="/img/games/auditorium/guide/attract.webp" alt="Attract Control" />
+						<div>
+							<h3>Attract</h3>
+							<p>The Attract Control might just be your best friend. Attraction is by far the most useful form of control in Auditorium. Particles caught by the Attract control will be pulled ever closer to the Control's center.</p>
+						</div>
+					</div>
+					<div class="item">
+						<img src="/img/games/auditorium/guide/rabbit.webp" alt="Rabbit Control" />
+						<div>
+							<h3>Rabbit</h3>
+							<p>Sometimes high speed is a necessity. And sometimes, high speed is just really, really fun. Pass your Flow through the Rabbit Control and it will increase in speed, getting to those hard-to-reach Audio Containers. <em>Note: Speeding up your Flow will decrease the effect of other controls until speed decreases.</em></p>
+						</div>
+					</div>
+					<div class="item">
+						<img src="/img/games/auditorium/guide/repel.webp" alt="Repel Control" />
+						<div>
+							<h3>Repel</h3>
+							<p>The Repel is the most counter-productive control available in the experience&mdash;or is it? Reverse the Flow of particles and send things back the way they came.</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="grid grid-2">
+					<div class="item">
+						<img src="/img/games/auditorium/guide/deflect.webp" alt="Deflect Control" />
+						<div>
+							<h3>Deflect</h3>
+							<p>There are dangers in Auditorium that may bring sadness to your harmonious experience, so protecting your Flow is definitely of high importance. The Deflect Control acts just as it sounds&mdash;particles deflect off this control's surface at angles similar to how they approach. But what you may not know is that this control is also useful for keeping particles inside a controlled area.</p>
+						</div>
+					</div>
+					<div class="item">
+						<img src="/img/games/auditorium/guide/colored.webp" alt="Colored Controls" class="lg" />
+						<div>
+							<h3>Colored Controls</h3>
+							<p>In later acts, some controls will also correspond to a color. If the Flow interacts with these controls it will take on that color. This can be both a hindrance and an asset&mdash;it's up to you to decide which.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="block">
+				<h2>Goals</h2>
+				<p>The Primary Goal of Auditorium is to guide your Flow into the various Audio Containers presented before you. As you fill these Containers, light transforms into sound. Given enough light, the containers will begin to sing together in a symphony, providing the ultimate Harmony of Flow. But be advised&mdash;while some containers merely require the presence of Flow, some containers will require a specific color or colors. Containers that require more than one color can be identified by the number of vertical bars and each bar's color.</p>
+
+				<div class="grid grid-3">
+					<div class="item">
+						<img src="/img/games/auditorium/guide/one_color.webp" alt="Single Color Container" />
+						<div>
+							<h3>Single Color Container</h3>
+							<p>A Single Color Container is the simplest form of goal in Auditorium. The color of a container is indicated by the single glowing bar at the bottom of the item. Just match your flow with that color and you'll be filling these up in no time.</p>
+						</div>
+					</div>
+					<div class="item">
+						<img src="/img/games/auditorium/guide/two_color.webp" alt="Double Color Container" />
+						<div>
+							<h3>Double Color Container</h3>
+							<p>When you start with Double Color containers you may be a little scared. Don't worry, all you need to do is make sure these containers are being filled by both colors at once.</p>
+						</div>
+					</div>
+					<div class="item">
+						<img src="/img/games/auditorium/guide/three_color.webp" alt="Triple Color Container" />
+						<div>
+							<h3>Triple Color Container</h3>
+							<p>Ah&hellip; Triple Color Containers. These are by far the most challenging adversary in Auditorium. Match all three colors at once to overcome these tough opponents. Don't worry, you've got this.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="block">
+				<h2>Obstacles</h2>
+				<p>Obstacles cannot be moved or altered and can sometimes impede your path. These obstacles can do anything to your Flow, from merely changing its color to eliminating it outright. Be advised; obstacles are not always a bad thing. Who knows, you may just find some obstacles to be the greatest assets in your quest for harmony.</p>
+
+				<div class="grid grid-2">
+					<div class="item">
+						<img src="/img/games/auditorium/guide/divide.webp" alt="Divide Obstacle" />
+						<div>
+							<h3>Divide</h3>
+							<p>Passing through The Divide will cause your Flow to split off in two directions. Which road will lead you to victory?</p>
+						</div>
+					</div>
+					<div class="item">
+						<img src="/img/games/auditorium/guide/portal.webp" alt="Portal Obstacle" />
+						<div>
+							<h3>Portals</h3>
+							<p>They say that the shortest distance between two points is a straight line. In Auditorium, that is not always the case. Use the Portal Obstacle to transport your flow to new destinations. Keep in mind, Portals do work both ways&hellip;</p>
+						</div>
+					</div>
+					<div class="item item-centered">
+						<img src="/img/games/auditorium/guide/blackhole.webp" alt="Black Hole" class="lg" />
+						<div>
+							<h3>Blackhole</h3>
+							<p>Nothing is more dangerous to your Flow than the vacuous, hungry void of the Black Hole. Any particles of your Flow that approach it will be sucked in and devoured. Avoid them.</p>
+						</div>
+					</div>
+					<div class="item item-centered">
+						<img src="/img/games/auditorium/guide/color_sphere.webp" alt="Color Sphere" class="lg" />
+						<div>
+							<h3>Color Sphere</h3>
+							<p>There is more to your Flow than the origin and the destination. The Color of your Flow can and will have to be changed in order to achieve harmony. Passing through a Color Sphere will allow you to change the color of your Flow. At least, until it hits another Color Sphere.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</GameLayout>
+
+<style>
+	.guide {
+		background: var(--cp-paper);
+		color: var(--cp-dark-text);
+		padding: 130px 24px 90px;
+	}
+	.guide-inner {
+		max-width: 980px;
+		margin: 0 auto;
+	}
+	.eyebrow {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		font-size: var(--fs-base);
+		text-transform: uppercase;
+		letter-spacing: 0.22em;
+		color: var(--cp-green-dim);
+		font-weight: 700;
+		text-decoration: none;
+		margin-bottom: 18px;
+	}
+	.eyebrow img {
+		width: 16px;
+		height: 16px;
+		border-radius: 3px;
+	}
+	.eyebrow:hover {
+		color: var(--cp-dark-text);
+	}
+	.guide h1 {
+		font-size: var(--fs-xl);
+		margin: 0 0 56px;
+		font-weight: 300;
+		color: var(--cp-dark-text);
+	}
+	.intro,
+	.block {
+		max-width: 680px;
+		margin: 0 0 60px;
+	}
+	.block {
+		max-width: 980px;
+	}
+	.guide h2 {
+		font-size: var(--fs-md);
+		margin: 0 0 12px;
+		font-weight: 400;
+		color: var(--cp-dark-text);
+	}
+	.guide > .guide-inner > .block > p {
+		max-width: 680px;
+		margin: 0 0 40px;
+	}
+	.guide p {
+		font-size: var(--fs-base);
+		color: var(--cp-paper-text-dim);
+	}
+	.guide em {
+		color: var(--cp-paper-rule);
+	}
+
+	/* Icon + copy pairing. The icon floats beside its paragraph, same
+	   idea as the old site's alignleft/alignright treatment, but the
+	   surrounding columns are laid out with grid instead of a 12-col
+	   float grid. */
+	.grid {
+		display: grid;
+		gap: 32px;
+		text-align: left;
+		margin-top: 8px;
+	}
+	.grid-4 {
+		grid-template-columns: repeat(4, 1fr);
+	}
+	.grid-3 {
+		grid-template-columns: repeat(3, 1fr);
+	}
+	.grid-2 {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.item {
+		display: flow-root;
+	}
+	.item img {
+		float: left;
+		width: 48px;
+		height: 48px;
+		margin: 2px 12px 8px 0;
+	}
+	.item img.lg {
+		float: none;
+		width: 96px;
+		height: 96px;
+		margin: 0 auto 14px;
+	}
+	.item-centered {
+		text-align: center;
+	}
+	.item-centered p {
+		text-align: left;
+	}
+	.item h3 {
+		font-size: var(--fs-base);
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		margin: 4px 0 6px;
+		color: var(--cp-dark-text);
+	}
+	.item p {
+		margin: 0;
+	}
+
+	@media (max-width: 860px) {
+		.grid-4 {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	@media (max-width: 640px) {
+		.grid-3,
+		.grid-2,
+		.grid-4 {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

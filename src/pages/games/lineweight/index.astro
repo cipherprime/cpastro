@@ -1,11 +1,16 @@
 ---
 import GameLayout from "../../../layouts/GameLayout.astro";
 import Hero from "../../../components/games/Hero.astro";
+import PullQuote from "../../../components/games/PullQuote.astro";
+import GameAbout from "../../../components/games/GameAbout.astro";
 import Gallery from "../../../components/games/Gallery.astro";
 import Press from "../../../components/games/Press.astro";
+import Credits from "../../../components/games/Credits.astro";
 import { games } from "../../../data/games";
 
 const game = games.find((g) => g.slug === "lineweight")!;
+
+const quotes = [{ quote: "Two Gold Medals for Interactive Design and Book Design.", cite: "Indigo Awards 2019" }];
 
 const accolades = [
 	{ label: "Gold Medal, Interactive Design", source: "Indigo Awards 2019" },
@@ -16,7 +21,7 @@ const accolades = [
 ];
 ---
 
-<GameLayout title={game.title} description={game.longDescription}>
+<GameLayout title={game.title} description={game.longDescription} image="/img/games/lineweight/lineweight_social.jpg" platforms={game.platforms}>
 	<Hero
 		title={game.title}
 		tagline={game.shortDescription}
@@ -26,32 +31,53 @@ const accolades = [
 		platforms={game.platforms}
 	/>
 
-	<Gallery images={["/img/games/lineweight/lineweight1.jpg", "/img/games/lineweight/lineweight2.jpg", "/img/games/lineweight/lineweight3.jpg"]} />
+	<PullQuote quote="Two Gold Medals for Interactive Design and Book Design." cite="Indigo Awards 2019" />
 
-	<section class="about">
-		<h2>Feel something.</h2>
+	<Gallery images={["/img/games/lineweight/lineweight1.jpg", "/img/games/lineweight/lineweight2.jpg", "/img/games/lineweight/lineweight3.jpg", "/img/games/lineweight/lineweight4.jpg", "/img/games/lineweight/lineweight5.jpg"]} />
+
+	<GameAbout heading="Feel something.">
 		<p>A face, a sunset, a moment in time—our lives are the emotions we feel, and the stories we tell. These are our stories.</p>
 		<p>Each of Lineweight's five chapters showcases a story with a specific emotional focus, illuminated with the studio's signature stylings of color, light, and music. Every moment, word, and image is controlled by your swipe, marrying storytelling and graphic design in a unique union.</p>
-	</section>
+	</GameAbout>
 
-	<Press quote="Two Gold Medals for Interactive Design and Book Design." cite="Indigo Awards 2019" accolades={accolades} />
+	<Press quotes={quotes} accolades={accolades} />
+
+	<Credits
+		groups={[
+			{
+				heading: "Credits",
+				names: [
+					{ name: "William Stallwood", href: "https://twitter.com/willstall" },
+					{ name: "Dain Saint", href: "https://twitter.com/dainsaint" },
+				],
+			},
+			{
+				heading: "The Label",
+				names: [{ name: "Eddie Hsu" }, { name: "Mike Ouye" }],
+			},
+			{
+				heading: "Beta Testers",
+				names: [
+					{ name: "Kotaro Fujita" },
+					{ name: "Nicole Forester" },
+					{ name: "Jude Buffum" },
+					{ name: "Emma Fried-Cassorla" },
+					{ name: "Alex Hillman" },
+					{ name: "Greg Lobanov" },
+					{ name: "Jess Mason" },
+					{ name: "Ichiro Lambe" },
+				],
+			},
+			{
+				heading: "Special Thanks",
+				names: [
+					{ name: "Robert Bowling", href: "https://twitter.com/fourzerotwo" },
+					{ name: "Shawn Pierre", href: "https://twitter.com/ShawnPierre" },
+					{ name: "Indy Hall", href: "https://indyhall.org" },
+					{ name: "Philly Game Mechanics", href: "https://phillygamemechanics.com" },
+					{ name: "Pexels", href: "https://pexels.com" },
+				],
+			},
+		]}
+	/>
 </GameLayout>
-
-<style>
-	.about {
-		padding: 70px 24px;
-		max-width: 680px;
-		margin: 0 auto;
-		text-align: center;
-	}
-	.about h2 {
-		font-size: var(--fs-lg);
-		margin: 0 0 16px;
-		font-weight: 800;
-		color: #fff;
-	}
-	.about p {
-		font-size: var(--fs-base);
-		color: #c7cab9;
-	}
-</style>

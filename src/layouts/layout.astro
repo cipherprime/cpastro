@@ -1,18 +1,30 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
 
 interface Props {
 	title: string;
 	description?: string;
+	image?: string;
 	hideNav?: boolean;
 }
 
-const { title, description, hideNav = false } = Astro.props;
+const { title, description, image, hideNav = false } = Astro.props;
+
+const organizationSchema = {
+	"@context": "https://schema.org",
+	"@type": "Organization",
+	name: "Cipher Prime",
+	url: "https://cipherprime.com",
+	logo: new URL("/img/common/cp_logotype_black.webp", Astro.site).toString(),
+	sameAs: ["https://twitter.com/cipherprime", "https://github.com/cipherprime", "https://music.cipherprime.com"],
+};
 ---
 
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead title={title} description={description} image={image} />
+		<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
 	</head>
 	<body>
 		{!hideNav && (
@@ -29,15 +41,7 @@ const { title, description, hideNav = false } = Astro.props;
 			<slot />
 		</main>
 
-		<footer class="site-footer">
-			<div class="links">
-				<a href="/about">About</a>
-				<a href="https://music.cipherprime.com">Music</a>
-				<a href="/mailinglist">Mailing List</a>
-				<a href="mailto:team@cipherprime.com">Contact</a>
-			</div>
-			<div class="copy">Cipher Prime Studios &mdash; Philadelphia, PA</div>
-		</footer>
+		<Footer />
 	</body>
 </html>
 
@@ -79,31 +83,4 @@ const { title, description, hideNav = false } = Astro.props;
 		padding-bottom: 60px;
 	}
 
-	.site-footer {
-		border-top: 1px solid #ddd;
-		padding: 40px 24px 46px;
-		text-align: center;
-		margin-top: 20px;
-	}
-	.site-footer .links {
-		display: flex;
-		justify-content: center;
-		gap: 26px;
-		flex-wrap: wrap;
-		margin-bottom: 18px;
-	}
-	.site-footer .links a {
-		text-decoration: none;
-		font-size: var(--fs-base);
-		color: var(--cp-text-faint);
-		text-transform: uppercase;
-		letter-spacing: 0.06em;
-	}
-	.site-footer .links a:hover {
-		color: var(--cp-dark-text);
-	}
-	.site-footer .copy {
-		font-size: var(--fs-base);
-		color: var(--cp-text-faint);
-	}
 </style>

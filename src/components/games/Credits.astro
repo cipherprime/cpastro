@@ -1,0 +1,80 @@
+---
+export interface CreditEntry {
+	name: string;
+	href?: string;
+}
+
+export interface CreditGroup {
+	heading: string;
+	names: CreditEntry[];
+}
+
+interface Props {
+	groups: CreditGroup[];
+}
+
+const { groups } = Astro.props;
+---
+
+<section class="credits">
+	<div class="credits-inner contain">
+		{groups.map((g) => (
+			<div class="group">
+				<h4>{g.heading}</h4>
+				<ul>
+					{g.names.map((n) => (
+						<li>
+							{n.href ? (
+								<a href={n.href} target="_blank" rel="noopener">{n.name}</a>
+							) : (
+								n.name
+							)}
+						</li>
+					))}
+				</ul>
+			</div>
+		))}
+	</div>
+</section>
+
+<style>
+	.credits {
+		background: var(--cp-panel-deep);
+		padding: 60px 0;
+		border-top: 1px solid #1b2013;
+	}
+	.credits-inner {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: start;
+		gap: 40px 64px;
+	}
+	.group {
+		min-width: 140px;
+	}
+	.group h4 {
+		font-size: var(--fs-base);
+		text-transform: uppercase;
+		letter-spacing: 0.18em;
+		color: var(--cp-text-faint);
+		font-weight: 700;
+		margin: 0 0 12px;
+	}
+	.group ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.group li {
+		font-size: var(--fs-base);
+		color: var(--cp-text-dim);
+		margin-bottom: 6px;
+	}
+	.group a {
+		color: var(--cp-text-dim);
+		text-decoration: none;
+	}
+	.group a:hover {
+		color: var(--cp-green);
+	}
+</style>

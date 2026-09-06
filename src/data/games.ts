@@ -18,6 +18,7 @@ export interface Game {
 	trailerHref?: string;
 	compactHero?: boolean;
 	platforms: PlatformLink[];
+	section: "main" | "lab";
 }
 
 export const games: Game[] = [
@@ -35,17 +36,20 @@ export const games: Game[] = [
 			{ type: "appstore", href: "https://apps.apple.com/us/app/lineweight/id1415191501" },
 			{ type: "googleplay", href: "https://play.google.com/store/apps/details?id=com.thelabel.android.lineweight" },
 		],
+		section: "main",
 	},
 	{
 		slug: "auditorium",
 		title: "Auditorium",
-		shortDescription: "Auditorium is about the process of discovery & play.",
-		longDescription: "Cipher Prime's signature game — bend light into sound.",
+		shortDescription: "Bend streams of light to conduct a symphony orchestra in this indie classic.",
+		longDescription: "Bend streams of light to conduct a symphony orchestra in this indie classic.",
 		cover: "/img/games/covers/auditorium.webp",
 		href: "/games/auditorium",
-		heroBackground: "/img/games/auditorium/auditorium_flyer.jpg",
+		heroBackground: "/img/games/auditorium/auditorium_4.jpg",
+		heroLogo: "/img/games/auditorium/auditorium_logo.webp",
 		compactHero: true,
 		platforms: [{ type: "steam", href: "https://store.steampowered.com/app/205870/" }],
+		section: "main",
 	},
 	{
 		slug: "splice",
@@ -55,10 +59,11 @@ export const games: Game[] = [
 		cover: "/img/games/covers/splice.webp",
 		href: "/games/splice",
 		heroBackground: "/img/games/splice/splice_splash_bg.jpg",
-		heroLogo: "/img/games/splice/splice_logo.jpg",
+		heroLogo: "/img/games/splice/hi-res-logo-raw.png",
 		trailerHref: "https://www.youtube.com/embed/UpAi8kPrFaA",
 		compactHero: false,
 		platforms: [{ type: "steam", href: "https://store.steampowered.com/app/209790/" }],
+		section: "main",
 	},
 	{
 		slug: "pulse",
@@ -68,12 +73,14 @@ export const games: Game[] = [
 		cover: "/img/games/covers/pulse.webp",
 		href: "/games/pulse",
 		heroBackground: "/img/games/pulse/pulse_splash.jpg",
+		heroLogo: "/img/games/pulse/pulse_logo.webp",
 		trailerHref: "https://www.youtube.com/embed/CFF3bJLb8Sg",
 		compactHero: true,
 		platforms: [
 			{ type: "appstore", href: "https://itunes.apple.com/us/app/pulse-volume-one/id432667443?mt=8" },
 			{ type: "googleplay", href: "https://play.google.com/store/apps/details?id=com.cipherprime.pulse" },
 		],
+		section: "main",
 	},
 	{
 		slug: "intake",
@@ -83,9 +90,11 @@ export const games: Game[] = [
 		cover: "/img/games/covers/intake.webp",
 		href: "/games/intake",
 		heroBackground: "/img/games/intake/intake_splash.jpg",
+		heroLogo: "/img/games/intake/intake_logo.webp",
 		trailerHref: "https://www.youtube.com/embed/Hyex6_8-Dig",
 		compactHero: true,
 		platforms: [{ type: "steam", href: "https://store.steampowered.com/app/237760/" }],
+		section: "main",
 	},
 	{
 		slug: "fractal",
@@ -95,9 +104,11 @@ export const games: Game[] = [
 		cover: "/img/games/covers/fractal.webp",
 		href: "/games/fractal",
 		heroBackground: "/img/games/fractal/fractal_splash.jpg",
+		heroLogo: "/img/games/fractal/fractal_logo.webp",
 		trailerHref: "https://www.youtube.com/embed/ZzrJrmcItMU",
 		compactHero: true,
 		platforms: [{ type: "steam", href: "https://store.steampowered.com/app/61310/" }],
+		section: "main",
 	},
 	{
 		slug: "jawns",
@@ -107,6 +118,7 @@ export const games: Game[] = [
 		href: "https://playjawns.com",
 		external: true,
 		platforms: [],
+		section: "lab",
 	},
 	{
 		slug: "tailwind",
@@ -119,6 +131,7 @@ export const games: Game[] = [
 		trailerHref: "https://www.youtube.com/embed/Eqr2Xn1w7X4",
 		compactHero: true,
 		platforms: [],
+		section: "lab",
 	},
 	{
 		slug: "shimsham",
@@ -131,6 +144,7 @@ export const games: Game[] = [
 		trailerHref: "https://www.youtube.com/embed/JPkzGyKgJts",
 		compactHero: true,
 		platforms: [],
+		section: "lab",
 	},
 	{
 		slug: "monster-want-burger",
@@ -140,5 +154,6 @@ export const games: Game[] = [
 		href: "https://monsterwantburger.com",
 		external: true,
 		platforms: [],
+		section: "lab",
 	},
 ];

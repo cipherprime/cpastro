@@ -1,4 +1,5 @@
 ---
+import Card from "../Card.astro";
 import GamePlatformBadge from "./GamePlatformBadge.astro";
 import type { PlatformLink } from "../../data/games";
 
@@ -9,98 +10,69 @@ interface Props {
 	desc: string;
 	external?: boolean;
 	platforms?: PlatformLink[];
+	size?: "default" | "mini";
 }
 
-const { name, href, cover, desc, external = false, platforms = [] } = Astro.props;
-const linkProps = external ? { target: "_blank", rel: "noopener" } : {};
+const { name, href, cover, desc, external = false, platforms = [], size = "default" } = Astro.props;
 ---
 
-<div class="game-box">
-	<a class="cover" href={href} {...linkProps}><img src={cover} alt={name} /></a>
-	<div class="body">
-		<h3><a href={href} {...linkProps}>{name}</a></h3>
-		<p class="desc">{desc}</p>
-		<div class="platform-row">
-			{platforms.length > 0
-				? platforms.map((p) => <GamePlatformBadge type={p.type} href={p.href} />)
-				: <GamePlatformBadge type="learn" href={href} external={external} />}
-		</div>
-	</div>
-</div>
+<Card variant="game" href={href} cover={cover} coverAlt={name} title={name} desc={desc} external={external} size={size}>
+	{platforms.length > 0
+		? platforms.map((p) => <GamePlatformBadge type={p.type} href={p.href} />)
+		: <GamePlatformBadge type="learn" href={href} external={external} />}
+</Card>
 
 <style>
-	.game-box {
-		background: #171811;
+	:global(.card-game) {
+		background: var(--cp-panel);
 		border-radius: 4px;
-		overflow: hidden;
-		display: flex;
-		flex-direction: column;
-		height: 100%;
 	}
-	.game-box .cover {
+	:global(.card-game .cover) {
 		aspect-ratio: 561 / 800;
-		overflow: hidden;
-		display: block;
 	}
-	.game-box .cover img {
-		width: 100%;
+	:global(.card-game .cover img) {
 		height: 100%;
-		object-fit: cover;
-		display: block;
 		transition: transform 0.2s ease;
 	}
-	.game-box .cover:hover img {
+	:global(.card-game .cover:hover img) {
 		transform: scale(1.03);
 	}
-	.game-box .body {
+	:global(.card-game .body) {
 		padding: 18px 20px 22px;
-		flex: 1;
-		display: flex;
-		flex-direction: column;
 	}
-	.game-box h3 {
+	:global(.card-game h3) {
 		font-size: var(--fs-xl);
-		font-weight: 400;
 		margin: 0 0 6px;
 		color: #fff;
 	}
-	.game-box h3 a {
-		text-decoration: none;
-	}
-	.game-box .desc {
+	:global(.card-game .desc) {
 		font-size: var(--fs-md);
 		color: var(--cp-text-dim);
 		line-height: 1.5;
-		margin: 0 0 16px;
-		flex: 1;
+		margin-bottom: 16px;
 	}
-	.game-box .platform-row {
+	:global(.card-game .footer) {
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
 		gap: 8px;
-		margin-top: auto;
 	}
 
-	:global(.games.minis) .game-box h3 {
+	:global(.card-game.mini h3) {
 		font-size: var(--fs-lg);
 	}
 
 	@media (max-width: 767px) {
-		:global(.games.minis) .game-box {
+		:global(.card-game.mini) {
 			flex-direction: row;
 			align-items: stretch;
 		}
-		:global(.games.minis) .game-box .cover {
+		:global(.card-game.mini .cover) {
 			width: 100px;
 			aspect-ratio: auto;
 			flex-shrink: 0;
 		}
-		:global(.games.minis) .game-box .cover img {
-			height: 100%;
-			object-fit: cover;
-		}
-		:global(.games.minis) .game-box .body {
+		:global(.card-game.mini .body) {
 			padding: 14px 16px;
 		}
 	}

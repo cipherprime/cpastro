@@ -1,11 +1,36 @@
 ---
 import GameLayout from "../../../layouts/GameLayout.astro";
+import Hero from "../../../components/games/Hero.astro";
+import GameAbout from "../../../components/games/GameAbout.astro";
+import Gallery from "../../../components/games/Gallery.astro";
 ---
 
-<GameLayout title="Auditorium Duet" description="The long-announced sequel to Auditorium.">
+<GameLayout title="Auditorium Duet" description="A cooperative sequel to Auditorium, on indefinite hiatus." image="/img/games/duet/duet_social.png">
+	<Hero
+		title="Auditorium Duet"
+		tagline="Particles. Colors. Music. A cooperative sequel to Auditorium, on indefinite hiatus."
+		backgroundSrc="/img/games/duet/duet_splash.jpg"
+		compact
+	/>
+
 	<section class="notice">
-		<h1>Auditorium Duet</h1>
-		<p>Auditorium Duet was announced as the sequel to <a href="/games/auditorium">Auditorium</a>, but was never released. This page is kept for reference.</p>
+		<p>Auditorium Duet is the announced sequel to <a href="/games/auditorium">Auditorium</a>, currently on indefinite hiatus. The work that went into it didn't disappear — it became <a href="http://cipherprime.itch.io/headlight" target="_blank" rel="noopener">Headlight</a>, a mini built while prototyping Duet's mechanics, and an art exhibition built from the same world.</p>
+	</section>
+
+	<Gallery images={["/img/games/duet/duet1.jpg", "/img/games/duet/duet2.jpg", "/img/games/duet/duet3.jpg"]} />
+
+	<GameAbout heading="Bend light and sound, together.">
+		<p>Duet builds on the essential elements of the original: players creating music by bending dazzling rivers of light and color through brain-twisting puzzles. But it's also so much more — a cooperative experience where two players coordinate to guide luminous motes to their destinations, leaning on each other's intuition and planning to create a vividly pulsing colorscape.</p>
+		<p>A <a href="http://cpri.me/A2Duet" target="_blank" rel="noopener">Kickstarter campaign</a> for Duet succeeded thanks to the support of backers and fans, coming together in a late surge in the campaign's final days. Building toward Cipher Prime's first multiplayer game, the team took on smaller side projects to work out the kinks of networking code and pipeline — one of which became Headlight.</p>
+	</GameAbout>
+
+	<section class="spinoff">
+		<div class="spinoff-inner contain-narrow align-center">
+			<div class="eyebrow">From the same world</div>
+			<h2 class="spinoff-title">We&rsquo;ve Traveled So Far&hellip;</h2>
+			<p class="spinoff-tagline">An interactive exhibition that chronicles the effort of two men working to keep a promise.</p>
+			<a class="link-underline" href="https://wevetraveledsofar.com" target="_blank" rel="noopener">Learn more &rarr;</a>
+		</div>
 	</section>
 </GameLayout>
 
@@ -13,10 +38,36 @@ import GameLayout from "../../../layouts/GameLayout.astro";
 	.notice {
 		max-width: 640px;
 		margin: 0 auto;
-		padding: 160px 24px 100px;
+		padding: 56px 24px;
 		text-align: center;
 	}
 	.notice p {
 		color: var(--cp-text-dim);
+	}
+
+	.spinoff {
+		background: var(--cp-panel-deep);
+		padding: 70px 0;
+	}
+	.spinoff-inner .eyebrow {
+		margin-bottom: 14px;
+	}
+	.spinoff-title {
+		font-size: var(--fs-2xl);
+		font-weight: 400;
+		color: #fff;
+		margin: 0 0 12px;
+	}
+	.spinoff-tagline {
+		color: var(--cp-text-dim);
+		margin: 0 0 24px;
+	}
+	.spinoff-inner .link-underline {
+		color: var(--cp-text-quiet);
+		border-bottom-color: rgba(207, 210, 194, 0.4);
+	}
+	.spinoff-inner .link-underline:hover {
+		color: #fff;
+		border-color: #fff;
 	}
 </style>
