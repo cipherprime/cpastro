@@ -1,4 +1,4 @@
-export type PlatformType = "steam" | "appstore" | "googleplay" | "learn";
+export type PlatformType = "steam" | "playstation" | "appstore" | "googleplay" | "learn";
 
 export interface PlatformLink {
 	type: PlatformType;
@@ -66,7 +66,10 @@ export const games: Game[] = [
 		trailerHref: "https://www.youtube.com/embed/UpAi8kPrFaA",
 		compactHero: false,
 		accent: "var(--accent-splice)",
-		platforms: [{ type: "steam", href: "https://store.steampowered.com/app/209790/" }],
+		platforms: [
+			{ type: "steam", href: "https://store.steampowered.com/app/209790/" },
+			{ type: "playstation", href: "https://store.playstation.com/en-us/product/UP2094-CUSA00995_00-0000000000000000" },
+		],
 		section: "main",
 	},
 	{
