@@ -17,15 +17,15 @@ const miniGames = games.filter((g) => g.section === "lab");
 			<div class="inner">
 				<img class="mark" src="/img/common/cp-logo-white.png" alt="Cipher Prime" />
 				<h1>Set Your Mind On Fire</h1>
-				<p class="subhead">Cipher Prime makes games out of light and music in Philly.</p>
+				<p class="subhead"><strong>Cipher Prime</strong> makes games out of light and music in Philly.</p>
 			</div>
 		</div>
 	</section>
 
 	<div class="stack">
 		<div class="page-head" id="games">
-			<h2>Award-winning games.</h2>
-			<p>Music, motion and puzzle-driven games from a small studio in Philadelphia — 2008 to 2020.</p>
+			<h2>Our Games</h2>
+			<p>We&rsquo;re a small Philly studio making music, motion and puzzle-driven games. <br/>A little bit artsy, a little bit fun, a lot bit games for people who &ldquo;don't play games&rdquo;</p>
 		</div>
 
 		<CardGrid columns={3} gap="40px 26px">
@@ -36,7 +36,7 @@ const miniGames = games.filter((g) => g.section === "lab");
 
 		<div class="minis-head">
 			<h2>The Lab</h2>
-			<p>Experiments, demos and one-off releases — jam-scale games, a hardware launch title, a Humble Original.</p>
+			<p>Check out these experiments, demos and one-off releases.</p>
 		</div>
 
 		<CardGrid columns={4} gap="34px 26px" mobileGap="16px">
@@ -123,7 +123,7 @@ const miniGames = games.filter((g) => g.section === "lab");
 		text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7), 0 4px 18px rgba(0, 0, 0, 0.6);
 	}
 	.site-hero .subhead {
-		font-size: var(--fs-md);
+		font-size: var(--fs-lg);
 		color: #dcdfd0;
 		margin: 16px 0 0;
 		text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6), 0 4px 14px rgba(0, 0, 0, 0.5);
@@ -140,14 +140,14 @@ const miniGames = games.filter((g) => g.section === "lab");
 		font-weight: 700;
 		text-decoration: none;
 		padding: 12px 26px;
-		border-radius: var(--radius-pill);
+		border-radius: var(--radius-md);
 	}
 
 	.page-head {
 		padding-top: 64px;
 	}
 	.page-head h2 {
-		font-size: var(--fs-xl);
+		font-size: var(--fs-2xl);
 		margin: 0;
 		font-weight: 300;
 	}
@@ -163,6 +163,7 @@ const miniGames = games.filter((g) => g.section === "lab");
 		font-size: var(--fs-3xl);
 		margin: 0;
 		font-weight: 300;
+		margin-top: 128px;
 	}
 	.minis-head p {
 		color: var(--cp-text-faint);
