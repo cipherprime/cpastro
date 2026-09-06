@@ -9,10 +9,10 @@ const game = games.find((g) => g.slug === "fractal")!;
 	title={`FAQ — ${game.title}`}
 	description={`Frequently asked questions about ${game.title}.`}
 	lightTopbar
-	hideBack
+	accent={game.accent}
 >
 	<section class="faq">
-		<div class="faq-inner">
+		<div class="faq-inner contain-narrow">
 			<a class="eyebrow" href="/games/fractal">← <img src="/img/games/fractal/fractal_icon.webp" alt="" /> Fractal</a>
 			<h1>Frequently Asked Questions</h1>
 
@@ -45,11 +45,7 @@ const game = games.find((g) => g.slug === "fractal")!;
 	.faq {
 		background: var(--cp-paper);
 		color: var(--cp-dark-text);
-		padding: 130px 24px 90px;
-	}
-	.faq-inner {
-		max-width: 680px;
-		margin: 0 auto;
+		padding: 130px 0 90px;
 	}
 	.eyebrow {
 		display: flex;
@@ -58,7 +54,7 @@ const game = games.find((g) => g.slug === "fractal")!;
 		font-size: var(--fs-base);
 		text-transform: uppercase;
 		letter-spacing: 0.22em;
-		color: var(--cp-green-dim);
+		color: var(--accent-dim);
 		font-weight: 700;
 		text-decoration: none;
 		margin-bottom: 18px;
@@ -96,7 +92,7 @@ const game = games.find((g) => g.slug === "fractal")!;
 		padding-left: 20px;
 	}
 	.qa a {
-		color: var(--cp-green-dim);
+		color: var(--accent-dim);
 	}
 	.qa code {
 		color: var(--cp-dark-text);

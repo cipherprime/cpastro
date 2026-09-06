@@ -30,11 +30,11 @@ const albums = [
 	title={`Behind the Music — ${game.title}`}
 	description={`The story behind the music of ${game.title}.`}
 	lightTopbar
-	hideBack
+	accent={game.accent}
 >
 	<section class="btm">
-		<div class="btm-inner">
-			<a class="eyebrow" href="/games/pulse">← Pulse</a>
+		<div class="btm-inner contain">
+			<a class="eyebrow" href="/games/pulse">← <img src="/img/games/pulse/pulse-icon.webp" alt="" /> Pulse</a>
 
 			<div class="layout">
 				<aside class="albums">
@@ -68,11 +68,7 @@ const albums = [
 	.btm {
 		background: var(--cp-paper);
 		color: var(--cp-dark-text);
-		padding: 130px 24px 90px;
-	}
-	.btm-inner {
-		max-width: 980px;
-		margin: 0 auto;
+		padding: 130px 0 90px;
 	}
 	.eyebrow {
 		display: flex;
@@ -81,10 +77,15 @@ const albums = [
 		font-size: var(--fs-base);
 		text-transform: uppercase;
 		letter-spacing: 0.22em;
-		color: var(--cp-green-dim);
+		color: var(--accent-dim);
 		font-weight: 700;
 		text-decoration: none;
 		margin-bottom: 32px;
+	}
+	.eyebrow img {
+		width: 16px;
+		height: 16px;
+		border-radius: 3px;
 	}
 	.eyebrow:hover {
 		color: var(--cp-dark-text);
@@ -112,7 +113,7 @@ const albums = [
 	.album img {
 		width: 64px;
 		height: 64px;
-		border-radius: 4px;
+		border-radius: var(--radius-sm);
 		flex-shrink: 0;
 	}
 	.album div {
@@ -131,7 +132,7 @@ const albums = [
 		color: var(--cp-dark-text);
 	}
 	.album:hover .title {
-		color: var(--cp-green-dim);
+		color: var(--accent-dim);
 	}
 
 	.main h1 {
@@ -147,7 +148,7 @@ const albums = [
 		color: var(--cp-dark-text);
 	}
 	.main p {
-		font-size: var(--fs-base);
+		font-size: var(--fs-md);
 		color: var(--cp-paper-text-dim);
 	}
 

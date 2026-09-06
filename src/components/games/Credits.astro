@@ -56,7 +56,7 @@ const { groups } = Astro.props;
 		font-size: var(--fs-base);
 		text-transform: uppercase;
 		letter-spacing: 0.18em;
-		color: var(--cp-text-faint);
+		color: var(--accent, var(--cp-text-faint));
 		font-weight: 700;
 		margin: 0 0 12px;
 	}
@@ -75,6 +75,6 @@ const { groups } = Astro.props;
 		text-decoration: none;
 	}
 	.group a:hover {
-		color: var(--cp-green);
+		color: var(--accent);
 	}
 </style>

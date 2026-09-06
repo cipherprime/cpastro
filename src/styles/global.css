@@ -1,9 +1,15 @@
+@import "./colors.css";
+
 :root {
 	--cp-ink: #0c0f08;
 	--cp-paper: #f4f4ee;
 	--cp-green: #9bd83e;
 	--cp-green-dim: #6f9c2c;
 	--cp-steam: #66c0f4;
+
+	/* Default accent for pages that don't set a per-game one (see colors.css). */
+	--accent: var(--cp-green);
+	--accent-dim: var(--cp-green-dim);
 	--cp-text: #e9ebe0;
 	--cp-text-dim: #9a9d8e;
 	--cp-text-faint: #5c5f52;
@@ -29,6 +35,12 @@
 	--fs-xl: calc(var(--fs-lg) * var(--fs-ratio));
 	--fs-2xl: calc(var(--fs-xl) * var(--fs-ratio));
 	--fs-3xl: calc(var(--fs-2xl) * var(--fs-ratio));
+
+	/* Corner radii — small for thumbnails/media, medium for cards and
+	   buttons, pill for fully-rounded CTAs. */
+	--radius-sm: 4px;
+	--radius-md: 8px;
+	--radius-pill: 999px;
 }
 
 * {

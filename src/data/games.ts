@@ -17,6 +17,7 @@ export interface Game {
 	heroLogo?: string;
 	trailerHref?: string;
 	compactHero?: boolean;
+	accent?: string;
 	platforms: PlatformLink[];
 	section: "main" | "lab";
 }
@@ -32,6 +33,7 @@ export const games: Game[] = [
 		heroBackground: "/img/games/lineweight/lineweight_splash.jpg",
 		trailerHref: "https://www.youtube.com/embed/VeWjLLgeGuo",
 		compactHero: true,
+		accent: "var(--accent-lineweight)",
 		platforms: [
 			{ type: "appstore", href: "https://apps.apple.com/us/app/lineweight/id1415191501" },
 			{ type: "googleplay", href: "https://play.google.com/store/apps/details?id=com.thelabel.android.lineweight" },
@@ -48,6 +50,7 @@ export const games: Game[] = [
 		heroBackground: "/img/games/auditorium/auditorium_4.jpg",
 		heroLogo: "/img/games/auditorium/auditorium_logo.webp",
 		compactHero: true,
+		accent: "var(--accent-auditorium)",
 		platforms: [{ type: "steam", href: "https://store.steampowered.com/app/205870/" }],
 		section: "main",
 	},
@@ -62,6 +65,7 @@ export const games: Game[] = [
 		heroLogo: "/img/games/splice/hi-res-logo-raw.png",
 		trailerHref: "https://www.youtube.com/embed/UpAi8kPrFaA",
 		compactHero: false,
+		accent: "var(--accent-splice)",
 		platforms: [{ type: "steam", href: "https://store.steampowered.com/app/209790/" }],
 		section: "main",
 	},
@@ -76,6 +80,7 @@ export const games: Game[] = [
 		heroLogo: "/img/games/pulse/pulse_logo.webp",
 		trailerHref: "https://www.youtube.com/embed/CFF3bJLb8Sg",
 		compactHero: true,
+		accent: "var(--accent-pulse)",
 		platforms: [
 			{ type: "appstore", href: "https://itunes.apple.com/us/app/pulse-volume-one/id432667443?mt=8" },
 			{ type: "googleplay", href: "https://play.google.com/store/apps/details?id=com.cipherprime.pulse" },
@@ -93,6 +98,7 @@ export const games: Game[] = [
 		heroLogo: "/img/games/intake/intake_logo.webp",
 		trailerHref: "https://www.youtube.com/embed/Hyex6_8-Dig",
 		compactHero: true,
+		accent: "var(--accent-intake)",
 		platforms: [{ type: "steam", href: "https://store.steampowered.com/app/237760/" }],
 		section: "main",
 	},
@@ -107,6 +113,7 @@ export const games: Game[] = [
 		heroLogo: "/img/games/fractal/fractal_logo.webp",
 		trailerHref: "https://www.youtube.com/embed/ZzrJrmcItMU",
 		compactHero: true,
+		accent: "var(--accent-fractal)",
 		platforms: [{ type: "steam", href: "https://store.steampowered.com/app/61310/" }],
 		section: "main",
 	},

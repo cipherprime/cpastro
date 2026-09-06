@@ -1,7 +1,10 @@
 ---
 import { games } from "../data/games";
 
-const mainGames = games.filter((g) => g.section === "main");
+const footerOrder = ["auditorium", "fractal", "pulse", "splice", "intake", "lineweight"];
+const mainGames = games
+	.filter((g) => g.section === "main")
+	.sort((a, b) => footerOrder.indexOf(a.slug) - footerOrder.indexOf(b.slug));
 const labGames = games.filter((g) => g.section === "lab");
 const year = new Date().getFullYear();
 ---

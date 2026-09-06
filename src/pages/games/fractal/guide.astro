@@ -47,10 +47,10 @@ const powerups = [
 	title={`Guide — ${game.title}`}
 	description={`A guide to the modes, power-ups, and bloom mechanics of ${game.title}.`}
 	lightTopbar
-	hideBack
+	accent={game.accent}
 >
 	<section class="guide">
-		<div class="guide-inner">
+		<div class="guide-inner contain">
 			<a class="eyebrow" href="/games/fractal">← <img src="/img/games/fractal/fractal_icon.webp" alt="" /> Fractal</a>
 			<h1>Fractal Guide</h1>
 
@@ -146,11 +146,7 @@ const powerups = [
 	.guide {
 		background: var(--cp-paper);
 		color: var(--cp-dark-text);
-		padding: 130px 24px 90px;
-	}
-	.guide-inner {
-		max-width: 980px;
-		margin: 0 auto;
+		padding: 130px 0 90px;
 	}
 	.eyebrow {
 		display: flex;
@@ -159,7 +155,7 @@ const powerups = [
 		font-size: var(--fs-base);
 		text-transform: uppercase;
 		letter-spacing: 0.22em;
-		color: var(--cp-green-dim);
+		color: var(--accent-dim);
 		font-weight: 700;
 		text-decoration: none;
 		margin-bottom: 18px;
@@ -197,7 +193,7 @@ const powerups = [
 		margin: 0 0 40px;
 	}
 	.guide p {
-		font-size: var(--fs-base);
+		font-size: var(--fs-md);
 		color: var(--cp-paper-text-dim);
 	}
 	.guide em {
@@ -213,7 +209,7 @@ const powerups = [
 		max-width: 480px;
 		height: auto;
 		margin: 0 auto;
-		border-radius: 6px;
+		border-radius: var(--radius-md);
 	}
 
 	.modes {

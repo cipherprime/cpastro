@@ -14,15 +14,15 @@ interface Props {
 	accolades?: Accolade[];
 }
 
-const { quotes, accolades = [] } = Astro.props;
+const { quotes = [] , accolades = [] } = Astro.props;
 ---
 
 <section class="press">
 	<div class="press-inner contain-narrow align-center">
-		<div class="eyebrow">What people said</div>
+		{ quotes.length > 1 && ( <div class="eyebrow">What people said</div> ) }
 
 		<div class="carousel">
-			{quotes.map((q, i) => (
+			{quotes && quotes.map((q, i) => (
 				<div class="slide" data-slide style={i === 0 ? "" : "display:none"}>
 					<blockquote>&ldquo;{q.quote}&rdquo;</blockquote>
 					<cite>&mdash; {q.cite}</cite>
@@ -94,6 +94,7 @@ const { quotes, accolades = [] } = Astro.props;
 	}
 	.eyebrow {
 		margin-bottom: 22px;
+		color: var(--accent-dim);
 	}
 	blockquote {
 		font-size: var(--fs-md);
@@ -124,7 +125,7 @@ const { quotes, accolades = [] } = Astro.props;
 		cursor: pointer;
 	}
 	.dot.active {
-		background: var(--cp-green-dim);
+		background: var(--accent-dim);
 	}
 	.accolades {
 		margin-top: 46px;

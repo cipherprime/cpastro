@@ -12,14 +12,17 @@ interface Props {
 const { heading, links = [] } = Astro.props;
 ---
 
-<section class="about contain-narrow align-center">
-	<h2 class="section-title">{heading}</h2>
-	<slot />
-	{links.length > 0 && (
-		<div class="links">
-			{links.map((l) => <a class="link-underline" href={l.href}>{l.label}</a>)}
-		</div>
-	)}
+<section class="about">
+	<div class="about-inner contain-narrow">
+		{links.length > 0 && (
+			<div class="links">
+				{links.map((l) => <a class="link-underline" href={l.href}>{l.label}</a>)}
+			</div>
+		)}
+
+		<h2 class="section-title">{heading}</h2>
+		<slot />
+	</div>
 </section>
 
 <style>
@@ -27,30 +30,30 @@ const { heading, links = [] } = Astro.props;
 		padding: 70px 0;
 	}
 	.about h2 {
-		margin-bottom: 16px;
+		font-size: var(--fs-2xl);
 	}
 	.about :global(p) {
-		font-size: var(--fs-md);
+		font-size: var(--fs-lg);
 		color: var(--cp-text-soft);
 	}
 	.about :global(a) {
-		color: var(--cp-green);
+		color: var(--accent);
 	}
 	.links {
 		display: flex;
-		justify-content: center;
+		justify-content: start;
 		gap: 32px;
-		margin-top: 32px;
+		margin-bottom: 32px;
 	}
 	.links a {
-		font-size: var(--fs-base);
+		font-size: var(--fs-md);
 		text-transform: uppercase;
 		letter-spacing: 0.14em;
 		font-weight: 700;
-		color: var(--cp-text-dim);
+		color: var(--accent);
 	}
 	.links a:hover {
-		color: var(--cp-green);
-		border-bottom-color: var(--cp-green);
+		color: var(--accent);
+		border-bottom-color: var(--accent);
 	}
 </style>

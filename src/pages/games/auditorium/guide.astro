@@ -9,24 +9,22 @@ const game = games.find((g) => g.slug === "auditorium")!;
 	title={`Guide — ${game.title}`}
 	description={`A guide to the Controls, Goals, and Obstacles of ${game.title}.`}
 	lightTopbar
-	hideBack
+	accent={game.accent}
 >
 	<section class="guide">
-		<div class="guide-inner">
+		<div class="guide-inner contain stack">
 			<a class="eyebrow" href="/games/auditorium">← <img src="/img/games/auditorium/auditorium_icon.webp" alt="" /> Auditorium</a>
 			<h1>Auditorium Guide</h1>
 
-			<div class="intro">
+
 				<h2>The General Idea</h2>
 				<p>Auditorium is really all about the experience, both visually and aurally. Take a deep breath, relax, and start playing. If you really feel you need extra information on the way something works, you'll find it here.</p>
-			</div>
 
-			<div class="intro">
+
 				<h2>The Flow</h2>
 				<p>The Flow is a masterful stream of many tiny audio-visual particles. They can be controlled and manipulated separately; these little ones think for themselves. Guide them to an Audio Container that matches their color in order to light up your path and start some harmony.</p>
-			</div>
 
-			<div class="block">
+
 				<h2>The Controls</h2>
 				<p>Controls are your way of manipulating the Flow. They can change both the speed and direction of any particle they encounter. There are two ways to operate the controls. First, you can click and drag the control icon to move it. Second, you can also drag the radius of a control to change its area of influence. <em>Remember: Controls can be overlapped to create multiple reactions at any given point.</em></p>
 
@@ -77,9 +75,8 @@ const game = games.find((g) => g.slug === "auditorium")!;
 						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="block">
+
 				<h2>Goals</h2>
 				<p>The Primary Goal of Auditorium is to guide your Flow into the various Audio Containers presented before you. As you fill these Containers, light transforms into sound. Given enough light, the containers will begin to sing together in a symphony, providing the ultimate Harmony of Flow. But be advised&mdash;while some containers merely require the presence of Flow, some containers will require a specific color or colors. Containers that require more than one color can be identified by the number of vertical bars and each bar's color.</p>
 
@@ -106,9 +103,7 @@ const game = games.find((g) => g.slug === "auditorium")!;
 						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="block">
 				<h2>Obstacles</h2>
 				<p>Obstacles cannot be moved or altered and can sometimes impede your path. These obstacles can do anything to your Flow, from merely changing its color to eliminating it outright. Be advised; obstacles are not always a bad thing. Who knows, you may just find some obstacles to be the greatest assets in your quest for harmony.</p>
 
@@ -141,21 +136,26 @@ const game = games.find((g) => g.slug === "auditorium")!;
 							<p>There is more to your Flow than the origin and the destination. The Color of your Flow can and will have to be changed in order to achieve harmony. Passing through a Color Sphere will allow you to change the color of your Flow. At least, until it hits another Color Sphere.</p>
 						</div>
 					</div>
-				</div>
+
 			</div>
 		</div>
 	</section>
 </GameLayout>
 
 <style>
+
+	.stack {
+		--stack-space: 32px;
+	}
+
+	.stack > h2 + p {
+		--stack-space: 0px;
+	}
+
 	.guide {
 		background: var(--cp-paper);
 		color: var(--cp-dark-text);
-		padding: 130px 24px 90px;
-	}
-	.guide-inner {
-		max-width: 980px;
-		margin: 0 auto;
+		padding: 130px 0 90px;
 	}
 	.eyebrow {
 		display: flex;
@@ -164,11 +164,17 @@ const game = games.find((g) => g.slug === "auditorium")!;
 		font-size: var(--fs-base);
 		text-transform: uppercase;
 		letter-spacing: 0.22em;
-		color: var(--cp-green-dim);
+		color: var(--accent-dim);
 		font-weight: 700;
 		text-decoration: none;
 		margin-bottom: 18px;
 	}
+
+	.eyebrow + *
+	{
+		--stack-space: 0px;	
+	}
+
 	.eyebrow img {
 		width: 16px;
 		height: 16px;
@@ -179,30 +185,24 @@ const game = games.find((g) => g.slug === "auditorium")!;
 	}
 	.guide h1 {
 		font-size: var(--fs-xl);
-		margin: 0 0 56px;
+		
 		font-weight: 300;
 		color: var(--cp-dark-text);
 	}
-	.intro,
-	.block {
-		max-width: 680px;
-		margin: 0 0 60px;
-	}
-	.block {
-		max-width: 980px;
-	}
+
+
 	.guide h2 {
 		font-size: var(--fs-md);
-		margin: 0 0 12px;
+		
 		font-weight: 400;
 		color: var(--cp-dark-text);
 	}
 	.guide > .guide-inner > .block > p {
 		max-width: 680px;
-		margin: 0 0 40px;
+
 	}
 	.guide p {
-		font-size: var(--fs-base);
+		font-size: var(--fs-md);
 		color: var(--cp-paper-text-dim);
 	}
 	.guide em {
@@ -217,7 +217,7 @@ const game = games.find((g) => g.slug === "auditorium")!;
 		display: grid;
 		gap: 32px;
 		text-align: left;
-		margin-top: 8px;
+
 	}
 	.grid-4 {
 		grid-template-columns: repeat(4, 1fr);
@@ -254,7 +254,7 @@ const game = games.find((g) => g.slug === "auditorium")!;
 		font-weight: 700;
 		text-transform: uppercase;
 		letter-spacing: 0.08em;
-		margin: 4px 0 6px;
+
 		color: var(--cp-dark-text);
 	}
 	.item p {

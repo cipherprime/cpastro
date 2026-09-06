@@ -1,0 +1,10 @@
+/* Per-game accent colors. Applied via GameLayout's `accent` prop, which sets
+   --accent/--accent-dim for the page — see src/data/games.ts and global.css. */
+:root {
+	--accent-auditorium: #2c9b96;
+	--accent-fractal: #e07b39;
+	--accent-pulse: #8b6fd4;
+	--accent-intake: #c9366f;
+	--accent-splice: #5ea04f;
+	--accent-lineweight: #4b3f8f;
+}

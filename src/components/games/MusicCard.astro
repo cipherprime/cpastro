@@ -22,7 +22,7 @@ const { cover, kind, title, desc, href } = Astro.props;
 	:global(.card-music) {
 		background: var(--cp-panel);
 		border: 1px solid #262b1a;
-		border-radius: 10px;
+		border-radius: var(--radius-md);
 		transition:
 			transform 0.15s ease,
 			border-color 0.15s ease,
@@ -30,7 +30,7 @@ const { cover, kind, title, desc, href } = Astro.props;
 	}
 	:global(.card-music:hover) {
 		transform: translateY(-3px);
-		border-color: var(--cp-green-dim);
+		border-color: var(--accent-dim);
 		background: var(--cp-panel-hover);
 	}
 	:global(.card-music .cover) {
@@ -43,7 +43,7 @@ const { cover, kind, title, desc, href } = Astro.props;
 		font-size: var(--fs-base);
 		text-transform: uppercase;
 		letter-spacing: 0.16em;
-		color: var(--cp-green);
+		color: var(--accent);
 		font-weight: 700;
 		margin-bottom: 10px;
 	}

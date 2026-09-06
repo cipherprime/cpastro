@@ -35,7 +35,7 @@ const musicItems = [
 ];
 ---
 
-<GameLayout title={game.title} description={game.longDescription} image="/img/games/intake/intake_social.jpg" platforms={game.platforms}>
+<GameLayout title={game.title} description={game.longDescription} image="/img/games/intake/intake_social.jpg" platforms={game.platforms} accent={game.accent}>
 	<Hero
 		title={game.title}
 		logoSrc={game.heroLogo}
@@ -46,14 +46,14 @@ const musicItems = [
 		platforms={game.platforms}
 	/>
 
-	<PullQuote quote="An intense, bass-dropping arcade experience." cite="Andrew Groen, Penny Arcade Report" />
+	
+	<GameAbout heading="Grab some quarters & strap in.">
+		<p>Intake is the retro-futuristic drugstep arcade shooter from Cipher Prime. In this polychromatic love child of Dr. Mario and Ikaruga, you battle a never-ending barrage of pills, pushing your skill and reflexes to the limit to avoid a lethal dosage.</p>
+	</GameAbout>
 
 	<Gallery images={["/img/games/intake/intake1.jpg", "/img/games/intake/intake2.jpg", "/img/games/intake/intake3.jpg"]} />
 
-	<GameAbout heading="Grab some quarters & strap in.">
-		<p>Intake is the retro-futuristic drugstep arcade shooter from Cipher Prime. In this polychromatic love child of Dr. Mario and Ikaruga, you battle a never-ending barrage of pills, pushing your skill and reflexes to the limit to avoid a lethal dosage.</p>
-		<p>Blast and combo your way through an epic cascade of audiovisual mayhem so intoxicating it comes with its own warning label.</p>
-	</GameAbout>
+	<PullQuote quote="An intense, bass-dropping arcade experience." cite="Andrew Groen, Penny Arcade Report" />
 
 	<Press quotes={quotes} accolades={accolades} />
 

@@ -34,6 +34,7 @@ const { title, tagline, logoSrc, backgroundSrc, trailerHref, compact = false, pl
 			<a class="trailer-link link-underline" href={trailerHref} target="_blank" rel="noopener">▶ Watch the trailer</a>
 		)}
 	</div>
+	
 </div>
 
 <style>
@@ -73,7 +74,7 @@ const { title, tagline, logoSrc, backgroundSrc, trailerHref, compact = false, pl
 	}
 	.hero-logo img {
 		width: 100%;
-		filter: drop-shadow(0 12px 40px rgba(0, 0, 0, 0.55));
+		/* filter: drop-shadow(0 12px 40px rgba(0, 0, 0, 0.55)); */
 	}
 	.hero-inner h1 {
 		font-size: var(--fs-2xl);
@@ -81,10 +82,11 @@ const { title, tagline, logoSrc, backgroundSrc, trailerHref, compact = false, pl
 		margin: 0;
 	}
 	.tagline {
-		font-size: var(--fs-md);
+		font-size: var(--fs-lg);
 		color: #d7dac9;
 		max-width: 520px;
 		margin: 8px auto 34px;
+		text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6), 0 4px 14px rgba(0, 0, 0, 0.5);
 	}
 	.cta-row {
 		display: flex;

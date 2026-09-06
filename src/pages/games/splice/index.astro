@@ -57,7 +57,7 @@ const musicItems = [
 ];
 ---
 
-<GameLayout title={game.title} description={game.longDescription} image="/img/games/splice/splice_social.jpg" platforms={game.platforms}>
+<GameLayout title={game.title} description={game.longDescription} image="/img/games/splice/splice_social.jpg" platforms={game.platforms} accent={game.accent}>
 	<Hero
 		title={game.title}
 		logoSrc={game.heroLogo}
@@ -66,9 +66,13 @@ const musicItems = [
 		trailerHref={game.trailerHref}
 		compact={game.compactHero}
 		platforms={game.platforms}
-	/>
+	>
+	
+	</Hero>
 
-	<PullQuote quote="Sexy on a cellular level." cite="John Polson, Touch Arcade" />
+	<section class="contain-narrow" style="padding: 64px 0px">
+		<PullQuote quote="Sexy on a cellular level." cite="John Polson, Touch Arcade" />
+	</section>
 
 	<Gallery images={["/img/games/splice/splice1.jpg", "/img/games/splice/splice2.jpg", "/img/games/splice/splice3.jpg"]} />
 

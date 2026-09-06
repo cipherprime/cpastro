@@ -11,8 +11,8 @@ const { heading = "Get the soundtracks", items } = Astro.props;
 ---
 
 <section class="music">
-	<div class="music-inner contain align-center">
-		<h2 class="section-title">{heading}</h2>
+	<div class="music-inner contain">
+		<h2 class="heading">{heading}</h2>
 		<CardGrid columns={3} gap="20px">
 			{items.map((item) => <MusicCard {...item} />)}
 		</CardGrid>
@@ -24,7 +24,10 @@ const { heading = "Get the soundtracks", items } = Astro.props;
 		background: var(--cp-ink);
 		padding: 80px 0;
 	}
-	.music-inner h2 {
-		margin-bottom: 40px;
+	.music-inner .heading {
+		font-size: var(--fs-2xl);
+		font-weight: 200;
+		color: #fff;
+		margin: 0 0 40px;
 	}
 </style>

@@ -10,7 +10,7 @@ import { games } from "../../../data/games";
 
 const game = games.find((g) => g.slug === "lineweight")!;
 
-const quotes = [{ quote: "Two Gold Medals for Interactive Design and Book Design.", cite: "Indigo Awards 2019" }];
+
 
 const accolades = [
 	{ label: "Gold Medal, Interactive Design", source: "Indigo Awards 2019" },
@@ -21,7 +21,7 @@ const accolades = [
 ];
 ---
 
-<GameLayout title={game.title} description={game.longDescription} image="/img/games/lineweight/lineweight_social.jpg" platforms={game.platforms}>
+<GameLayout title={game.title} description={game.longDescription} image="/img/games/lineweight/lineweight_social.jpg" platforms={game.platforms} accent={game.accent}>
 	<Hero
 		title={game.title}
 		tagline={game.shortDescription}
@@ -31,16 +31,14 @@ const accolades = [
 		platforms={game.platforms}
 	/>
 
-	<PullQuote quote="Two Gold Medals for Interactive Design and Book Design." cite="Indigo Awards 2019" />
-
-	<Gallery images={["/img/games/lineweight/lineweight1.jpg", "/img/games/lineweight/lineweight2.jpg", "/img/games/lineweight/lineweight3.jpg", "/img/games/lineweight/lineweight4.jpg", "/img/games/lineweight/lineweight5.jpg"]} />
+	<Gallery vertical images={["/img/games/lineweight/lineweight1.jpg", "/img/games/lineweight/lineweight2.jpg", "/img/games/lineweight/lineweight3.jpg", "/img/games/lineweight/lineweight4.jpg", "/img/games/lineweight/lineweight5.jpg"]} />
 
 	<GameAbout heading="Feel something.">
 		<p>A face, a sunset, a moment in time—our lives are the emotions we feel, and the stories we tell. These are our stories.</p>
 		<p>Each of Lineweight's five chapters showcases a story with a specific emotional focus, illuminated with the studio's signature stylings of color, light, and music. Every moment, word, and image is controlled by your swipe, marrying storytelling and graphic design in a unique union.</p>
 	</GameAbout>
 
-	<Press quotes={quotes} accolades={accolades} />
+	<Press accolades={accolades} />
 
 	<Credits
 		groups={[

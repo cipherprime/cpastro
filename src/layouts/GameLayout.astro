@@ -8,22 +8,11 @@ interface Props {
 	description?: string;
 	image?: string;
 	platforms?: PlatformLink[];
-	backHref?: string;
-	backLabel?: string;
 	lightTopbar?: boolean;
-	hideBack?: boolean;
+	accent?: string;
 }
 
-const {
-	title,
-	description,
-	image,
-	platforms = [],
-	backHref = "/#games",
-	backLabel = "All games →",
-	lightTopbar = false,
-	hideBack = false,
-} = Astro.props;
+const { title, description, image, platforms = [], lightTopbar = false, accent } = Astro.props;
 
 const platformOS: Record<PlatformLink["type"], string | null> = {
 	steam: "Windows",
@@ -57,13 +46,12 @@ const videoGameSchema = {
 		<BaseHead title={title} description={description} image={image} />
 		<script type="application/ld+json" set:html={JSON.stringify(videoGameSchema)} />
 	</head>
-	<body>
+	<body style={accent ? `--accent: ${accent}; --accent-dim: color-mix(in srgb, ${accent} 72%, black);` : undefined}>
 		<div class:list={["topbar", { light: lightTopbar }]}>
 			<div class="topbar-inner contain">
 				<a class="brand" href="/">
 					<img src={lightTopbar ? "/img/common/cp_logotype_black.webp" : "/img/common/cp_logotype_white.webp"} alt="Cipher Prime" />
 				</a>
-				{!hideBack && <a class="back" href={backHref}>{backLabel}</a>}
 			</div>
 		</div>
 
@@ -85,12 +73,10 @@ const videoGameSchema = {
 	.topbar-inner {
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
 	}
 	.topbar .brand {
 		display: flex;
 		align-items: center;
-		gap: 8px;
 		text-decoration: none;
 		opacity: 0.85;
 	}
@@ -103,20 +89,4 @@ const videoGameSchema = {
 			height: 26px;
 		}
 	}
-	.topbar .back {
-		font-size: var(--fs-base);
-		color: var(--cp-text-dim);
-		text-decoration: none;
-		letter-spacing: 0.04em;
-	}
-	.topbar .back:hover {
-		color: #fff;
-	}
-	.topbar.light .back {
-		color: var(--cp-text-faint);
-	}
-	.topbar.light .back:hover {
-		color: var(--cp-dark-text);
-	}
-
 </style>
