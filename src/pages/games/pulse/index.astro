@@ -4,7 +4,7 @@ import Hero from "../../../components/games/Hero.astro";
 import PullQuote from "../../../components/games/PullQuote.astro";
 import GameAbout from "../../../components/games/GameAbout.astro";
 import Gallery from "../../../components/games/Gallery.astro";
-import Press from "../../../components/games/Press.astro";
+import PressSpotlight from "../../../components/games/PressSpotlight.astro";
 import MusicGrid from "../../../components/games/MusicGrid.astro";
 import { games } from "../../../data/games";
 
@@ -63,11 +63,7 @@ const musicItems = [
 		platforms={game.platforms}
 	/>
 
-	<PullQuote quote="[Reminds you] of why music games were popular in the first place." cite="Tracy Erickson, Pocket Gamer" />
-
-	<Gallery images={["/img/games/pulse/pulse1.jpg", "/img/games/pulse/pulse2.jpg", "/img/games/pulse/pulse3.jpg"]} />
-
-	<GameAbout
+		<GameAbout
 		heading="Reach out and touch the music."
 		links={[
 			{ href: "/games/pulse/behindthemusic", label: "Behind the music" },
@@ -78,7 +74,11 @@ const musicItems = [
 		<p>Pulse debuted on the iPad in 2011 and absolutely destroyed the App Store, claiming the #1 Music Rhythm Game spot for years. Since then, it has enjoyed many updates, including a full Android launch.</p>
 	</GameAbout>
 
-	<Press quotes={quotes} accolades={accolades} />
+	<Gallery images={["/img/games/pulse/pulse1.jpg", "/img/games/pulse/pulse2.jpg", "/img/games/pulse/pulse3.jpg"]} />
+
+
+
+	<PressSpotlight quotes={quotes} accolades={accolades} backgroundSrc="/img/games/pulse/pulse2.jpg" accent={game.accent} />
 
 	<MusicGrid items={musicItems} />
 </GameLayout>

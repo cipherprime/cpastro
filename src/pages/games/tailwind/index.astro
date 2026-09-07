@@ -1,10 +1,9 @@
 ---
 import GameLayout from "../../../layouts/GameLayout.astro";
 import Hero from "../../../components/games/Hero.astro";
-import PullQuote from "../../../components/games/PullQuote.astro";
 import GameAbout from "../../../components/games/GameAbout.astro";
 import Gallery from "../../../components/games/Gallery.astro";
-import Press from "../../../components/games/Press.astro";
+import PressSpotlight from "../../../components/games/PressSpotlight.astro";
 import MusicGrid from "../../../components/games/MusicGrid.astro";
 import Credits from "../../../components/games/Credits.astro";
 import { games } from "../../../data/games";
@@ -29,9 +28,10 @@ const musicItems = [
 ];
 ---
 
-<GameLayout title={game.title} description={game.longDescription} platforms={game.platforms}>
+<GameLayout title={game.title} description={game.longDescription} platforms={game.platforms} accent={game.accent}>
 	<Hero
 		title={game.title}
+		logoSrc={game.heroLogo}
 		tagline={game.shortDescription}
 		backgroundSrc={game.heroBackground}
 		trailerHref={game.trailerHref}
@@ -39,17 +39,15 @@ const musicItems = [
 		platforms={game.platforms}
 	/>
 
-	<PullQuote quote="It's from Cipher Prime!?" cite="Prince Jones" />
-
-	<Gallery images={["/img/games/tailwind/tailwind1.jpg", "/img/games/tailwind/tailwind2.jpg", "/img/games/tailwind/tailwind3.jpg"]} />
-
 	<GameAbout heading="Before you die, live.">
 		<p>You are the last survivor of an alien invasion that has all but destroyed your homeworld. Barely escaping the atmosphere in your experimental ship, the Keravnós, you realize you don't have enough fuel to survive.</p>
 		<p>If this is your time, you might as well spend it doing what you do best: aerial ballet. Rain from the heavens as a bolt of lightning in one final blaze of glory.</p>
 		<p><em>Tailwind: Prologue</em> was released exclusively in the Humble Monthly Bundle as a Humble Original in April 2016.</p>
 	</GameAbout>
 
-	<Press quotes={quotes} />
+	<Gallery images={["/img/games/tailwind/tailwind1.jpg", "/img/games/tailwind/tailwind2.jpg", "/img/games/tailwind/tailwind3.jpg"]} />
+
+	<PressSpotlight quotes={quotes} backgroundSrc="/img/games/tailwind/tailwind2.jpg" accent={game.accent} />
 
 	<MusicGrid items={musicItems} />
 

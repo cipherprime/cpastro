@@ -4,7 +4,7 @@ import Hero from "../../../components/games/Hero.astro";
 import PullQuote from "../../../components/games/PullQuote.astro";
 import GameAbout from "../../../components/games/GameAbout.astro";
 import Gallery from "../../../components/games/Gallery.astro";
-import Press from "../../../components/games/Press.astro";
+import PressSpotlight from "../../../components/games/PressSpotlight.astro";
 import MusicGrid from "../../../components/games/MusicGrid.astro";
 import Credits from "../../../components/games/Credits.astro";
 import { games } from "../../../data/games";
@@ -12,9 +12,11 @@ import { games } from "../../../data/games";
 const game = games.find((g) => g.slug === "splice")!;
 
 const quotes = [
+	{ quote: "As a package, Splice: Tree of Life is nigh-on perfect.", cite:"Harry Slater, Pocket Gamer", rating: "5/5"},	
+	{ quote: "Sexy on a Cellular Level.", cite: "John Polson, Touch Arcade", rating: "4.5/5"},
+	{ quote: "Just moments after you've uttered the words 'what the heck am I supposed to be doing', you're relishing in one of the freshest and most mind-blowing puzzle games you've played in a long while.", cite: "Mike Rose, Gamezebo", rating: "90/100" },
 	{ quote: "Elegant puzzle games should be on Oprah's non-existent list of video game favorite things.", cite: "Kotaku, Game of the Day" },
-	{ quote: "Just moments after you've uttered the words 'what the heck am I supposed to be doing', you're relishing in one of the freshest and most mind-blowing puzzle games you've played in a long while.", cite: "Mike Rose, Gamezebo" },
-	{ quote: "Sexy on a Cellular Level.", cite: "John Polson, Touch Arcade" },
+	
 	{ quote: "You discover Splice more than you play it, and it works spectacularly.", cite: "B.C. Johnson, Gaming Illustrated" },
 	{ quote: "[Splice is] a fantastic puzzle with a great atmosphere.", cite: "Steve Lewis, Jay Is Games" },
 	{ quote: "Splice does what most puzzle games fail to do: it enthralls.", cite: "John Lindvay, BigSushi.fm" },
@@ -70,17 +72,15 @@ const musicItems = [
 	
 	</Hero>
 
-	<section class="contain-narrow" style="padding: 64px 0px">
-		<PullQuote quote="Sexy on a cellular level." cite="John Polson, Touch Arcade" />
-	</section>
-
-	<Gallery images={["/img/games/splice/splice1.jpg", "/img/games/splice/splice2.jpg", "/img/games/splice/splice3.jpg"]} />
-
 	<GameAbout heading="Evolve your mind.">
 		<p>Splice is an experimental and artistic puzzler. Immerse yourself in its microbial world and start splicing! Every level ("strand") consists of a number of cells that you will need to rearrange into a target structure in several moves ("splices"). Exploration and experimentation are key in determining how the curious little cells react to each other.</p>
 	</GameAbout>
 
-	<Press quotes={quotes} accolades={accolades} />
+	<Gallery images={["/img/games/splice/splice1.jpg", "/img/games/splice/splice2.jpg", "/img/games/splice/splice3.jpg"]} />
+
+
+
+	<PressSpotlight quotes={quotes} accolades={accolades} backgroundSrc="/img/games/splice/splice2.jpg" accent={game.accent} />
 
 	<MusicGrid items={musicItems} />
 

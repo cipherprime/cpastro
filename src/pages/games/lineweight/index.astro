@@ -4,7 +4,7 @@ import Hero from "../../../components/games/Hero.astro";
 import PullQuote from "../../../components/games/PullQuote.astro";
 import GameAbout from "../../../components/games/GameAbout.astro";
 import Gallery from "../../../components/games/Gallery.astro";
-import Press from "../../../components/games/Press.astro";
+import PressSpotlight from "../../../components/games/PressSpotlight.astro";
 import Credits from "../../../components/games/Credits.astro";
 import { games } from "../../../data/games";
 
@@ -30,15 +30,15 @@ const accolades = [
 		compact={game.compactHero}
 		platforms={game.platforms}
 	/>
-
-	<Gallery vertical images={["/img/games/lineweight/lineweight1.jpg", "/img/games/lineweight/lineweight2.jpg", "/img/games/lineweight/lineweight3.jpg", "/img/games/lineweight/lineweight4.jpg", "/img/games/lineweight/lineweight5.jpg"]} />
-
 	<GameAbout heading="Feel something.">
 		<p>A face, a sunset, a moment in time—our lives are the emotions we feel, and the stories we tell. These are our stories.</p>
 		<p>Each of Lineweight's five chapters showcases a story with a specific emotional focus, illuminated with the studio's signature stylings of color, light, and music. Every moment, word, and image is controlled by your swipe, marrying storytelling and graphic design in a unique union.</p>
 	</GameAbout>
+	<Gallery vertical images={["/img/games/lineweight/lineweight1.jpg", "/img/games/lineweight/lineweight2.jpg", "/img/games/lineweight/lineweight3.jpg", "/img/games/lineweight/lineweight4.jpg", "/img/games/lineweight/lineweight5.jpg"]} />
 
-	<Press accolades={accolades} />
+
+
+	<PressSpotlight accolades={accolades} accent={game.accent} />
 
 	<Credits
 		groups={[

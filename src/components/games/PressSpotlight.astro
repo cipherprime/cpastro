@@ -1,0 +1,179 @@
+---
+export interface Quote {
+	quote: string;
+	cite: string;
+	rating?: string;
+}
+
+export interface Accolade {
+	label: string;
+	source: string;
+}
+
+interface Props {
+	quotes?: Quote[];
+	accolades?: Accolade[];
+	backgroundSrc?: string;
+	accent?: string;
+}
+
+const { quotes = [], accolades = [], backgroundSrc, accent } = Astro.props;
+const picks = quotes.slice(0, 3);
+const hasQuotes = picks.length > 0;
+const hasAwards = accolades.length > 0;
+const style = [backgroundSrc ? `background-image:url(${backgroundSrc})` : "", accent ? `--accent-local: ${accent}` : ""].filter(Boolean).join("; ");
+---
+
+{(hasQuotes || hasAwards) && (
+	<section class:list={["press-spotlight", { "no-art": !backgroundSrc, "awards-only": !hasQuotes }]} style={style}>
+		{backgroundSrc && <div class="scrim"></div>}
+		<div class:list={["press-spotlight-inner", "contain", { "single-col": !hasQuotes || !hasAwards }]}>
+			{hasQuotes && (
+				<div class="quotes">
+					{picks.map((q, i) => (
+						<div class:list={["pick", { featured: i === 0 }]}>
+							<blockquote>{q.quote}</blockquote>
+							<cite>{q.cite} {q.rating && <span class="rating">{q.rating}</span>}</cite>
+						</div>
+					))}
+				</div>
+			)}
+
+			{hasAwards && (
+				<ul class:list={["awards", { standalone: !hasQuotes }]}>
+					{accolades.map((a) => (
+						<li>
+							<span class="award-label">{a.label}</span>
+							<span class="award-source">{a.source}</span>
+						</li>
+					))}
+				</ul>
+			)}
+		</div>
+	</section>
+)}
+
+<style>
+	.press-spotlight {
+		position: relative;
+		background-size: cover;
+		background-position: center;
+		padding: 110px 0;
+		color: #fff;
+	}
+	.press-spotlight.no-art {
+		background-color: var(--cp-ink);
+	}
+	.scrim {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(180deg, rgba(4, 6, 3, 0.75) 0%, rgba(4, 6, 3, 0.9) 100%);
+	}
+	.press-spotlight-inner {
+		position: relative;
+		z-index: 1;
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 48px;
+		max-width: 980px;
+		margin: 0 auto;
+	}
+	@media (min-width: 860px) {
+		.press-spotlight-inner {
+			grid-template-columns: 1fr 220px;
+			align-items: start;
+		}
+		.press-spotlight-inner.single-col {
+			grid-template-columns: 1fr;
+		}
+	}
+	.quotes {
+		display: flex;
+		flex-direction: column;
+	}
+	.awards {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+	.awards.standalone {
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 14px 40px;
+	}
+	.awards.standalone li {
+		align-items: center;
+		text-align: center;
+		width: 200px;
+	}
+	.awards li {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+		padding: 14px 0px;
+		border-radius: var(--radius-md);
+		text-wrap: pretty;
+	}
+	.award-label {
+		font-size: var(--fs-md);
+		font-weight: 300;
+		color: var(--cp-paper);
+	}
+	.award-source {
+		font-size: 0.7rem;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		font-weight: 800;
+		color: var(--accent);
+	}
+	.pick {
+		padding: 28px 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.18);
+	}
+	.pick:first-child {
+		padding-top: 0;
+		border-top: none;
+	}
+	.pick:last-child {
+		padding-bottom: 0;
+	}
+	.rating {
+		display: inline-block;
+		font-weight: 800;
+		letter-spacing: 0.06em;
+		color: var(--cp-ink);
+		background: var(--accent);
+		border-radius: var(--radius-md);
+		padding: 1px 10px;
+		margin: -1px 5px;
+	}
+	.pick blockquote {
+		margin: 0 0 14px;
+		font-size: var(--fs-lg);
+		font-weight: 400;
+		line-height: 1.3;
+		letter-spacing: -0.005em;
+	}
+	.pick.featured blockquote {
+		font-size: var(--fs-2xl);
+		font-weight: 400;
+		line-height: 1.15;
+		letter-spacing: -0.01em;
+	}
+	.pick cite {
+		display: block;
+		font-style: normal;
+		font-size: var(--fs-md);
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--accent-local, var(--accent));
+		font-weight: 700;
+	}
+	.pick.featured cite {
+		font-size: var(--fs-md);
+	}
+</style>

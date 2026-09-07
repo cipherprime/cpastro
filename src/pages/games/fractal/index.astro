@@ -1,10 +1,9 @@
 ---
 import GameLayout from "../../../layouts/GameLayout.astro";
 import Hero from "../../../components/games/Hero.astro";
-import PullQuote from "../../../components/games/PullQuote.astro";
 import GameAbout from "../../../components/games/GameAbout.astro";
 import Gallery from "../../../components/games/Gallery.astro";
-import Press from "../../../components/games/Press.astro";
+import PressSpotlight from "../../../components/games/PressSpotlight.astro";
 import MusicGrid from "../../../components/games/MusicGrid.astro";
 import Credits from "../../../components/games/Credits.astro";
 import { games } from "../../../data/games";
@@ -48,10 +47,6 @@ const musicItems = [
 		platforms={game.platforms}
 	/>
 
-	<PullQuote quote="Slick, explosive, and wickedly addictive." cite="Adam Fimio, Indie Game Reviewer" />
-
-	<Gallery images={["/img/games/fractal/fractal1.jpg", "/img/games/fractal/fractal2.jpg", "/img/games/fractal/fractal3.jpg"]} />
-
 	<GameAbout
 		heading="Make blooms, not war."
 		links={[
@@ -63,7 +58,9 @@ const musicItems = [
 		<p>Push, Combo, and Chain your way through a pulsing technicolor dreamscape all while expanding your consciousness at 130 BPM.</p>
 	</GameAbout>
 
-	<Press quotes={quotes} accolades={accolades} />
+	<Gallery images={["/img/games/fractal/fractal1.jpg", "/img/games/fractal/fractal2.jpg", "/img/games/fractal/fractal3.jpg"]} />
+
+	<PressSpotlight quotes={quotes} accolades={accolades} backgroundSrc="/img/games/fractal/fractal2.jpg" accent={game.accent} />
 
 	<MusicGrid items={musicItems} />
 

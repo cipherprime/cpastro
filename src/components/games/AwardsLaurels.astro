@@ -1,0 +1,100 @@
+---
+export interface Accolade {
+	label: string;
+	source: string;
+}
+
+interface Props {
+	accolades: Accolade[];
+	accent?: string;
+}
+
+const { accolades = [], accent } = Astro.props;
+---
+
+{accolades.length > 0 && (
+	<section class="awards-laurels" style={accent ? `--accent-local: ${accent}` : undefined}>
+		<div class="laurels-inner contain">
+			{accolades.map((a) => (
+				<div class="laurel">
+					<svg class="wreath" viewBox="0 0 120 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<g class="branch">
+							<path d="M40 118C22 108 10 88 10 64C10 42 20 24 34 12" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+							<ellipse cx="14" cy="98" rx="9" ry="4.5" fill="currentColor" transform="rotate(-40 14 98)"/>
+							<ellipse cx="9" cy="82" rx="9" ry="4.5" fill="currentColor" transform="rotate(-15 9 82)"/>
+							<ellipse cx="9" cy="64" rx="9" ry="4.5" fill="currentColor" transform="rotate(10 9 64)"/>
+							<ellipse cx="13" cy="46" rx="9" ry="4.5" fill="currentColor" transform="rotate(35 13 46)"/>
+							<ellipse cx="22" cy="30" rx="9" ry="4.5" fill="currentColor" transform="rotate(58 22 30)"/>
+							<ellipse cx="34" cy="16" rx="9" ry="4.5" fill="currentColor" transform="rotate(78 34 16)"/>
+						</g>
+						<g class="branch flip">
+							<path d="M80 118C98 108 110 88 110 64C110 42 100 24 86 12" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+							<ellipse cx="106" cy="98" rx="9" ry="4.5" fill="currentColor" transform="rotate(40 106 98)"/>
+							<ellipse cx="111" cy="82" rx="9" ry="4.5" fill="currentColor" transform="rotate(15 111 82)"/>
+							<ellipse cx="111" cy="64" rx="9" ry="4.5" fill="currentColor" transform="rotate(-10 111 64)"/>
+							<ellipse cx="107" cy="46" rx="9" ry="4.5" fill="currentColor" transform="rotate(-35 107 46)"/>
+							<ellipse cx="98" cy="30" rx="9" ry="4.5" fill="currentColor" transform="rotate(-58 98 30)"/>
+							<ellipse cx="86" cy="16" rx="9" ry="4.5" fill="currentColor" transform="rotate(-78 86 16)"/>
+						</g>
+					</svg>
+					<div class="laurel-copy">
+						<span class="label">{a.label}</span>
+						<span class="source">{a.source}</span>
+					</div>
+				</div>
+			))}
+		</div>
+	</section>
+)}
+
+<style>
+	.awards-laurels {
+		background: var(--cp-paper);
+		padding: 70px 0;
+	}
+	.laurels-inner {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 34px 24px;
+	}
+	.laurel {
+		position: relative;
+		width: 150px;
+		height: 160px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.wreath {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		color: var(--accent-local, var(--accent));
+	}
+	.laurel-copy {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		gap: 3px;
+		padding: 0 30px;
+		margin-top: 6px;
+	}
+	.label {
+		font-size: 0.7rem;
+		font-weight: 800;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		line-height: 1.15;
+		color: var(--cp-dark-text);
+	}
+	.source {
+		font-size: 0.65rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: var(--cp-paper-text-dim);
+	}
+</style>

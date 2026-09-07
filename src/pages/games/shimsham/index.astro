@@ -1,10 +1,9 @@
 ---
 import GameLayout from "../../../layouts/GameLayout.astro";
 import Hero from "../../../components/games/Hero.astro";
-import PullQuote from "../../../components/games/PullQuote.astro";
 import GameAbout from "../../../components/games/GameAbout.astro";
 import Gallery from "../../../components/games/Gallery.astro";
-import Press from "../../../components/games/Press.astro";
+import PressSpotlight from "../../../components/games/PressSpotlight.astro";
 import MusicGrid from "../../../components/games/MusicGrid.astro";
 import Credits from "../../../components/games/Credits.astro";
 import { games } from "../../../data/games";
@@ -29,9 +28,11 @@ const musicItems = [
 ];
 ---
 
-<GameLayout title={game.title} description={game.longDescription} platforms={game.platforms}>
+<GameLayout title={game.title} description={game.longDescription} platforms={game.platforms} accent={game.accent}>
 	<Hero
 		title={game.title}
+		logoSrc={game.heroLogo}
+		logoScale={0.75}
 		tagline={game.shortDescription}
 		backgroundSrc={game.heroBackground}
 		trailerHref={game.trailerHref}
@@ -39,16 +40,14 @@ const musicItems = [
 		platforms={game.platforms}
 	/>
 
-	<PullQuote quote="This game is a piece of art!" cite="fifigyuri" />
-
-	<Gallery images={["/img/games/shimsham/shimsham1.jpg", "/img/games/shimsham/shimsham2.jpg", "/img/games/shimsham/shimsham3.jpg"]} />
-
 	<GameAbout heading="Go toe-to-toe and crush your opponent.">
 		<p>In this heads-up competitive game, each player fights for control of their world while battling competing laws of gravity. Spin your level and control the falling blocks to crush your opponent—without letting them crush you first.</p>
 		<p>Originally created as a debut title for the Leap Motion, Shimsham has since been revamped with full keyboard, mouse, and controller support.</p>
 	</GameAbout>
 
-	<Press quotes={quotes} />
+	<Gallery images={["/img/games/shimsham/shimsham1.jpg", "/img/games/shimsham/shimsham2.jpg", "/img/games/shimsham/shimsham3.jpg"]} />
+
+	<PressSpotlight quotes={quotes} backgroundSrc="/img/games/shimsham/shimsham2.jpg" accent={game.accent} />
 
 	<MusicGrid items={musicItems} />
 

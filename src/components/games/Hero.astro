@@ -6,19 +6,22 @@ interface Props {
 	title: string;
 	tagline?: string;
 	logoSrc?: string;
+	logoScale?: number;
 	backgroundSrc: string;
 	trailerHref?: string;
 	compact?: boolean;
 	platforms?: PlatformLink[];
 }
 
-const { title, tagline, logoSrc, backgroundSrc, trailerHref, compact = false, platforms = [] } = Astro.props;
+const { title, tagline, logoSrc, logoScale = 1, backgroundSrc, trailerHref, compact = false, platforms = [] } = Astro.props;
+
+const trailerId = trailerHref?.split("/").pop();
 ---
 
 <div class:list={["hero", { compact }]} style={`background-image:url(${backgroundSrc})`}>
-	<div class="hero-inner">
+	<div class="hero-inner" data-hero-inner>
 		{logoSrc ? (
-			<div class="hero-logo"><img src={logoSrc} alt={title} /></div>
+			<div class="hero-logo" style={`--logo-scale: ${logoScale}`}><img src={logoSrc} alt={title} /></div>
 		) : (
 			<h1>{title}</h1>
 		)}
@@ -31,10 +34,11 @@ const { title, tagline, logoSrc, backgroundSrc, trailerHref, compact = false, pl
 		)}
 
 		{trailerHref && (
-			<a class="trailer-link link-underline" href={trailerHref} target="_blank" rel="noopener">▶ Watch the trailer</a>
+			<a class="trailer-link link-underline" href={trailerHref} target="_blank" rel="noopener" data-trailer-trigger data-video-id={trailerId}>▶ Watch the trailer</a>
 		)}
 	</div>
-	
+
+	{trailerHref && <div class="hero-video" data-hero-video hidden></div>}
 </div>
 
 <style>
@@ -67,9 +71,29 @@ const { title, tagline, logoSrc, backgroundSrc, trailerHref, compact = false, pl
 		z-index: 1;
 		padding: 120px 24px 64px;
 		max-width: 920px;
+		transition: opacity 0.25s ease;
+	}
+	.hero-inner.fading {
+		opacity: 0;
+		pointer-events: none;
+	}
+	.hero-video {
+		position: absolute;
+		inset: 0;
+		z-index: 2;
+		background: #000;
+	}
+	.hero-video[hidden] {
+		display: none;
+	}
+	.hero-video :global(iframe) {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
 	}
 	.hero-logo {
-		width: min(640px, 86vw);
+		width: calc(min(640px, 86vw) * var(--logo-scale, 1));
 		margin: 0 auto 6px;
 	}
 	.hero-logo img {
@@ -106,3 +130,75 @@ const { title, tagline, logoSrc, backgroundSrc, trailerHref, compact = false, pl
 		border-color: #fff;
 	}
 </style>
+
+<script>
+	let ytApiPromise: Promise<any> | null = null;
+
+	function loadYouTubeApi(): Promise<any> {
+		if (ytApiPromise) return ytApiPromise;
+		ytApiPromise = new Promise((resolve) => {
+			const w = window as any;
+			if (w.YT && w.YT.Player) {
+				resolve(w.YT);
+				return;
+			}
+			const prevCallback = w.onYouTubeIframeAPIReady;
+			w.onYouTubeIframeAPIReady = () => {
+				prevCallback?.();
+				resolve(w.YT);
+			};
+			const script = document.createElement("script");
+			script.src = "https://www.youtube.com/iframe_api";
+			document.head.appendChild(script);
+		});
+		return ytApiPromise;
+	}
+
+	document.querySelectorAll<HTMLAnchorElement>("[data-trailer-trigger]").forEach((trigger) => {
+		const hero = trigger.closest(".hero");
+		const heroInner = hero?.querySelector<HTMLElement>("[data-hero-inner]");
+		const videoHost = hero?.querySelector<HTMLElement>("[data-hero-video]");
+		const videoId = trigger.dataset.videoId;
+		if (!hero || !heroInner || !videoHost || !videoId) return;
+
+		let player: any = null;
+
+		trigger.addEventListener("click", async (e) => {
+			e.preventDefault();
+
+			heroInner.classList.add("fading");
+			videoHost.hidden = false;
+
+			const YT = await loadYouTubeApi();
+
+			if (player) {
+				player.playVideo();
+				return;
+			}
+
+			const mount = document.createElement("div");
+			videoHost.appendChild(mount);
+
+			player = new YT.Player(mount, {
+				height: "100%",
+				width: "100%",
+				videoId,
+				playerVars: {
+					autoplay: 1,
+					playsinline: 1,
+					modestbranding: 1,
+					rel: 0,
+				},
+				events: {
+					onReady: (ev: any) => ev.target.playVideo(),
+					onStateChange: (ev: any) => {
+						if (ev.data === YT.PlayerState.ENDED) {
+							videoHost.hidden = true;
+							heroInner.classList.remove("fading");
+						}
+					},
+				},
+			});
+		});
+	});
+</script>

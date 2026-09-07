@@ -1,0 +1,88 @@
+---
+export interface Accolade {
+	label: string;
+	source: string;
+}
+
+interface Props {
+	accolades: Accolade[];
+	accent?: string;
+}
+
+const { accolades = [], accent } = Astro.props;
+---
+
+{accolades.length > 0 && (
+	<section class="awards-shelf" style={accent ? `--accent-local: ${accent}` : undefined}>
+		<div class="shelf-inner contain">
+			{accolades.map((a, i) => (
+				<div class="medal" style={`--tilt: ${(i % 2 === 0 ? -1 : 1) * (2 + (i % 3))}deg`}>
+					<div class="medal-face">
+						<span class="star">&#9733;</span>
+						<span class="label">{a.label}</span>
+					</div>
+					<span class="source">{a.source}</span>
+				</div>
+			))}
+		</div>
+	</section>
+)}
+
+<style>
+	.awards-shelf {
+		background: var(--cp-ink);
+		padding: 64px 0;
+	}
+	.shelf-inner {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 28px 22px;
+	}
+	.medal {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 10px;
+		width: 130px;
+		transform: rotate(var(--tilt, 0deg));
+		transition: transform 0.2s ease;
+	}
+	.medal:hover {
+		transform: rotate(0deg) scale(1.05);
+	}
+	.medal-face {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 4px;
+		width: 110px;
+		height: 110px;
+		border-radius: 50%;
+		background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--accent-local, var(--accent)) 55%, white 10%), var(--accent-local, var(--accent)) 70%);
+		box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45), inset 0 2px 4px rgba(255, 255, 255, 0.35), inset 0 -6px 10px rgba(0, 0, 0, 0.25);
+		padding: 10px;
+		text-align: center;
+	}
+	.star {
+		font-size: var(--fs-md);
+		color: #06120a;
+		opacity: 0.75;
+	}
+	.label {
+		font-size: 0.7rem;
+		font-weight: 800;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		line-height: 1.15;
+		color: #06120a;
+	}
+	.source {
+		font-size: var(--fs-sm);
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--cp-text-faint);
+		text-align: center;
+	}
+</style>

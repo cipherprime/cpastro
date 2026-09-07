@@ -1,0 +1,115 @@
+---
+export interface Accolade {
+	label: string;
+	source: string;
+}
+
+export interface Quote {
+	quote: string;
+	cite: string;
+}
+
+interface Props {
+	quotes: Quote[];
+	accolades?: Accolade[];
+}
+
+const { quotes = [], accolades = [] } = Astro.props;
+---
+
+<section class="press-grid">
+	<div class="press-grid-inner contain">
+		{quotes.length > 0 && (
+			<div class="quotes">
+				{quotes.map((q) => (
+					<figure class="quote-card">
+						<span class="mark">&ldquo;</span>
+						<blockquote>{q.quote}</blockquote>
+						<figcaption>{q.cite}</figcaption>
+					</figure>
+				))}
+			</div>
+		)}
+
+		{accolades.length > 0 && (
+			<div class="chips">
+				{accolades.map((a) => (
+					<span class="chip"><b>{a.label}</b><span class="dot">&middot;</span>{a.source}</span>
+				))}
+			</div>
+		)}
+	</div>
+</section>
+
+<style>
+	.press-grid {
+		background: var(--cp-paper);
+		color: var(--cp-dark-text);
+		padding: 80px 0;
+	}
+	.quotes {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 22px;
+		margin-bottom: 44px;
+	}
+	@media (min-width: 700px) {
+		.quotes {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	.quote-card {
+		margin: 0;
+		padding: 26px 24px 22px;
+		background: #fff;
+		border: 1px solid rgba(0, 0, 0, 0.08);
+		border-radius: var(--radius-md);
+		position: relative;
+	}
+	.mark {
+		position: absolute;
+		top: 6px;
+		left: 18px;
+		font-size: 3rem;
+		line-height: 1;
+		font-family: Georgia, serif;
+		color: var(--accent-dim);
+		opacity: 0.5;
+	}
+	.quote-card blockquote {
+		margin: 18px 0 12px;
+		font-size: var(--fs-md);
+		font-weight: 600;
+		line-height: 1.35;
+		letter-spacing: -0.01em;
+	}
+	.quote-card figcaption {
+		font-size: var(--fs-sm);
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: #66695c;
+	}
+	.chips {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 10px;
+	}
+	.chip {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		padding: 8px 16px;
+		border-radius: 999px;
+		border: 1px solid rgba(0, 0, 0, 0.12);
+		font-size: var(--fs-sm);
+		color: var(--cp-paper-text-dim);
+	}
+	.chip b {
+		color: var(--cp-dark-text);
+		font-weight: 700;
+	}
+	.chip .dot {
+		opacity: 0.5;
+	}
+</style>

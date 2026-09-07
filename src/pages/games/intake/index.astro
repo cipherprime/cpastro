@@ -1,10 +1,9 @@
 ---
 import GameLayout from "../../../layouts/GameLayout.astro";
 import Hero from "../../../components/games/Hero.astro";
-import PullQuote from "../../../components/games/PullQuote.astro";
 import GameAbout from "../../../components/games/GameAbout.astro";
 import Gallery from "../../../components/games/Gallery.astro";
-import Press from "../../../components/games/Press.astro";
+import PressSpotlight from "../../../components/games/PressSpotlight.astro";
 import MusicGrid from "../../../components/games/MusicGrid.astro";
 import Credits from "../../../components/games/Credits.astro";
 import { games } from "../../../data/games";
@@ -12,16 +11,10 @@ import { games } from "../../../data/games";
 const game = games.find((g) => g.slug === "intake")!;
 
 const quotes = [
+	{ quote: "100% undiluted, pulse-pounding fun.", cite: "Jarrett Redding, Mash Those Buttons", rating: "5/5" },
 	{ quote: "Intake is a spectacularly minimal game that contains a staggering amount of complexity with just a handful of straightforward concepts.", cite: "Daniel Starkey, Gamespot" },
 	{ quote: "Intake is an intense, bass-dropping arcade experience.", cite: "Andrew Groen, Penny Arcade Report" },
 	{ quote: "Super simple and super addicting.", cite: "Jessica Conditt, Joystiq" },
-	{ quote: "100% undiluted, pulse-pounding fun. 5/5.", cite: "Jarrett Redding, Mash Those Buttons" },
-];
-
-const accolades = [
-	{ label: "5/5", source: "Mash Those Buttons" },
-	{ label: "Bass-dropping arcade experience", source: "Penny Arcade Report" },
-	{ label: "Super addicting", source: "Joystiq" },
 ];
 
 const musicItems = [
@@ -53,9 +46,7 @@ const musicItems = [
 
 	<Gallery images={["/img/games/intake/intake1.jpg", "/img/games/intake/intake2.jpg", "/img/games/intake/intake3.jpg"]} />
 
-	<PullQuote quote="An intense, bass-dropping arcade experience." cite="Andrew Groen, Penny Arcade Report" />
-
-	<Press quotes={quotes} accolades={accolades} />
+	<PressSpotlight quotes={quotes} backgroundSrc="/img/games/intake/intake2.jpg" accent={game.accent} />
 
 	<MusicGrid items={musicItems} />
 

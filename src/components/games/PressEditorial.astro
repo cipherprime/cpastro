@@ -1,0 +1,109 @@
+---
+export interface Accolade {
+	label: string;
+	source: string;
+}
+
+export interface Quote {
+	quote: string;
+	cite: string;
+}
+
+interface Props {
+	quotes: Quote[];
+	accolades?: Accolade[];
+}
+
+const { quotes = [], accolades = [] } = Astro.props;
+const [featured, ...rest] = quotes;
+---
+
+<section class="press-editorial">
+	<div class="press-editorial-inner contain-narrow align-center">
+		{featured && (
+			<div class="featured">
+				<blockquote>&ldquo;{featured.quote}&rdquo;</blockquote>
+				<cite>&mdash; {featured.cite}</cite>
+			</div>
+		)}
+
+		{rest.length > 0 && (
+			<ul class="supporting">
+				{rest.map((q) => (
+					<li><span class="snippet">&ldquo;{q.quote}&rdquo;</span><br/><span class="cite">&mdash; {q.cite}</span></li>
+				))}
+			</ul>
+		)}
+
+		{accolades.length > 0 && (
+			<div class="ribbon">
+				{accolades.map((a, i) => (
+					<>
+						{i > 0 && <span class="sep">|</span>}
+						<span class="award"><b>{a.label}</b> {a.source}</span>
+					</>
+				))}
+			</div>
+		)}
+	</div>
+</section>
+
+<style>
+	.press-editorial {
+		background: var(--cp-paper);
+		color: var(--cp-dark-text);
+		padding: 90px 0;
+	}
+	.featured blockquote {
+		margin: 0 0 16px;
+		font-size: var(--fs-xl);
+		font-weight: 300;
+		line-height: 1.3;
+		letter-spacing: -0.01em;
+	}
+	.featured cite {
+		font-style: normal;
+		font-size: var(--fs-base);
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: #66695c;
+	}
+	.supporting {
+		list-style: none;
+		margin: 40px 0 0;
+		padding: 28px 0 0;
+		border-top: 1px solid rgba(0, 0, 0, 0.1);
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+	.supporting li {
+		font-size: var(--fs-md);
+		color: var(--cp-paper-text-dim);
+	}
+	.supporting .snippet {
+		font-style: italic;
+	}
+	.supporting .cite {
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		font-size: 0.85em;
+	}
+	.ribbon {
+		margin-top: 46px;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 10px 14px;
+		font-size: var(--fs-sm);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: var(--cp-paper-text-dim);
+	}
+	.ribbon b {
+		color: var(--cp-dark-text);
+	}
+	.ribbon .sep {
+		opacity: 0.35;
+	}
+</style>

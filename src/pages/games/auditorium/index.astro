@@ -1,10 +1,9 @@
 ---
 import GameLayout from "../../../layouts/GameLayout.astro";
 import Hero from "../../../components/games/Hero.astro";
-import PullQuote from "../../../components/games/PullQuote.astro";
 import GameAbout from "../../../components/games/GameAbout.astro";
 import Gallery from "../../../components/games/Gallery.astro";
-import Press from "../../../components/games/Press.astro";
+import PressSpotlight from "../../../components/games/PressSpotlight.astro";
 import MusicGrid from "../../../components/games/MusicGrid.astro";
 import { games } from "../../../data/games";
 
@@ -46,10 +45,6 @@ const musicItems = [
 		platforms={game.platforms}
 	/>
 
-	<PullQuote quote="I love music. I love videogames. Consequently, I love Auditorium." cite="Samit Sarkar, Destructoid" />
-
-	<Gallery images={["/img/games/auditorium/auditorium1.jpg", "/img/games/auditorium/auditorium2.jpg", "/img/games/auditorium/auditorium3.jpg"]} />
-
 	<GameAbout
 		heading="Discovery & play."
 		links={[
@@ -61,7 +56,9 @@ const musicItems = [
 		<p>The full version is the culmination of over 8 months of work by two indie game developers, spread across 70+ levels in 15 acts. Remember: there are no right or wrong answers, only your own.</p>
 	</GameAbout>
 
-	<Press quotes={quotes} accolades={accolades} />
+	<Gallery images={["/img/games/auditorium/auditorium1.jpg", "/img/games/auditorium/auditorium2.jpg", "/img/games/auditorium/auditorium3.jpg"]} />
+
+	<PressSpotlight quotes={quotes} accolades={accolades} backgroundSrc="/img/games/auditorium/auditorium2.jpg" accent={game.accent} />
 
 	<MusicGrid items={musicItems} />
 </GameLayout>
